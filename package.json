@@ -53,6 +53,7 @@
 		"reflect-metadata": "^0.1.13",
 		"rimraf": "^3.0.2",
 		"rxjs": "^6.5.4",
+		"sequelize": "^6.3.5",
 		"swagger-ui-express": "^4.1.4",
 		"typeorm": "^0.2.25",
 		"underscore": "^1.10.2"
@@ -98,6 +99,7 @@
 		"testEnvironment": "node"
 	},
 	"_moduleAliases": {
+		"@adapters": "dist/adapters",
 		"@applications": "dist/applications",
 		"@auth": "dist/auth",
 		"@clients": "dist/clients",

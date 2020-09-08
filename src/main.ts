@@ -5,12 +5,14 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { Config } from './config';
+import { Config } from './config/index';
 import { TokenAuthGuard } from './guard/auth.guard';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 import { Provider } from 'oidc-provider';
+import { AuthProviderConfig } from '@config/auth-provider';
+import { OidcSequelizeAdapter } from '@adapters/oidc-postgres';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(
@@ -34,15 +36,13 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);
 
-    // OIDC PROVIDER
-    const configuration = {
-        clients: [{
-            client_id: 'foo',
-            client_secret: 'bar',
-            redirect_uris: ['http://lvh.me:8080/cb']
-        }],
-    };
-    const oidc = new Provider(`http://localhost:${Config.PORT}`, configuration);
+    const oidcAdapter = OidcSequelizeAdapter;
+    await OidcSequelizeAdapter.connect();
+
+    const oidc = new Provider(Config.OAUTH_ISSUER, {
+        adapter: oidcAdapter,
+        ...AuthProviderConfig
+    });
     app.use('/oauth', oidc.callback)
 
     await app.listen(Config.PORT);

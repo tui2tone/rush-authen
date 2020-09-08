@@ -5,7 +5,8 @@ export const Config = {
     HOST: process.env.HOST || 'localhost',
     PORT: process.env.PORT || 3000,
     DB_URL: process.env.DB_URL,
-    TOKEN_SECRET: process.env.TOKEN_SECRET
+    TOKEN_SECRET: process.env.TOKEN_SECRET,
+    OAUTH_ISSUER: process.env.OAUTH_ISSUER
 }
 
 export const RedisConfig = {
