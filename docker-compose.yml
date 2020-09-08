@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  tmn-sms-service:
+    image: registry.gitlab.com/rushlap/rush-plan-api
+    container_name: rush-plan-api
+    ports:
+      - 3000:3000
+    env_file:
+      - .env

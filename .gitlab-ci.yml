@@ -1,0 +1,65 @@
+image: docker:latest
+services:
+  - docker:19.03.5-dind
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  PROD_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+
+build_production:
+  environment:
+    name: master
+  only:
+    - master
+  stage: build
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $PROD_IMAGE_TAG .
+    - docker push $PROD_IMAGE_TAG
+
+build_staging:
+  environment:
+    name: develop
+  only:
+    - develop
+  stage: build
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
+deploy_staging:
+  stage: deploy
+  environment:
+    name: develop
+  before_script:
+    - "which ssh-agent || ( apk update && apk upgrade && apk add --no-cache bash git openssh )"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh root@128.199.189.208 "cd /root/api && docker pull registry.gitlab.com/leaftech/manyfox-api-v2:develop && docker-compose up -d"
+  only:
+    - develop
+
+deploy_production:
+  stage: deploy
+  environment:
+    name: master
+  before_script:
+    - "which ssh-agent || ( apk update && apk upgrade && apk add --no-cache bash git openssh )"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh root@157.245.206.10 "cd /root/api && docker pull registry.gitlab.com/leaftech/manyfox-api-v2:master && docker-compose up -d"
+  only:
+    - master

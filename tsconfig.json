@@ -1,0 +1,53 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"declaration": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"target": "es2017",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./",
+		"incremental": true,
+		"paths": {
+			"@applications/*": [
+				"src/applications/*"
+			],
+			"@auth/*": [
+				"src/auth/*"
+			],
+			"@clients/*": [
+				"src/clients/*"
+			],
+			"@config/*": [
+				"src/config/*"
+			],
+			"@core/*": [
+				"src/core/*"
+			],
+			"@decorators/*": [
+				"src/decorators/*"
+			],
+			"@guard/*": [
+				"src/guard/*"
+			],
+			"@healthcheck/*": [
+				"src/healthcheck/*"
+			],
+			"@interceptors/*": [
+				"src/interceptors/*"
+			],
+			"@users/*": [
+				"src/users/*"
+			],
+			"@utils/*": [
+				"src/utils/*"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
+}
