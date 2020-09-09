@@ -2,7 +2,7 @@ import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, U
 import { ApiProperty } from '@nestjs/swagger';
 import { ClientRedirectUri } from './client-redirect-uri.entity';
 
-@Entity("clients")
+@Entity("app_clients")
 export class Client extends BaseEntity {
     @ApiProperty({
         example: 1
