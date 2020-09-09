@@ -109,6 +109,7 @@
 		"@guard": "dist/guard",
 		"@healthcheck": "dist/healthcheck",
 		"@interceptors": "dist/interceptors",
+		"@register": "dist/register",
 		"@users": "dist/users",
 		"@utils": "dist/utils"
 	}

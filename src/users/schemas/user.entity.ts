@@ -14,21 +14,45 @@ export class User extends BaseEntity {
     })
     @Column({
         type: String,
-        length: 55,
         unique: true
     })
     email: string;
+
+    @ApiProperty({
+        example: "Charuwit Nod."
+    })
+    @Column({
+        type: String
+    })
+    name: string;
+
+    @ApiProperty({
+        example: "tui2tone"
+    })
+    @Column({
+        type: String,
+        unique: true
+    })
+    username: string;
+
+    @Column({
+        type: String,
+        name: "crypted_password"
+    })
+    cryptedPassword: string;
 
     @ApiProperty({
         example: "xxxxxxx"
     })
     @Column({
         type: String,
-        length: 55,
-        unique: true,
-        name: 'google_user_id'
+        name: 'google_user_id',
+        nullable: true
     })
     googleUserId: string;
+
+    password?: string;
+    confirmPassword?: string;
 
     @CreateDateColumn({
         name: 'created_at'

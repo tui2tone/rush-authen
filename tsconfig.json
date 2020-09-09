@@ -41,6 +41,9 @@
 			"@interceptors/*": [
 				"src/interceptors/*"
 			],
+			"@register/*": [
+				"src/register/*"
+			],
 			"@users/*": [
 				"src/users/*"
 			],

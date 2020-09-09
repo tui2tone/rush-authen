@@ -7,6 +7,7 @@ import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { ClientsModule } from './clients/clients.module';
+import { RegisterModule } from './register/register.module';
 
 @Module({
     imports: [
@@ -19,7 +20,8 @@ import { ClientsModule } from './clients/clients.module';
         UsersModule,
         AuthModule,
         ApplicationsModule,
-        ClientsModule
+        ClientsModule,
+        RegisterModule
     ],
     controllers: [AppController],
     providers: [],
