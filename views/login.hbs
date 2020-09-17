@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <div class="w-full py-8 h-auto md:h-screen bg-white flex justify-center items-center overflow-auto" data-barba="wrapper">
+    <div class="w-full py-8 h-auto md:h-screen bg-white flex justify-center items-center overflow-auto"
+        data-barba="wrapper">
         <div class="flex bg-white justify-center items-center mx-auto h-full">
             <div class="flex flex-col justify-center items-center h-full app-login">
                 <div class="w-full text-center mb-8">
@@ -24,21 +25,21 @@
                                 {{message}}</div>
                         </div>
 
-                        <form>
+                        <form action="/auth/{{uid}}/login" method="POST">
                             <div class="mb-4">
                                 <input
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                                    id="username" type="text" placeholder="Username">
+                                    name="username" value="tui2tone@gmail.com" type="text" placeholder="Username">
                             </div>
                             <div class="mb-6">
                                 <input
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                                    id="password" type="password" placeholder="Password">
+                                    name="password" type="password" placeholder="Password">
                             </div>
                             <div class="flex items-center justify-between w-full">
                                 <button
                                     class="bg-orange-500 appearance-none shadow w-full hover:bg-orange-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
-                                    type="button">
+                                    type="submit">
                                     Sign In
                                 </button>
                             </div>

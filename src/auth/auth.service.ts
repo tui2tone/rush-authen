@@ -31,7 +31,6 @@ export class AuthService extends TypeOrmCrudService<Session> {
     async signinPassword(req: Request, res: Response, dto: UserPasswordSigninDto) {
 
         const { uid, prompt, params } = await AuthProvider.interactionDetails(req, res);
-        console.log(uid)
         dto.cryptedPassword = Hash.sha256(dto.password, Config.PASSWORD_SECRET)
         const matched = await this.user.repo.findOne({
             where: [{
@@ -43,13 +42,13 @@ export class AuthService extends TypeOrmCrudService<Session> {
             }]
         })
 
-        const result = {};
+        const result = {
+            login: {
+                account: matched.email,
+            },
+        }
 
-        // const response = await AuthProvider.interactionFinished(req, res, result);
-        // const session = await AuthProvider.setProviderSession(req, res, { account: matched.email });
-
-        // return session
-        return true;
+        return await AuthProvider.interactionFinished(req, res, result);
     }
 
     async validateToken(token: string): Promise<any> {

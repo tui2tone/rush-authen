@@ -1,4 +1,4 @@
-import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get, Req, Res } from '@nestjs/common';
+import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get, Req, Res, Param } from '@nestjs/common';
 import { UserPasswordSigninDto, GoogleAuthPayload } from './interfaces/auth-payload.interface';
 import { AuthService } from './auth.service';
 import { Public } from '@decorators/public.decorator';
@@ -7,6 +7,7 @@ import { Session } from './schemas/session.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { GoogleService } from './google/google.service';
 import { Request, Response } from 'express';
+import { AuthProvider } from '@utils/auth-provider';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -27,18 +28,7 @@ export class AuthController {
     // }
 
     @Public()
-    @Get(':uid')
-    async getSigninSession(
-        @Req() req: Request,
-        @Res() res: Response
-    ) {
-        return res.render('login',
-            { message: 'Hello world!' },
-        );
-    }
-
-    @Public()
-    @Post('signin')
+    @Post(':uid/login')
     @ApiOperation({ summary: 'Signin via username/password' })
     @ApiResponse({ status: 200, description: 'Signin Successfully' })
     @ApiResponse({ status: 400, description: 'Something error' })
@@ -49,6 +39,33 @@ export class AuthController {
     ) {
         const session = await this.service.signinPassword(req, res, payload)
         res.send(session);
+    }
+
+    @Public()
+    @Get(':uid')
+    async getSigninSession(
+        @Req() req: Request,
+        @Res() res: Response,
+        @Param('uid') uid: string
+    ) {
+        const details = await AuthProvider.interactionDetails(req, res);
+        const { prompt, params, session } = details;
+
+        const client = await AuthProvider.Client.find(params.client_id);
+
+        if (prompt.name === 'login') {
+        
+            return res.render('login',
+                {
+                    uid,
+                    message: 'Hello world!'
+                },
+            );
+        }
+
+        return res.render('authorized', {
+            username: session.accountId
+        })
     }
 
     @Public()
