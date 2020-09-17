@@ -19,7 +19,7 @@ async function bootstrap() {
         AppModule,
     );
     app.enableCors();
-    app.setGlobalPrefix('/api');
+    // app.setGlobalPrefix('/api');
     app.useGlobalPipes(new ValidationPipe());
 
     const reflector = app.get(Reflector);
@@ -28,7 +28,7 @@ async function bootstrap() {
     app.useGlobalInterceptors(new RequestInterceptor());
     app.useGlobalInterceptors(new ResponseInterceptor());
 
-    app.useStaticAssets(join(__dirname, '..', 'public'));
+    app.useStaticAssets(join(__dirname, '..', 'views/_site'));
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
     app.setViewEngine('hbs');
 

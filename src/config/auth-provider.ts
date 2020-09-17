@@ -9,7 +9,7 @@ export const AuthProviderConfig: Configuration = {
     clients: [{
         client_id: 'foo',
         client_secret: 'bar',
-        redirect_uris: ['http://localhost:8080/auth'],
+        redirect_uris: ['http://localhost:3000/auth'],
         response_types: ['code']
     }],
     cookies: {

@@ -27,12 +27,14 @@ export class AuthController {
     // }
 
     @Public()
-    @Get('signin/:uid')
+    @Get(':uid')
     async getSigninSession(
         @Req() req: Request,
         @Res() res: Response
     ) {
-        return await this.service.getSigninSession(req, res);
+        return res.render('login',
+            { message: 'Hello world!' },
+        );
     }
 
     @Public()
