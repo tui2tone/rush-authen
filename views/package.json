@@ -1,0 +1,20 @@
+{
+    "name": "rush-auth-web-client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "npx @11ty/eleventy --serve & npm run sass",
+        "sass": "sass --style=compressed styles/index.scss styles/style.css --watch & postcss styles/style.css --o _tmp/style.css --watch"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@11ty/eleventy": "^0.11.0",
+        "postcss-cli": "^7.1.2",
+        "tailwindcss": "^1.8.10"
+    },
+    "dependencies": {
+        "sass": "^1.26.10"
+    }
+}

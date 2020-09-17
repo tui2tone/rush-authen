@@ -10,9 +10,9 @@ import { TokenAuthGuard } from './guard/auth.guard';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { ValidationPipe } from '@nestjs/common';
-import { Provider } from 'oidc-provider';
-import { AuthProviderConfig } from '@config/auth-provider';
 import { OidcSequelizeAdapter } from '@adapters/oidc-postgres';
+import { AuthProvider } from '@utils/auth-provider';
+import { join } from 'path';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(
@@ -28,6 +28,10 @@ async function bootstrap() {
     app.useGlobalInterceptors(new RequestInterceptor());
     app.useGlobalInterceptors(new ResponseInterceptor());
 
+    app.useStaticAssets(join(__dirname, '..', 'public'));
+    app.setBaseViewsDir(join(__dirname, '..', 'views'));
+    app.setViewEngine('hbs');
+
     const options = new DocumentBuilder()
         .setTitle('Rush Plan API')
         .setDescription('Rush Plan API')
@@ -36,14 +40,9 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);
 
-    const oidcAdapter = OidcSequelizeAdapter;
-    await OidcSequelizeAdapter.connect();
+    // await OidcSequelizeAdapter.connect();
 
-    const oidc = new Provider(Config.OAUTH_ISSUER, {
-        adapter: oidcAdapter,
-        ...AuthProviderConfig
-    });
-    app.use('/oauth', oidc.callback)
+    app.use('/oauth', AuthProvider.callback)
 
     await app.listen(Config.PORT);
 }

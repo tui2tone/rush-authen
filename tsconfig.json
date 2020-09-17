@@ -38,6 +38,9 @@
 			"@healthcheck/*": [
 				"src/healthcheck/*"
 			],
+			"@interaction/*": [
+				"src/interaction/*"
+			],
 			"@interceptors/*": [
 				"src/interceptors/*"
 			],

@@ -1,12 +1,12 @@
-import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get } from '@nestjs/common';
-import { AuthPayload, UserPasswordSigninDto, GoogleAuthPayload } from './interfaces/auth-payload.interface';
+import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get, Req, Res } from '@nestjs/common';
+import { UserPasswordSigninDto, GoogleAuthPayload } from './interfaces/auth-payload.interface';
 import { AuthService } from './auth.service';
 import { Public } from '@decorators/public.decorator';
-import { AuthorizationToken } from '@decorators/authorization-token.decorator';
 import { CurrentSession } from '@decorators/current-session.decorator';
 import { Session } from './schemas/session.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { GoogleService } from './google/google.service';
+import { Request, Response } from 'express';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -17,23 +17,36 @@ export class AuthController {
         private google: GoogleService
     ) { }
 
-    @Get()
-    @ApiOperation({ summary: 'Get current session via token or cookie' })
-    @ApiResponse({ status: 200 })
-    async getAuth(
-        @CurrentSession() session: Session
-    ): Promise<Session> {
-        return await this.service.repo.findOne({})
+    // @Get()
+    // @ApiOperation({ summary: 'Get current session via token or cookie' })
+    // @ApiResponse({ status: 200 })
+    // async getAuth(
+    //     @CurrentSession() session: Session
+    // ): Promise<Session> {
+    //     return await this.service.repo.findOne({})
+    // }
+
+    @Public()
+    @Get('signin/:uid')
+    async getSigninSession(
+        @Req() req: Request,
+        @Res() res: Response
+    ) {
+        return await this.service.getSigninSession(req, res);
     }
-    
-    @Post()
+
+    @Public()
+    @Post('signin')
     @ApiOperation({ summary: 'Signin via username/password' })
     @ApiResponse({ status: 200, description: 'Signin Successfully' })
     @ApiResponse({ status: 400, description: 'Something error' })
-    async authen(
-        @Body() payload: UserPasswordSigninDto
-    ): Promise<Session> {
-        return await this.service.repo.save({})
+    async signinPassword (
+        @Body() payload: UserPasswordSigninDto,
+        @Req() req: Request,
+        @Res() res: Response
+    ) {
+        const session = await this.service.signinPassword(req, res, payload)
+        res.send(session);
     }
 
     @Public()

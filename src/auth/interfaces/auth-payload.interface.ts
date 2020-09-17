@@ -1,20 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export interface AuthPayload {
-    username: string;
-    password: string;
-}
-
 export class UserPasswordSigninDto {
     @ApiProperty({
-        example: "admin"
+        example: "admin",
+        description: "username or email"
     })
     username: string;
 
     @ApiProperty({
-        example: "admin"
+        example: "xxxxx"
     })
     password: string;
+    cryptedPassword?: string;
 }
 
 export interface GoogleAuthPayload {

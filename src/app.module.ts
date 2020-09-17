@@ -8,6 +8,7 @@ import { AuthModule } from '@auth/auth.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { ClientsModule } from './clients/clients.module';
 import { RegisterModule } from './register/register.module';
+import { InteractionModule } from './interaction/interaction.module';
 
 @Module({
     imports: [
@@ -21,7 +22,8 @@ import { RegisterModule } from './register/register.module';
         AuthModule,
         ApplicationsModule,
         ClientsModule,
-        RegisterModule
+        RegisterModule,
+        InteractionModule
     ],
     controllers: [AppController],
     providers: [],

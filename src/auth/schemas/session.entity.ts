@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColu
 import { User } from '@users/schemas/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
-@Entity("sessions")
+@Entity("app_sessions")
 export class Session extends BaseEntity {
     @ApiProperty({
         example: 1
