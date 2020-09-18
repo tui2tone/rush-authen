@@ -3,6 +3,7 @@
 /node_modules
 .env*
 views/node_modules
+admin/node_modules
 views/_site
 
 nodemon-debug.json

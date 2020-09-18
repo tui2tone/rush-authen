@@ -1,5 +1,11 @@
 {
-    "watch": ["dist"],
+    "watch": [
+        "dist"
+    ],
     "ext": "js",
+    "ignore": [
+        "admin",
+        "README"
+    ],
     "exec": "node dist/main.js"
 }

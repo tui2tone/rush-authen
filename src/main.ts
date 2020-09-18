@@ -30,6 +30,7 @@ async function bootstrap() {
 
     app.useStaticAssets(join(__dirname, '..', 'views/_site'));
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
+    app.setBaseViewsDir(join(__dirname, '..', 'admin'));
     app.setViewEngine('hbs');
 
     const options = new DocumentBuilder()
