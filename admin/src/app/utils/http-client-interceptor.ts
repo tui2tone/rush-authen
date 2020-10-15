@@ -40,7 +40,7 @@ export class HttpClientInterceptor implements HttpInterceptor {
         req = req.clone({
             url: url + req.url
         });
-        return next.handle(this.addToken(req, ''))
+        return next.handle(this.addToken(req, this.authService.token))
             .pipe(map((event: any) => {
                 return event;
             }),

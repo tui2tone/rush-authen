@@ -1,0 +1,10 @@
+@import '~src/assets/styles/variable.scss';
+
+.btn-clear {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 1rem;
+    color: rgba($app-black-light, .4);
+}

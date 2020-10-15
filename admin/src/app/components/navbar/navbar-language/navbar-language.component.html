@@ -1,0 +1,5 @@
+<button *ngFor="let lang of languages" (click)="changeLanguage(lang)" mat-menu-item>
+    <span class="mr-2 flag-icon flag-icon-{{lang.icon}}"></span>
+
+    {{lang.name}}
+</button>

@@ -1,0 +1,14 @@
+<div class="mb-5">
+    <div class="text-center font-thin text-2xl">{{data?.title}}</div>
+    <div class="text-center ">{{data?.content}}</div>
+</div>
+<div class="flex items-center justify-center">
+    <button (click)="cancel()" tabindex="1"
+        class="w-64 text-center bg-gray-500 whitespace-no-wrap hover:bg-gray-700 border-2 border-transparent focus:border-gray-900 text-white font-thin py-3 px-6 rounded-full mr-2">
+        {{(data?.btnCancel || 'CANCEL') | translate }}
+    </button>
+    <button id="btn-confirm" (click)="confirm()" appAutofocus tabindex="0"
+        class="w-64 text-center bg-red-500 whitespace-no-wrap hover:bg-red-700 border-2 border-transparent focus:border-red-900 text-white font-thin py-3 px-6 rounded-full ml-2">
+        {{(data?.btnConfirm || 'CONFIRM') | translate }}
+    </button>
+</div>

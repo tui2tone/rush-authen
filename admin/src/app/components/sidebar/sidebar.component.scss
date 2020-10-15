@@ -1,0 +1,20 @@
+
+@import '~src/assets/styles/variable.scss';
+
+.navbar-logo {
+    height: $navbar-height;
+    background: $sidebar-bg-header;
+    color: $app-white;
+}
+
+.logo-img {
+    width: auto;
+    height: 40px;
+    overflow: hidden;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    img {
+        width: auto;
+        height: 100%;
+    }
+}

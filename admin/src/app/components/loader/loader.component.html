@@ -1,0 +1,4 @@
+<ng-content></ng-content>
+<div *ngIf="appLoader" class="loader absolute h-full w-full top-0 left-0 bg-white opacity-50 flex justify-center items-center text-3xl">
+    <fa-icon class="icon" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
+</div>

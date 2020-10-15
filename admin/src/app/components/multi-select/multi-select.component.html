@@ -1,0 +1,15 @@
+<div [class.mb-2]="!noMargin">
+  <label *ngIf="label" class="block text-gray-700 text-sm font-bold mb-1">
+    {{label}}
+  </label>
+  <div>
+    <ng-select class="rounded" [placeholder]="placeholder" [readonly]="isDisabled" [items]="items" [multiple]="multiple"
+      [bindLabel]="valueLabel" [(ngModel)]="formControl" [clearable]="clearable" (focus)="onFocus()" appendTo="body"
+      [ngClass]="{'is-invalid':
+        formError || isInvalid}" (change)="onValueChange($event)"></ng-select>
+    <div class="invalid-feedback" *ngIf="formError">{{formError[0] | translate}}</div>
+    <ng-container *ngIf="isInvalid">
+      <p class="text-red-500 mb-1 text-xs italic">{{ 'ERROR_FIELD.ISNOTEMPTY' | translate }}</p>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div>
+    <div class="flex items-center">
+        <ui-switch [formControl]="form"></ui-switch>
+        <label *ngIf="label" class="block text-gray-700 ml-2 text-sm font-bold mb-2 whitespace-no-wrap">
+            {{label}}
+        </label>
+    </div>
+    <ng-container *ngIf="error && error.length">
+        <p class="text-red-500 mb-1 text-xs italic" *ngFor="let item of error">{{ 'ERROR_FIELD.' + item | translate }}
+        </p>
+    </ng-container>
+</div>

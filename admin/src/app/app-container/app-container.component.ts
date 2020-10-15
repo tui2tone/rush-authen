@@ -1,25 +1,24 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { AuthState } from '../store/auth';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Menu } from '../components/sidebar/menu';
 
 @Component({
     selector: 'app-app-container',
     templateUrl: './app-container.component.html',
     styleUrls: ['./app-container.component.scss']
 })
-export class AppContainerComponent implements OnInit, OnDestroy {
+export class AppContainerComponent implements OnInit {
 
-    subscriber: Subscription[] = [];
-
+    menu: Menu[] = [
+        new Menu({
+            name: 'DASHBOARD',
+            icon: 'th-large',
+            link: '/dashboard'
+        })
+    ]
     constructor(
-        private store: Store<AuthState.State>
     ) { }
 
     ngOnInit() {
-    }
-
-    ngOnDestroy() {
     }
 
 }

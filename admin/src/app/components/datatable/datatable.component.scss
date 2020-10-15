@@ -1,0 +1,22 @@
+.datatable-container {
+  position: relative;
+}
+
+.datatable-column-selector {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 5px;
+
+  .mat-form-field-infix {
+    width: 50px;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: transparent;
+  }
+
+  .mat-select-value {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,26 @@
+<div class="img-upload-container" [class.is-disabled]="disabled">
+  <label *ngIf="!noLabel">{{label}}</label>
+  <div class="input-group">
+    <div class="image-selected">
+      <div class="item is-empty" *ngIf="formControl['controls'].length == 0 && disabled">
+        No Image
+      </div>
+      <div class="item" *ngFor="let image of formControl['controls']; let j = index;">
+        <button class="btn-remove" type="button" (click)="removeImage(j)" *ngIf="!disabled">
+          <fa-icon [icon]="['fas', 'times']"></fa-icon>
+        </button>
+        <app-image-preview [source]="image.value" [imageUrlField]="imageUrlField"></app-image-preview>
+      </div>
+    </div>
+    <div class="btn-upload-wrapper"
+      *ngIf="!disabled && ((type == 'single' && formControl['controls'].length == 0) || type != 'single')">
+      <button class="btn btn-file">
+        <span class="icon-holder">
+          <fa-icon [icon]="['fas', 'image']"></fa-icon>
+        </span>
+        <div class="text">Drop or Select</div>
+      </button>
+      <input type="file" (change)="getFile($event)">
+    </div>
+  </div>
+</div>

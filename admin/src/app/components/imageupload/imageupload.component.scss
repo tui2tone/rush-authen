@@ -1,0 +1,110 @@
+@import '~src/assets/styles/variable.scss';
+
+.img-upload-container {
+  padding: 0px;
+
+  label {
+    font-family: "Roboto", "Prompt Regular";
+    color: rgba(0, 0, 0, .54);
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+
+  .input-group {
+    display: flex;
+  }
+
+  .image-selected {
+    display: flex;
+    overflow: auto;
+    width: auto;
+
+    .item {
+      position: relative;
+      margin-right: 12px;
+
+      &.is-empty {
+
+        width: 140px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $app-grey-darker;
+        border: 1px dashed $app-grey-darker;
+      }
+    }
+
+    .btn-remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: transparent;
+      color: #FFF;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  .btn-upload-wrapper {
+    position: relative;
+    overflow: hidden;
+    border: 1px dashed $app-grey-darker;
+    border-radius: 3px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $app-grey-darker;
+
+    .icon-holder {
+      font-size: 2rem;
+      color: $app-grey-darker;
+    }
+
+    .text {
+      font-size: 0.9rem;
+      color: $app-grey-darker;
+    }
+
+    &:hover {
+      background-color: $app-grey;
+      cursor: pointer;
+
+      .icon-holder {
+        color: $app-black-lightest;
+      }
+
+      .text {
+        color: $app-black-lightest;
+      }
+    }
+
+
+    & input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+
+  }
+
+
+  .image-preview {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 2px;
+    border: 1px dashed $app-grey-darker;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

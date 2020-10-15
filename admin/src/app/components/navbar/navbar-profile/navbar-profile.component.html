@@ -1,0 +1,6 @@
+<button mat-menu-item [routerLink]="['/profile']">{{ 'PROFILE' | translate }}</button>
+<button mat-menu-item [routerLink]="['/profile/reset-password']">{{ 'RESET_PASSWORD' | translate }}</button>
+<button mat-menu-item (click)="onSignout()">{{ 'SIGNOUT' | translate }}</button>
+
+<app-confirm-modal #signoutConfirmModal [title]="'SIGNOUT' | translate" (onConfirm)="onSignoutConfirm()">
+</app-confirm-modal>

@@ -6,6 +6,7 @@ import { AuthProviderConfig } from "@config/auth-provider";
 const oidcAdapter = OidcSequelizeAdapter;
 
 export const AuthProvider = new Provider(Config.OAUTH_ISSUER, {
-    // adapter: oidcAdapter,
+    adapter: oidcAdapter,
     ...AuthProviderConfig
 });
+AuthProvider.proxy = true;

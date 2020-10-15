@@ -1,0 +1,10 @@
+<mat-drawer-container class="h-full">
+  <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidebar-container" [class.is-mobile]="mobileQuery.matches">
+      <app-sidebar class="sidebar" [menu]="menu"></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+      <ng-content>
+
+      </ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

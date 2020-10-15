@@ -1,2 +1,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~ngx-toastr/toastr';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~@swimlane/ngx-dnd/release/index.css";
+
+$transition-duration: 200ms;
+// $dialog-position-top: 50%;
+@import "~ngx-smart-modal/ngx-smart-modal";
+@import "~hamburgers/dist/hamburgers.css";

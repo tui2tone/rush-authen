@@ -4,14 +4,8 @@ dotenv.config()
 
 export const AuthProviderConfig: Configuration = {
     formats: {
-        AccessToken: 'jwt',
+        AccessToken: 'jwt'
     },
-    clients: [{
-        client_id: 'foo',
-        client_secret: 'bar',
-        redirect_uris: ['http://localhost:3000/auth'],
-        response_types: ['code']
-    }],
     cookies: {
         long: {
             sameSite: 'none'
@@ -30,5 +24,5 @@ export const AuthProviderConfig: Configuration = {
         devInteractions: { enabled: false },
         introspection: { enabled: true },
         revocation: { enabled: true },
-    },
+    }
 }

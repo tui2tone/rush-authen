@@ -30,25 +30,42 @@ export class AuthService extends TypeOrmCrudService<Session> {
 
     async signinPassword(req: Request, res: Response, dto: UserPasswordSigninDto) {
 
-        const { uid, prompt, params } = await AuthProvider.interactionDetails(req, res);
-        dto.cryptedPassword = Hash.sha256(dto.password, Config.PASSWORD_SECRET)
-        const matched = await this.user.repo.findOne({
-            where: [{
-                username: dto.username,
-                cryptedPassword: dto.cryptedPassword,
-            }, {
-                email: dto.username,
-                cryptedPassword: dto.cryptedPassword,
-            }]
-        })
+        try {
+            const { uid, prompt, params } = await AuthProvider.interactionDetails(req, res);
+            dto.cryptedPassword = Hash.sha256(dto.password, Config.PASSWORD_SECRET)
+            const matched = await this.user.repo.findOne({
+                where: [{
+                    username: dto.username,
+                    cryptedPassword: dto.cryptedPassword,
+                }, {
+                    email: dto.username,
+                    cryptedPassword: dto.cryptedPassword,
+                }]
+            })
 
-        const result = {
-            login: {
-                account: matched.email,
-            },
+            if (matched) {
+                const result = {
+                    login: {
+                        account: matched.email,
+                    },
+                    consent: {
+                        rejectedScopes: [],
+                        rejectedClaims: [],
+                    },
+                }
+
+                return await AuthProvider.interactionFinished(req, res, result);
+            } else {
+                return res.render('login',
+                    {
+                        uid,
+                        message: 'Hello world!'
+                    },
+                );
+            }
+        } catch (error) {
+            console.error(error)
         }
-
-        return await AuthProvider.interactionFinished(req, res, result);
     }
 
     async validateToken(token: string): Promise<any> {

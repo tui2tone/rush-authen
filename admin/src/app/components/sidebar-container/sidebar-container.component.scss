@@ -1,0 +1,18 @@
+@import "~src/assets/styles/variable.scss";
+.sidebar-container {
+    overflow: visible;
+    box-shadow: $box-shadow-light;
+    width: $sidebar-width;
+    .sidebar {
+        width: $sidebar-width;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        height: -webkit-fill-available;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

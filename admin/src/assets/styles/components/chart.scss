@@ -1,0 +1,14 @@
+.chartjs-render-monitor {
+
+  @media (max-width: 640px) {
+    width: 100% !important;
+}
+}
+
+.app-chart-container {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}

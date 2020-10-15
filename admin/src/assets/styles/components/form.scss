@@ -1,0 +1,18 @@
+.form-control {
+  height: $form-height;
+
+  &:disabled {
+    background-color: $bg-gray-100;
+  }
+}
+
+.btn-browse-file {
+  margin-left: .5rem;
+  color: $app-blue;
+  background: transparent;
+}
+
+
+.ng-select.ng-select-single .ng-select-container {
+  border: 1px solid #e2e8f0 !important;
+}

@@ -1,0 +1,22 @@
+<nav class="navbar flex items-center justify-between bg-white">
+  <div class="h-full navbar-logo flex items-center justify-between flex-wrap flex sm:hidden md:hidden lg:hidden xl:hidden">
+    <div class="flex items-center justify-center px-4 text-gray-800 text-lg">
+        <div class="mr-3 company-img"><img src="assets/images/icons/icon.png"></div>
+        <!-- <span class="font-bold">EPA</span> -->
+    </div>
+  </div>
+  <div class="h-full flex sidebar-toggle">
+    <button (click)="toggleSidebar()"
+        id="btn-navbar-toggle"
+      class="h-full flex items-center text-gray-500 p-5 text-md hover:text-gray-700 hover:bg-gray-200">
+      <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+    </button>
+    <app-navbar-menu class="h-full" [mobile]="true" [profile]="profile$ | async"></app-navbar-menu>
+  </div>
+  <div class="h-full w-full block flex-grow lg:items-center lg:w-auto hidden sm:flex md:flex lg:flex xl:flex">
+    <div class="text-sm lg:flex-grow"></div>
+    <div class="h-full d-flex">
+      <app-navbar-menu [profile]="profile$ | async"></app-navbar-menu>
+    </div>
+  </div>
+</nav>

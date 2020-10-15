@@ -1,0 +1,9 @@
+<div>
+  <label *ngIf="label" class="block text-gray-700 text-sm font-bold mb-2">
+    {{label}}
+  </label>
+  <mat-checkbox [formControl]="form" [disabled]="disabled" (click)="onClick($event)"></mat-checkbox>
+  <ng-container *ngIf="error && error.length">
+    <p class="text-red-500 mb-1 text-xs italic" *ngFor="let item of error">{{ 'ERROR_FIELD.' + item | translate }}</p>
+  </ng-container>
+</div>

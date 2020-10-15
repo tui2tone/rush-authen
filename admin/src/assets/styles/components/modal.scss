@@ -1,0 +1,13 @@
+.nsm-content {
+    border-radius: 4px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 6px -3px rgba(0, 0, 0, 0.1);
+
+    .nsm-dialog-btn-close {
+        display: none;
+    }
+}
+
+.nsm-dialog {
+    max-width: 360px;
+}

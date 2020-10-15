@@ -8,6 +8,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { GoogleService } from './google/google.service';
 import { Request, Response } from 'express';
 import { AuthProvider } from '@utils/auth-provider';
+import * as queryString from 'query-string'
 
 @ApiTags('auth')
 @Controller('auth')
@@ -54,7 +55,6 @@ export class AuthController {
         const client = await AuthProvider.Client.find(params.client_id);
 
         if (prompt.name === 'login') {
-        
             return res.render('login',
                 {
                     uid,
@@ -62,10 +62,18 @@ export class AuthController {
                 },
             );
         }
+        if (prompt.name === "consent") {
+            return res.render('consent',
+                {
+                    uid,
+                    message: 'Hello world!'
+                },
+            );
+        }
 
-        return res.render('authorized', {
-            username: session.accountId
-        })
+        return res.redirect(`${params.redirect_uri}?${queryString.stringify({
+            ...params
+        })}`)
     }
 
     @Public()

@@ -33,9 +33,40 @@ export class Client extends BaseEntity {
     })
     @Column({
         type: String,
-        name: 'client_secret'
+        name: 'client_secret',
+        nullable: true
     })
     clientSecret: string;
+
+    @ApiProperty({
+        example: "xxxxxxxxxxxxxxxxxxx"
+    })
+    @Column({
+        type: String,
+        name: 'application_type',
+        nullable: true
+    })
+    applicationType: string;
+
+    @ApiProperty({
+        example: "xxxxxxxxxxxxxxxxxxx"
+    })
+    @Column({
+        type: String,
+        name: 'token_endpoint_auth_method',
+        nullable: true
+    })
+    tokenEndpointAuthMethod: string;
+    
+    @ApiProperty({
+        example: "xxxxxxxxxxxxxxxxxxx"
+    })
+    @Column({
+        type: String,
+        name: 'client_secret_jwt',
+        nullable: true
+    })
+    clientSecretJwt: string;
 
     @OneToMany(type => ClientRedirectUri, item => item.client, {
         cascade: true

@@ -15,7 +15,9 @@ export class ClientRedirectUri extends BaseEntity {
     })
     @Column({
         type: String,
-        unique: true
+        unique: true,
+        nullable: false,
+        name: 'redirect_uri'
     })
     redirectUri: string;
 

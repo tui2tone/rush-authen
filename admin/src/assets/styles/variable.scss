@@ -1,0 +1,67 @@
+$border-radius: 3px;
+$form-height: 40px;
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$box-shadow-light: 0 1px 6px rgba(0, 0, 0, 0.05),
+0 1px 3px rgba(0, 0, 0, 0.05);
+$box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+$bg-gray-100: #f7fafc;
+$bg-blue-700: #2b6cb0;
+$bg-blue-800: #2c5282;
+$bg-white: #FFF;
+
+$app-white: #FFFFFF;
+$app-bg: #F3F5FA;
+$app-grey: #F9F9F9;
+$app-grey-s1: #EEEEEE;
+$app-grey-dark: #DDDDDD;
+$app-red: #F55D3E;
+$app-black: #333333;
+$app-black-light: #666666;
+
+$app-blue: #10BCF9;
+$app-blue-dark: #397AF2;
+$app-yellow: #F3B700;
+$app-yellow-dark: #FDB913;
+
+$app-green: #48bb78;
+$app-green-light: #81C14B;
+
+$app-sidebar-bg: $app-white;
+$app-sidebar-header-bg: $app-white;
+$app-sidebar-highlight: $app-white;
+$app-sidebar-color: #8EA1AB;
+
+$app-bg-s1: #f9f9fc;
+$app-black-lightest: #75787B;
+$app-grey-darker: #E3E4E4;
+
+$primary-color-dark: #1976D2;
+$primary-color-s1: #1976D2;
+$primary-color: #3066BE;
+$primary-color-light: #BBDEFB;
+$primary-color-text: #FFFFFF;
+$accent-color: #4CAF50;
+$primary-text-color: #212121;
+$secondary-text-color: #757575;
+$divider-color: #BDBDBD;
+
+$card-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+
+
+$app-red: #ef5350;
+$app-red-bg: linear-gradient(60deg, #ef5350, #ef5350);
+$app-red-bg-hover: linear-gradient(60deg, #ef5350, #CE221F);
+$app-red-box-shadow: 0 4px 12px -3px rgba(#CE221F, 0.3);
+$app-green-bg: linear-gradient(60deg, #66bb6a, #66bb6a);
+$app-green-bg-dark: linear-gradient(60deg, #55a059, #3ea03e);
+$app-green-box-shadow: 0 4px 12px -3px rgba(#319731, 0.3);
+
+$sidebar-width: 250px;
+$navbar-height: 60px;
+
+$sidebar-bg: #091C2E;
+$sidebar-bg-header: #081929;
+$sidebar-color: #59ACF5;

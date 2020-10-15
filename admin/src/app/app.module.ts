@@ -9,10 +9,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
 import { StoreModule } from '@ngrx/store';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ToastrModule } from 'ngx-toastr';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { NgxMaskModule } from 'ngx-mask';
+
+import { AppComponentsModule } from './components/components.module';
+import { SidebarService } from './services/sidebar.service';
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http, '/languages/');
+}
 
 @NgModule({
     declarations: [
@@ -26,11 +39,28 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
         BrowserAnimationsModule,
         FontAwesomeModule,
         AppStoreModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AppComponentsModule,
+        LoadingBarHttpClientModule,
+        NgxSmartModalModule.forRoot(),
+        NgxMaskModule.forRoot({}),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-top-center',
+            preventDuplicates: true
+        }),
     ],
     providers: [
         AuthService,
-        AuthGuardService
+        AuthGuardService,
+        SidebarService
     ],
     bootstrap: [AppComponent]
 })

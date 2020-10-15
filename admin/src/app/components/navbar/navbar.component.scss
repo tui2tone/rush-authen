@@ -1,0 +1,31 @@
+@import '~src/assets/styles/variable.scss';
+
+.navbar {
+    box-shadow: $box-shadow-light;
+    height: $navbar-height;
+}
+
+:host {
+    z-index: 2;
+    position: relative;
+    display: block;
+}
+
+.sidebar-toggle {
+    .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+        height: 2px;
+    }
+}
+
+
+.company-img {
+    width: auto;
+    height: 40px;
+    overflow: hidden;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    img {
+        width: auto;
+        height: 100%;
+    }
+}

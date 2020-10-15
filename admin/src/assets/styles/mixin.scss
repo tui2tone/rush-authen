@@ -1,0 +1,19 @@
+@mixin flex($direction: row, $align: flex-start, $justify: flex-start) {
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin tablet() {
+    @include media-breakpoint-down(lg) {
+        @content;
+    }
+}
+
+@mixin mobile() {
+    @include media-breakpoint-down(md) {
+        @content;
+    }
+}

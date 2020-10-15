@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    height: 100%;
+}
+
+.company-img {
+    width: auto;
+    height: 36px;
+    overflow: hidden;
+    img {
+        width: auto;
+        height: 100%;
+    }
+}

@@ -1,0 +1,26 @@
+<div class="navbar-logo flex items-center justify-between flex-wrap">
+    <div class="flex px-2 items-center justify-center text-lg text-white">
+        <div class="logo-img"><img src="assets/images/logo.png"></div>
+        <span class="italic text-orange-500">Rush</span><span class="font-bold text-white">Authen</span>
+    </div>
+</div>
+
+<mat-accordion>
+    <ng-container *ngFor="let item of menu">
+        <div *ngIf="item.permission; else elseMenuItem" [appPermission]="item.permission" permissionType="view">
+            <ng-container 
+            [ngTemplateOutlet]="menuItem" 
+            [ngTemplateOutletContext]="{item: item}"></ng-container>
+        </div>
+        <ng-template #elseMenuItem>
+            <ng-container 
+            [ngTemplateOutletContext]="{item: item}"
+            [ngTemplateOutlet]="menuItem">
+            </ng-container>
+        </ng-template>
+    </ng-container>
+</mat-accordion>
+
+<ng-template #menuItem let-item="item">
+    <app-sidebar-item [item]="item"></app-sidebar-item>
+</ng-template>

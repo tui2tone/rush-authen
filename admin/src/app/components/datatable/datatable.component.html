@@ -1,0 +1,47 @@
+<button appExpandAnimate [isOpen]="error" *ngIf="error" [expandHeight]="50" class="w-full bg-red-200 hover:bg-red-200 rounded text-red-900 px-4 py-2 shadow-md mb-2" (click)="search()">
+  <div class="flex items-center">
+    <div class="mr-4">
+      <fa-icon [icon]="['fas', 'redo']"></fa-icon>
+    </div>
+    <div>
+      <p class="text-bold">{{ 'ERROR' | translate }}</p>
+    </div>
+  </div>
+</button>
+<ng-content select="[filter]" #listFilter *ngIf="isFilterOpen"></ng-content>
+<div class="datatable-container rounded overflow-hidden shadow">
+    <div class="flex bg-gray-100">
+        <input class="flex-grow py-4 bg-white px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" [placeholder]="'SEARCH' | translate" [formControl]="query">
+        <button btnSecondary class="mr-10" (click)="onToggleFilter()" *ngIf="isFilterable">
+      <fa-icon class="text-gray-700" [icon]="['fas', 'filter']"></fa-icon>
+      <div class="ml-2 text-gray-600 hidden md:flex">{{ 'FILTER' | translate }}</div>
+    </button>
+    </div>
+    <ngx-datatable #datatable class="material" [rowHeight]="50" [columnMode]="columnMode" [columns]="columns" [headerHeight]="headerHeight" [footerHeight]="50" [rows]="rows" (select)="onSelect($event)" [selected]="selected" [selectionType]="'checkbox'" [externalPaging]="true"
+        [cssClasses]='customClasses' [count]="total" [offset]="offset" [limit]="limit" (page)="onSetPage($event)" (sort)="onSort($event)" [summaryRow]="summaryRow" [rowClass]="rowClass" [summaryPosition]="summaryPosition" [summaryHeight]="summaryHeight" (activate)="onActivate($event)"
+        [scrollbarH]="scrollbarH">
+        <ngx-datatable-row-detail rowHeight="150" [template]="myRowDetail">
+        </ngx-datatable-row-detail>
+        <ng-content></ng-content>
+        <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+                <div class="nav-left hidden md:flex">
+                    <div class="page-count">
+                        {{rowCount}} {{'TOTAL_RECORD' | translate}}
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <mat-paginator #paginator [length]="rowCount" [pageIndex]="pageIndex" [pageSize]="limit" [pageSizeOptions]="[10, 25, 100]" (page)="setPaginationChange($event)">
+                    </mat-paginator>
+                </div>
+            </ng-template>
+        </ngx-datatable-footer>
+    </ngx-datatable>
+    <div class="datatable-column-selector">
+        <mat-form-field>
+            <mat-select [formControl]="columnSelector" multiple>
+                <mat-option *ngFor="let column of columns" [value]="column">{{column.name | translate}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

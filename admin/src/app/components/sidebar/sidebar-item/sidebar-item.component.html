@@ -1,0 +1,30 @@
+<div class="menu-container" [class.is-level2]="level == 2" [appPermission]="item.permission" permissionType="view">
+  <div class="menu-header" *ngIf="item.isHeader">
+    <span class="text text-white opacity-50">{{ item.name | translate}}</span>
+  </div>
+  <ng-container *ngIf="!item.isHeader && !hasSubMenu()">
+    <a class="menu" [class.is-level2]="level == 2" [routerLinkActive]="['is-active']" [routerLink]="item.link"
+      (click)="onToggleMenu()">
+      <span class="icon text-center">
+        <fa-icon [icon]="['fas', item.icon]"></fa-icon>
+      </span>
+      <span class="text">{{ item.name | translate}}</span>
+    </a>
+  </ng-container>
+  <div *ngIf="!item.isHeader && hasSubMenu()">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="menu">
+          <span class="icon text-center">
+            <fa-icon [icon]="['fas', item.icon]"></fa-icon>
+          </span>
+          <span class="text">{{ item.name | translate}}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <ng-container *ngFor="let item of item.items">
+        <app-sidebar-item [item]="item" [level]="level + 1" (onToggle)="onToggleMenu()"></app-sidebar-item>
+      </ng-container>
+    </mat-expansion-panel>
+  </div>
+</div>

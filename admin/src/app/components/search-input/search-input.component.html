@@ -1,0 +1,12 @@
+<div *ngIf="query" class="flex relative items-center appearance-none bg-white">
+  <span class="bg-white h-full px-3">
+    <fa-icon [icon]="['fas', 'search']"></fa-icon>
+  </span>
+  <input class="w-full py-4 bg-white px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    type="text" [placeholder]="'SEARCH' | translate" [formControl]="query">
+  <button *ngIf="query.value" class="btn-clear" (click)="onClear()">
+    <span class="icon">
+      <fa-icon [icon]="['fas', 'times']"></fa-icon>
+    </span>
+  </button>
+</div>

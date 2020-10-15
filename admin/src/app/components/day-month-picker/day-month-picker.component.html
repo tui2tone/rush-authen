@@ -1,0 +1,23 @@
+<div [class.mb-2]="!noMargin">
+  <label *ngIf="label" class="block text-gray-700 text-sm font-bold mb-1">
+    {{label}}
+  </label>
+  <div [ngClass]="{
+        'appearance-none border flex flex-grow rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control': true,
+        'bg-gray-100': disabled,
+        'border-red-500': error || isInvalid
+    }">
+    <input [disabled]="disabled" #input [matDatepicker]="picker3" [min]="_minDate" [max]="_maxDate" class="w-full bg-transparent flex-grow"
+      [formControl]="formControl">
+    <mat-datepicker-toggle class="flex items-center justify-center" matSuffix [for]="picker3"></mat-datepicker-toggle>
+    <mat-datepicker #picker3></mat-datepicker>
+  </div>
+  <ng-container *ngIf="(error && error.length)">
+    <p class="text-red-500 mb-1 text-xs italic" *ngFor="let item of error">{{ 'ERROR_FIELD.' + item | translate }}</p>
+  </ng-container>
+  <ng-container *ngIf="isInvalid">
+    <p class="text-red-500 mb-1 text-xs italic" *ngIf="formControl?.errors?.required">{{ 'ERROR_FIELD.ISNOTEMPTY' | translate }}</p>
+    <p class="text-red-500 mb-1 text-xs italic" *ngIf="formControl?.errors?.dateMin">{{ 'ERROR_FIELD.MIN_DATE' | translate }} {{formControl?.errors?.dateMin}}</p>
+    <p class="text-red-500 mb-1 text-xs italic" *ngIf="formControl?.errors?.dateMax">{{ 'ERROR_FIELD.MAX_DATE' | translate }} {{formControl?.errors?.dateMax}}</p>
+  </ng-container>
+</div>

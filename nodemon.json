@@ -4,7 +4,8 @@
     ],
     "ext": "js",
     "ignore": [
-        "admin",
+        "admin/**/*.ts",
+        "admin/**/*.js",
         "README"
     ],
     "exec": "node dist/main.js"
