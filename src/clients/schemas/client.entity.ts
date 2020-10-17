@@ -1,6 +1,7 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { ClientRedirectUri } from './client-redirect-uri.entity';
+import { Application } from '@applications/schemas/application.entity';
 
 @Entity("app_clients")
 export class Client extends BaseEntity {
@@ -72,6 +73,15 @@ export class Client extends BaseEntity {
         cascade: true
     })
     redirectUris: ClientRedirectUri[];
+
+    @Column({
+        type: Number,
+        name: 'application_id'
+    })
+    applicationId: number;
+    @ManyToOne(type => Application)
+    @JoinColumn({ name: 'application_id' })
+    application: Application;
 
     @CreateDateColumn({
         name: 'created_at'

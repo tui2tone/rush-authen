@@ -28,7 +28,9 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "node_modules/flag-icon-css/css/flag-icon.min.css",
                             "src/styles.scss",
+                            "src/theme.scss",
                             "src/tailwind-compile.scss"
                         ],
                         "scripts": []
@@ -93,7 +95,9 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "node_modules/flag-icon-css/css/flag-icon.min.css",
                             "src/styles.scss",
+                            "src/theme.scss",
                             "src/tailwind-compile.scss"
                         ],
                         "scripts": []

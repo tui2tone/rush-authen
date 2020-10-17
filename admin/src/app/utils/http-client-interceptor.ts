@@ -17,7 +17,7 @@ export class HttpClientInterceptor implements HttpInterceptor {
 
     getApiUrl(): String {
         if (this.apiUrl) { return this.apiUrl }
-        this.apiUrl = ''
+        this.apiUrl = ENV.apiUrl
         return this.apiUrl
     }
 

@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaskModule } from 'ngx-mask'
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { InputComponent } from './input/input.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -68,6 +69,7 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { MyMatPaginatorIntl } from './datatable/paginator-intl';
 import { MonthYearPickerComponent } from './month-year-picker/month-year-picker.component';
 import { YearPickerComponent } from './year-picker/year-picker.component';
+import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 
 @NgModule({
     declarations: [
@@ -112,7 +114,8 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
         DayMonthPickerComponent,
         MultiSelectComponent,
         MonthYearPickerComponent,
-        YearPickerComponent
+        YearPickerComponent,
+        InfiniteListComponent
     ],
     imports: [
         CommonModule,
@@ -140,7 +143,8 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
         MatDatepickerModule,
         MatIconModule,
         NgxMaskModule,
-        NgbTypeaheadModule
+        NgbTypeaheadModule,
+        InfiniteScrollModule
     ],
     exports: [
         InputComponent,
@@ -179,7 +183,8 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
         DayMonthPickerComponent,
         MultiSelectComponent,
         MonthYearPickerComponent,
-        YearPickerComponent
+        YearPickerComponent,
+        InfiniteListComponent
     ],
     providers: [
         {

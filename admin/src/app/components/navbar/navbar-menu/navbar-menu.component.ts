@@ -18,18 +18,17 @@ export class NavbarMenuComponent implements OnInit {
     @Input() mobile: boolean = false;
     @Input() profile: Profile;
     currentLanguage: Language;
-    languages: Language[] = []
-
-    round$: Observable<any>;
+    languages: Language[] = [{
+        code: 'en',
+        name: 'English',
+        icon: 'gb'
+    }]
 
     constructor(
-        private store: Store<AuthState.State>,
-        private translateService: TranslateService,
-        private http: HttpClient
+        private translateService: TranslateService
     ) { }
 
     async ngOnInit() {
-        this.languages = (await this.http.get('/languages').toPromise()) as Language[]
         this.getCurrentLanguage();
     }
 

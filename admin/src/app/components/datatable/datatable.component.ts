@@ -7,7 +7,7 @@ import { DataTableColumnDirective, DatatableComponent } from '@swimlane/ngx-data
 import { DatatableActivateEvent, DatatableSelectedEvent } from './datatable';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
-import { distinctUntilChanged, debounce, debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Injectable, CACHE_MANAGER, Inject } from '@nestjs/common';
+import { Injectable, CACHE_MANAGER, Inject, UnauthorizedException } from '@nestjs/common';
 import { Hash } from '@utils/hash';
 import { User } from '@users/schemas/user.entity';
 import { UsersService } from '@users/users.service';
@@ -11,6 +11,8 @@ import { Config } from '@config/index';
 import { AuthProvider } from '@utils/auth-provider';
 import { Request, Response } from 'express';
 import { InteractionResults } from 'oidc-provider';
+import axios from 'axios';
+import { Issuer } from 'openid-client';
 
 @Injectable()
 export class AuthService extends TypeOrmCrudService<Session> {
@@ -69,7 +71,20 @@ export class AuthService extends TypeOrmCrudService<Session> {
     }
 
     async validateToken(token: string): Promise<any> {
-        return await this.getActiveToken(token)
+
+        try {
+            const issuer = await Issuer.discover('http://localhost:3000/oauth')
+            const client = new issuer.Client({
+                client_id: 'foo2',
+                client_secret: 'bar2',
+                redirect_uris: [],
+                response_types: [],
+                grant_types: ['client_credentials']
+            });
+            return await client.introspect(token)
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
     }
 
     async getActiveToken(token: string) {

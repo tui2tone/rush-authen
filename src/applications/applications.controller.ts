@@ -1,8 +1,9 @@
 import { Controller } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Crud, CrudController, CrudRequest, Override } from '@nestjsx/crud';
 import { Application } from './schemas/application.entity';
 import { ApplicationsService } from './applications.service';
 import { ApiTags } from '@nestjs/swagger';
+import { DatatableRequest } from '@decorators/datatable-request.decorator';
 
 
 @Crud({
@@ -11,7 +12,7 @@ import { ApiTags } from '@nestjs/swagger';
     }
 })
 @ApiTags('applications')
-@Controller('applications')
+@Controller('api/applications')
 export class ApplicationsController implements CrudController<Application> {
     get base(): CrudController<Application> {
         return this;
@@ -21,5 +22,14 @@ export class ApplicationsController implements CrudController<Application> {
         public service: ApplicationsService
     ) {
 
+    }
+
+    @Override()
+    async getMany(
+        @DatatableRequest({
+            fields: ['name'],
+        }) req: CrudRequest
+    ) {
+        return await this.base.getManyBase(req);
     }
 }

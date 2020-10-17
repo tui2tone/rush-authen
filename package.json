@@ -35,6 +35,7 @@
 		"@nestjs/websockets": "^7.4.2",
 		"@nestjsx/crud": "^4.6.2",
 		"@nestjsx/crud-typeorm": "^4.6.2",
+		"axios": "^0.20.0",
 		"cache-manager": "^3.3.0",
 		"cache-manager-redis-store": "^2.0.0",
 		"class-transformer": "^0.3.1",
@@ -113,6 +114,7 @@
 		"@interaction": "dist/interaction",
 		"@interceptors": "dist/interceptors",
 		"@register": "dist/register",
+		"@seeds": "dist/seeds",
 		"@users": "dist/users",
 		"@utils": "dist/utils"
 	}

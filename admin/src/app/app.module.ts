@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
 import { StoreModule } from '@ngrx/store';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { NgxMaskModule } from 'ngx-mask';
+import { HttpClientInterceptor } from "./utils/http-client-interceptor";
 
 import { AppComponentsModule } from './components/components.module';
 import { SidebarService } from './services/sidebar.service';
@@ -60,7 +61,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     providers: [
         AuthService,
         AuthGuardService,
-        SidebarService
+        SidebarService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpClientInterceptor,
+            multi: true
+        },
     ],
     bootstrap: [AppComponent]
 })

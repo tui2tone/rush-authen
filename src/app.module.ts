@@ -9,6 +9,7 @@ import { ApplicationsModule } from './applications/applications.module';
 import { ClientsModule } from './clients/clients.module';
 import { RegisterModule } from './register/register.module';
 import { InteractionModule } from './interaction/interaction.module';
+import { TokenStrategy } from '@auth/token.strategy';
 
 @Module({
     imports: [
@@ -26,6 +27,6 @@ import { InteractionModule } from './interaction/interaction.module';
         InteractionModule
     ],
     controllers: [AppController],
-    providers: [],
+    providers: [TokenStrategy],
 })
 export class AppModule { }

@@ -24,5 +24,6 @@ export const AuthProviderConfig: Configuration = {
         devInteractions: { enabled: false },
         introspection: { enabled: true },
         revocation: { enabled: true },
+        clientCredentials: { enabled: true }
     }
 }
