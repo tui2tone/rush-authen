@@ -1,1 +1,5 @@
-<p>create works!</p>
+<app-page-header [title]="'Applications' | translate">
+</app-page-header>
+<div pageBody>
+    <app-form (onSubmit)="onSubmit($event)"></app-form>
+</div>

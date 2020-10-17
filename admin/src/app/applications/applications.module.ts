@@ -13,10 +13,11 @@ import { AppDirectivesModule } from '../directives/directives.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListItemComponent } from './list/list-item/list-item.component';
+import { FormComponent } from './form/form.component';
 
 
 @NgModule({
-    declarations: [ViewComponent, ListComponent, CreateComponent, UpdateComponent, ListItemComponent],
+    declarations: [ViewComponent, ListComponent, CreateComponent, UpdateComponent, ListItemComponent, FormComponent],
     imports: [
         CommonModule,
         ApplicationsRoutingModule,

@@ -1,1 +1,6 @@
-<p>update works!</p>
+<app-page-header [title]="'Applications' | translate">
+</app-page-header>
+<div pageBody>
+    <app-form [error]="error" [data]="data" [isLoading]="isLoading" (onSubmit)="onSubmit($event)">
+    </app-form>
+</div>

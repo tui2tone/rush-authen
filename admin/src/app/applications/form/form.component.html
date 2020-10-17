@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div [appLoader]="isLoading">
+        <div appCardForm>
+            <div appRow>
+                <div appColumn>
+                    <app-input [label]="'Name' | translate" formControlName="name" [error]="error?.title"
+                        [disabled]="disabled" [required]="true" [touched]="form.touched">
+                    </app-input>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex" *ngIf="!disabled">
+        <button btnPrimary class="mr-2" type="submit">{{ 'Save' | translate }}</button>
+        <button btnSecondary type="button" appBtnBack>{{ 'Cancel' | translate }}</button>
+    </div>
+</form>

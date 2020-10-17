@@ -1,1 +1,15 @@
-<p>view works!</p>
+<app-page-header [title]="'Applications' | translate">
+    <ng-container action>
+        <button btnSecondary (click)="remove()">
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+        </button>
+        <a class="ml-2" [routerLink]="updateLink()" btnPrimary>
+            <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+            <span class="ml-2 hidden md:flex">{{ 'EDIT' | translate }}</span>
+        </a>
+    </ng-container>
+</app-page-header>
+<div pageBody>
+    <app-form [data]="data" [disabled]="disabled" [isLoading]="isLoading">
+    </app-form>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Config } from 'src/app/constants';
 
 @Component({
     selector: 'app-list',
@@ -13,7 +14,7 @@ export class ListComponent implements OnInit {
     }
 
     createLink(): string {
-        return ''
+        return Config.APP_URL.APPLICATION + Config.APP_URL.PAGE.CREATE;
     }
 
 }
