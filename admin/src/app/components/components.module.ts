@@ -36,7 +36,6 @@ import { BtnPrimaryComponent } from './button/btn-primary/btn-primary.component'
 import { BtnSecondaryComponent } from './button/btn-secondary/btn-secondary.component';
 import { FormInputComponent } from './form/form-input/form-input.component';
 import { ConfirmModalViewComponent } from './confirm-modal/confirm-modal-view/confirm-modal-view.component';
-import { NgxFileDropModule } from 'ngx-file-drop';
 import { RowComponent } from './row/row.component';
 import { ColumnComponent } from './row/column/column.component';
 import { TableComponent } from './table/table.component';
@@ -134,7 +133,6 @@ import { InfiniteListComponent } from './infinite-list/infinite-list.component';
         MatPaginatorModule,
         ClickOutsideModule,
         MatDialogModule,
-        NgxFileDropModule,
         AppDirectivesModule,
         MatExpansionModule,
         UiSwitchModule,
