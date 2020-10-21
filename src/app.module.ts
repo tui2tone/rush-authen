@@ -10,6 +10,7 @@ import { ClientsModule } from './clients/clients.module';
 import { RegisterModule } from './register/register.module';
 import { InteractionModule } from './interaction/interaction.module';
 import { TokenStrategy } from '@auth/token.strategy';
+import { AdditionalFieldsModule } from './additional-fields/additional-fields.module';
 
 @Module({
     imports: [
@@ -24,7 +25,8 @@ import { TokenStrategy } from '@auth/token.strategy';
         ApplicationsModule,
         ClientsModule,
         RegisterModule,
-        InteractionModule
+        InteractionModule,
+        AdditionalFieldsModule
     ],
     controllers: [AppController],
     providers: [TokenStrategy],

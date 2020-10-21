@@ -18,7 +18,7 @@ const routes: Routes = [{
         loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule)
     }, {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/applications',
         pathMatch: 'full'
     }]
 }];

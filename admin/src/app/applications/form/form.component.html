@@ -8,10 +8,17 @@
                     </app-input>
                 </div>
             </div>
+            <div appRow>
+                <div appColumn>
+                    <app-input [label]="'Description' | translate" formControlName="description" [error]="error?.description"
+                        [disabled]="disabled" [required]="true" [touched]="form.touched">
+                    </app-input>
+                </div>
+            </div>
         </div>
     </div>
     <div class="flex" *ngIf="!disabled">
-        <button btnPrimary class="mr-2" type="submit">{{ 'Save' | translate }}</button>
+        <button btnPrimary class="mr-2" type="submit">Save</button>
         <button btnSecondary type="button" appBtnBack>{{ 'Cancel' | translate }}</button>
     </div>
 </form>

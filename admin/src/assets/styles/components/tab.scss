@@ -1,0 +1,40 @@
+.app-tab {
+    .mat-tab-label {
+        height: auto;
+        margin-right: 16px;
+        padding: 8px 0;
+        min-width: auto;
+        font-size: 1.1rem;
+        opacity: 1;
+
+        .mat-tab-label-content {
+            @apply text-gray-700;
+            font-family: 'Roboto Regular';
+            font-weight: 400;
+        }
+
+        &.mat-tab-label-active {
+            .mat-tab-label-content {
+                @apply text-green-700;
+            }
+        }
+    }
+
+    .mat-tab-nav-bar, .mat-tab-header {
+        border-bottom: 3px solid rgba(0, 0, 0, 0.12);
+        overflow: visible;
+    }
+
+    .mat-tab-label-container {
+        overflow: visible;
+    }
+
+    .mat-tab-group.mat-primary {
+        .mat-ink-bar {
+            @apply bg-green-500;
+            border-radius: 3px;
+            margin-bottom: -3px;
+            height: 3px;
+        }
+    }
+}

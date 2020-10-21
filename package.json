@@ -103,6 +103,7 @@
 	},
 	"_moduleAliases": {
 		"@adapters": "dist/adapters",
+		"@additional-fields": "dist/additional-fields",
 		"@applications": "dist/applications",
 		"@auth": "dist/auth",
 		"@clients": "dist/clients",

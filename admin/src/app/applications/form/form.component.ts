@@ -33,7 +33,8 @@ export class FormComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.fb.group({
-            name: ''
+            name: '',
+            description: ''
         });
     }
 

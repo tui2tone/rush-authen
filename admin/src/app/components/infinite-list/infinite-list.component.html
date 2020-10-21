@@ -1,4 +1,6 @@
 <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()"
     (scrolledUp)="onScrollUp()">
-    <ng-container *ngTemplateOutlet="templateRef; context: { items: items }"></ng-container>
+    <div class="grid grid-cols-4 gap-4">
+        <ng-container *ngTemplateOutlet="templateRef; context: { items: items }"></ng-container>
+    </div>
 </div>

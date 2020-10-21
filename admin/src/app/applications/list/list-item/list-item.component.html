@@ -1,3 +1,23 @@
-<a class="rounded bg-white p-4 shadow" [routerLink]="viewLink(item)">
-    {{item?.name}}
+<a class="flex flex-col rounded bg-white shadow-lg w-full flex-grow overflow-hidden border-white border-2 hover:border-blue-500 transform transition-all duration-500 ease-in-out" [routerLink]="viewLink(item)">
+    <div class="flex w-full items-center px-5 py-5">
+        <div class="text-lg flex-grow text-gray-700">{{item?.name}}</div>
+        <div class="flex text-sm items-center text-green-500">
+            <fa-icon class="mr-1" [icon]="['fas', 'circle']"></fa-icon>
+            <span>Active</span>
+        </div>
+    </div>
+    <div class="border-t border-gray-200 px-5 py-3">
+        <div class="flex items-center text-gray-600 mb-1">
+            <fa-icon class="icon mr-2" [icon]="['fas', 'users']"></fa-icon>
+            <span>79 Users</span>
+        </div>
+        <div class="flex items-center text-gray-600 mb-1">
+            <fa-icon class="icon mr-2" [icon]="['fas', 'chart-line']"></fa-icon>
+            <span>3 Daily Active Users</span>
+        </div>
+        <div class="flex items-center text-gray-600 mb-1">
+            <fa-icon class="icon mr-2" [icon]="['fas', 'plus']"></fa-icon>
+            <span>5 Registered a week</span>
+        </div>
+    </div>
 </a>

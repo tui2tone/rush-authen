@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './navbar-menu-item.component.html',
   styleUrls: ['./navbar-menu-item.component.scss'],
   host: {
-    class: 'border-l outline-none p-4 text-md h-full'
+    class: 'border-l border-white outline-none p-4 text-md h-full'
   }
 })
 export class NavbarMenuItemComponent implements OnInit {

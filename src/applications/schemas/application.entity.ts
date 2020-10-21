@@ -18,6 +18,15 @@ export class Application extends BaseEntity {
     })
     name: string;
 
+    @ApiProperty({
+        example: "app1"
+    })
+    @Column({
+        type: String,
+        nullable: true,
+    })
+    description: string;
+
     @CreateDateColumn({
         name: 'created_at'
     })

@@ -1,7 +1,7 @@
-@import '~@swimlane/ngx-datatable/index.scss';
-@import '~@swimlane/ngx-datatable/themes/material.scss';
-@import '~@swimlane/ngx-datatable/assets/icons.css';
-@import '~src/assets/styles/variable.scss';
+@import '@swimlane/ngx-datatable/index.scss';
+@import '@swimlane/ngx-datatable/themes/material.scss';
+@import '@swimlane/ngx-datatable/assets/icons.css';
+@import 'assets/styles/variable.scss';
 
 .ngx-datatable.material .datatable-body .datatable-row-detail {
   overflow-y: auto;

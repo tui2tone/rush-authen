@@ -1,15 +1,25 @@
 <app-page-header [title]="'Applications' | translate">
-    <ng-container action>
-        <a btnPrimary class="ml-2" [routerLink]="createLink()">
+    <ng-container option>
+        <a class="ml-2 flex items-center px-8 py-3 rounded-full bg-gray-100 text-gray-600 border-dashed border border-gray-400" [routerLink]="createLink()">
             <fa-icon [icon]="['fas', 'plus']"></fa-icon>
             <span class="ml-2 hidden md:flex">{{ 'Create' | translate }}</span>
         </a>
+    </ng-container>
+
+    <ng-container action>
+        <div class="relative">
+            <input class="ml-2 flex items-center px-8 py-3 rounded-full bg-white text-gray-600 border border-gray-300" placeholder="Search">
+            <div class="absolute top-0 right-0 h-full flex items-center px-8">
+                <fa-icon class="text-lg text-gray-500" [icon]="['fas', 'search']"></fa-icon>
+            </div>
+        </div>
     </ng-container>
 </app-page-header>
 <div pageBody>
     <app-infinite-list url="/applications">
         <ng-template let-items="items">
             <app-list-item [item]="item" *ngFor="let item of items"></app-list-item>
+            <app-list-create-item></app-list-create-item>
         </ng-template>
     </app-infinite-list>
 </div>
