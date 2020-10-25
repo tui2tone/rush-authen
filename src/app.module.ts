@@ -5,12 +5,14 @@ import { Config } from './config';
 import { UsersModule } from './users/users.module';
 import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
-import { ApplicationsModule } from './applications/applications.module';
+import { ProjectsModule } from './projects/projects.module';
 import { ClientsModule } from './clients/clients.module';
 import { RegisterModule } from './register/register.module';
 import { InteractionModule } from './interaction/interaction.module';
 import { TokenStrategy } from '@auth/token.strategy';
 import { AdditionalFieldsModule } from './additional-fields/additional-fields.module';
+import { SettingModule } from './setting/setting.module';
+import { SetupModule } from './setup/setup.module';
 
 @Module({
     imports: [
@@ -22,11 +24,13 @@ import { AdditionalFieldsModule } from './additional-fields/additional-fields.mo
         CoreModule,
         UsersModule,
         AuthModule,
-        ApplicationsModule,
+        ProjectsModule,
         ClientsModule,
         RegisterModule,
         InteractionModule,
-        AdditionalFieldsModule
+        AdditionalFieldsModule,
+        SettingModule,
+        SetupModule
     ],
     controllers: [AppController],
     providers: [TokenStrategy],

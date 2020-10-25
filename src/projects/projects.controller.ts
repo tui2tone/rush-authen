@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { Crud, CrudController, CrudRequest, Override } from '@nestjsx/crud';
-import { Application } from './schemas/application.entity';
-import { ApplicationsService } from './applications.service';
+import { Project } from './schemas/project.entity';
+import { ProjectsService } from './projects.service';
 import { ApiTags } from '@nestjs/swagger';
 import { DatatableRequest } from '@decorators/datatable-request.decorator';
 import { Public } from '@decorators/public.decorator';
@@ -9,18 +9,18 @@ import { Public } from '@decorators/public.decorator';
 
 @Crud({
     model: {
-        type: Application,
+        type: Project,
     }
 })
-@ApiTags('applications')
-@Controller('api/applications')
-export class ApplicationsController implements CrudController<Application> {
-    get base(): CrudController<Application> {
+@ApiTags('projects')
+@Controller('api/projects')
+export class ProjectsController implements CrudController<Project> {
+    get base(): CrudController<Project> {
         return this;
     }
 
     constructor(
-        public service: ApplicationsService
+        public service: ProjectsService
     ) {
 
     }

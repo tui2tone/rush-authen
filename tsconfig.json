@@ -17,9 +17,6 @@
 			"@additional-fields/*": [
 				"src/additional-fields/*"
 			],
-			"@applications/*": [
-				"src/applications/*"
-			],
 			"@auth/*": [
 				"src/auth/*"
 			],
@@ -47,11 +44,20 @@
 			"@interceptors/*": [
 				"src/interceptors/*"
 			],
+			"@projects/*": [
+				"src/projects/*"
+			],
 			"@register/*": [
 				"src/register/*"
 			],
 			"@seeds/*": [
 				"src/seeds/*"
+			],
+			"@setting/*": [
+				"src/setting/*"
+			],
+			"@setup/*": [
+				"src/setup/*"
 			],
 			"@users/*": [
 				"src/users/*"

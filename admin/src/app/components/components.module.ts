@@ -69,6 +69,7 @@ import { MyMatPaginatorIntl } from './datatable/paginator-intl';
 import { MonthYearPickerComponent } from './month-year-picker/month-year-picker.component';
 import { YearPickerComponent } from './year-picker/year-picker.component';
 import { InfiniteListComponent } from './infinite-list/infinite-list.component';
+import { NavbarProjectComponent } from './navbar/navbar-project/navbar-project.component';
 
 @NgModule({
     declarations: [
@@ -114,7 +115,8 @@ import { InfiniteListComponent } from './infinite-list/infinite-list.component';
         MultiSelectComponent,
         MonthYearPickerComponent,
         YearPickerComponent,
-        InfiniteListComponent
+        InfiniteListComponent,
+        NavbarProjectComponent
     ],
     imports: [
         CommonModule,

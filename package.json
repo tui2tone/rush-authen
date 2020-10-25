@@ -104,7 +104,6 @@
 	"_moduleAliases": {
 		"@adapters": "dist/adapters",
 		"@additional-fields": "dist/additional-fields",
-		"@applications": "dist/applications",
 		"@auth": "dist/auth",
 		"@clients": "dist/clients",
 		"@config": "dist/config",
@@ -114,8 +113,11 @@
 		"@healthcheck": "dist/healthcheck",
 		"@interaction": "dist/interaction",
 		"@interceptors": "dist/interceptors",
+		"@projects": "dist/projects",
 		"@register": "dist/register",
 		"@seeds": "dist/seeds",
+		"@setting": "dist/setting",
+		"@setup": "dist/setup",
 		"@users": "dist/users",
 		"@utils": "dist/utils"
 	}

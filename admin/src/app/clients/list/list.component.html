@@ -1,1 +1,7 @@
-<p>list works!</p>
+
+<app-infinite-list url="/clients">
+    <ng-template let-items="items">
+        <app-list-item [item]="item" *ngFor="let item of items"></app-list-item>
+        <app-list-create-item></app-list-create-item>
+    </ng-template>
+</app-infinite-list>

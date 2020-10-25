@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Setup Authorization Server</title>
+    <link rel="stylesheet" href="/style.css?v={% version %}" />
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+</head>
+
+<body>
+    <div class="w-full py-8 h-auto md:h-screen bg-gray-200 flex justify-center items-center overflow-auto"
+        data-barba="wrapper">
+        <div class="flex justify-center items-center mx-auto h-full">
+            <div class="flex flex-col justify-center items-center h-full app-login">
+                <div class="w-full text-center mb-8">
+                    <img src="/assets/images/rushlap-logo-horizontal.png" class="logo" />
+                </div>
+                <div class="flex justify-center items-center w-full" data-barba="container"
+                    data-barba-namespace="register">
+                    <div class="max-w-sm w-full rounded overflow-hidden bg-white shadow-lg p-10 mb-10">
+                        <div class="mb-8">
+                            <div class="text-gray-700 text-3xl font-bold mb-1">
+                                Setup</div>
+                            <div class="text-gray-600 text-sm mb-1">
+                                Your admin username & password </div>
+                        </div>
+
+                        <form method="POST" action="/setup" >
+                            <div class="mb-4">
+                                <input
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+                                    name="siteUrl" value="{{siteUrl}}" type="text" placeholder="Site Url">
+                            </div>
+                            <div class="mb-4">
+                                <input
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+                                    name="username" value="{{username}}" type="text" placeholder="Username">
+                            </div>
+                            <div class="mb-4">
+                                <input
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+                                    name="password" type="text" placeholder="Password">
+                            </div>
+                            <div class="flex items-center justify-between w-full">
+                                <button
+                                    class="bg-orange-500 appearance-none shadow w-full hover:bg-orange-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    type="submit">
+                                    Finish Setup
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer text-center w-full">
+                    <div class="text-gray-600 text-sm">power by <i class="font-bold">rushlab.dev</i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        barba.init({
+        })
+    </script>
+</body>
+
+</html>

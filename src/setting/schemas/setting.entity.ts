@@ -1,31 +1,21 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
-
-@Entity("applications")
-export class Application extends BaseEntity {
-    @ApiProperty({
-        example: 1
-    })
+@Entity("settings")
+export class Setting extends BaseEntity {
     @PrimaryGeneratedColumn({})
     id: number;
 
-    @ApiProperty({
-        example: "app1"
-    })
     @Column({
         type: String,
         unique: true
     })
     name: string;
 
-    @ApiProperty({
-        example: "app1"
-    })
     @Column({
         type: String,
-        nullable: true,
+        name: 'site_url',
+        nullable: true
     })
-    description: string;
+    siteUrl: string;
 
     @CreateDateColumn({
         name: 'created_at'
