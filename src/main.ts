@@ -28,7 +28,12 @@ async function bootstrap() {
     app.useGlobalInterceptors(new RequestInterceptor());
     app.useGlobalInterceptors(new ResponseInterceptor());
 
-    app.useStaticAssets(join(__dirname, '..', 'views/_site'));
+    app.useStaticAssets(join(__dirname, '..', 'views/_site/assets'), {
+        prefix: '/assets'
+    });
+    app.useStaticAssets(join(__dirname, '..', 'views/_site/style.css'), {
+        prefix: '/style.css'
+    });
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
     app.setViewEngine('hbs');
 

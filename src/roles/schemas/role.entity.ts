@@ -1,7 +1,8 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, Unique, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, AfterLoad, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { getColumnType } from '@utils/database/column-type';
-@Entity("settings")
-export class Setting extends BaseEntity {
+
+@Entity("roles")
+export class Role extends BaseEntity {
     @PrimaryGeneratedColumn({})
     id: number;
 
@@ -10,13 +11,6 @@ export class Setting extends BaseEntity {
         unique: true
     })
     name: string;
-
-    @Column({
-        type: getColumnType('string'),
-        name: 'site_url',
-        nullable: true
-    })
-    siteUrl: string;
 
     @CreateDateColumn({
         name: 'created_at'

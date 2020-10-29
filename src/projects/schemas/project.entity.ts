@@ -1,5 +1,6 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { getColumnType } from '@utils/database/column-type';
 
 @Entity("projects")
 export class Project extends BaseEntity {
@@ -13,7 +14,7 @@ export class Project extends BaseEntity {
         example: "app1"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         unique: true
     })
     name: string;
@@ -22,7 +23,7 @@ export class Project extends BaseEntity {
         example: "app1"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         nullable: true,
     })
     description: string;

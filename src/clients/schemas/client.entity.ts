@@ -2,6 +2,7 @@ import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, U
 import { ApiProperty } from '@nestjs/swagger';
 import { ClientRedirectUri } from './client-redirect-uri.entity';
 import { Project } from '@projects/schemas/project.entity';
+import { getColumnType } from '@utils/database/column-type';
 
 export interface ClientDto {
     id?: number,
@@ -24,7 +25,7 @@ export class Client extends BaseEntity {
         example: "web client"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         unique: true
     })
     name: string;
@@ -33,7 +34,7 @@ export class Client extends BaseEntity {
         example: "xxxxxxxxxxxxxxxxxxx"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         name: 'client_id'
     })
     clientId: string;
@@ -42,7 +43,7 @@ export class Client extends BaseEntity {
         example: "xxxxxxxxxxxxxxxxxxx"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         name: 'client_secret',
         nullable: true
     })
@@ -52,7 +53,7 @@ export class Client extends BaseEntity {
         example: "xxxxxxxxxxxxxxxxxxx"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         name: 'application_type',
         default: 'web',
         nullable: true
@@ -63,7 +64,7 @@ export class Client extends BaseEntity {
         example: "xxxxxxxxxxxxxxxxxxx"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         name: 'token_endpoint_auth_method',
         default: 'none',
         nullable: true

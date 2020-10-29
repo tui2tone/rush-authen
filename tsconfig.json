@@ -50,6 +50,9 @@
 			"@register/*": [
 				"src/register/*"
 			],
+			"@roles/*": [
+				"src/roles/*"
+			],
 			"@seeds/*": [
 				"src/seeds/*"
 			],

@@ -13,6 +13,7 @@ import { TokenStrategy } from '@auth/token.strategy';
 import { AdditionalFieldsModule } from './additional-fields/additional-fields.module';
 import { SettingModule } from './setting/setting.module';
 import { SetupModule } from './setup/setup.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
     imports: [
@@ -30,7 +31,8 @@ import { SetupModule } from './setup/setup.module';
         InteractionModule,
         AdditionalFieldsModule,
         SettingModule,
-        SetupModule
+        SetupModule,
+        RolesModule
     ],
     controllers: [AppController],
     providers: [TokenStrategy],

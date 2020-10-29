@@ -1,6 +1,7 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Client } from './client.entity';
+import { getColumnType } from '@utils/database/column-type';
 
 @Entity("app_client_redirect_uris")
 export class ClientRedirectUri extends BaseEntity {
@@ -14,7 +15,7 @@ export class ClientRedirectUri extends BaseEntity {
         example: "http://localhost:4000/callback"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         nullable: false,
         name: 'redirect_uri'
     })

@@ -1,5 +1,6 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { getColumnType } from '@utils/database/column-type';
 
 @Unique(['group', 'name'])
 @Entity("additional-fields")
@@ -8,17 +9,17 @@ export class AdditionalField extends BaseEntity {
     id: number;
 
     @Column({
-        type: String
+        type: getColumnType('string')
     })
     group: string;
 
     @Column({
-        type: String
+        type: getColumnType('string')
     })
     name: string;
 
     @Column({
-        type: String,
+        type: getColumnType('string'),
         nullable: true
     })
     description: string;

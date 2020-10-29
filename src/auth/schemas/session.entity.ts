@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from '@users/schemas/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { getColumnType } from '@utils/database/column-type';
 
 @Entity("app_sessions")
 export class Session extends BaseEntity {
@@ -26,7 +27,7 @@ export class Session extends BaseEntity {
     })
     @Column({
         name: 'token',
-        type: String,
+        type: getColumnType('string'),
         length: 100
     })
     token: string;

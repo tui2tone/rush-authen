@@ -115,6 +115,7 @@
 		"@interceptors": "dist/interceptors",
 		"@projects": "dist/projects",
 		"@register": "dist/register",
+		"@roles": "dist/roles",
 		"@seeds": "dist/seeds",
 		"@setting": "dist/setting",
 		"@setup": "dist/setup",

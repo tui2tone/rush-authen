@@ -1,5 +1,6 @@
 import { Entity, Column, Unique, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, AfterLoad, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { getColumnType } from '@utils/database/column-type';
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -13,7 +14,7 @@ export class User extends BaseEntity {
         example: "abc@gmail.com"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         unique: true
     })
     email: string;
@@ -22,7 +23,7 @@ export class User extends BaseEntity {
         example: "Charuwit Nod."
     })
     @Column({
-        type: String
+        type: getColumnType('string')
     })
     name: string;
 
@@ -30,13 +31,13 @@ export class User extends BaseEntity {
         example: "tui2tone"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         unique: true
     })
     username: string;
 
     @Column({
-        type: String,
+        type: getColumnType('string'),
         name: "crypted_password"
     })
     cryptedPassword: string;
@@ -45,7 +46,7 @@ export class User extends BaseEntity {
         example: "xxxxxxx"
     })
     @Column({
-        type: String,
+        type: getColumnType('string'),
         name: 'google_user_id',
         nullable: true
     })
