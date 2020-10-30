@@ -95,6 +95,34 @@
                                     "maximumError": "10kb"
                                 }
                             ]
+                        },
+                        "dev": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.dev.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
                         }
                     }
                 },
@@ -109,6 +137,9 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "admin:build:production"
+                        },
+                        "dev": {
+                            "browserTarget": "admin:build:dev"
                         },
                         "fullstack": {
                             "browserTarget": "admin:build:fullstack"
@@ -167,6 +198,9 @@
                     "configurations": {
                         "production": {
                             "devServerTarget": "admin:serve:production"
+                        },
+                        "dev": {
+                            "devServerTarget": "admin:serve:dev"
                         },
                         "fullstack": {
                             "devServerTarget": "admin:serve:fullstack"
