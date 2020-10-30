@@ -20,7 +20,6 @@ async function bootstrap() {
         AppModule,
     );
     app.enableCors();
-    // app.setGlobalPrefix('/api');
     app.useGlobalPipes(new ValidationPipe());
 
     const reflector = app.get(Reflector);
@@ -35,11 +34,6 @@ async function bootstrap() {
     app.useStaticAssets(join(__dirname, '..', 'views/_site/style.css'), {
         prefix: '/style.css'
     });
-    // app.useStaticAssets(join(__dirname, '..', 'admin/dist/admin'), {
-    //     prefix: '/admin',
-    //     index: false,
-    //     redirect: false
-    // });
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
     app.setViewEngine('hbs');
 
@@ -51,8 +45,7 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);
 
-    // await OidcSequelizeAdapter.connect();
-    // app.use('/admin', proxy('www.google.com'));
+    await OidcSequelizeAdapter.connect();
 
     app.use('/oauth', AuthProvider.callback)
 

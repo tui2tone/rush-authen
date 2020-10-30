@@ -1,6 +1,7 @@
-import { Entity, Column, Unique, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, AfterLoad, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, Unique, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, AfterLoad, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { getColumnType } from '@utils/database/column-type';
+import { UserRole } from './user-role.entity';
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -42,6 +43,13 @@ export class User extends BaseEntity {
     })
     cryptedPassword: string;
 
+    @Column({
+        type: getColumnType('boolean'),
+        name: "is_owner",
+        default: false
+    })
+    isOwner: boolean;
+
     @ApiProperty({
         example: "xxxxxxx"
     })
@@ -54,6 +62,11 @@ export class User extends BaseEntity {
 
     password?: string;
     confirmPassword?: string;
+
+    @OneToMany(type => UserRole, userRole => userRole.user, {
+        cascade: true
+    })
+    roles: UserRole[];
 
     @CreateDateColumn({
         name: 'created_at'

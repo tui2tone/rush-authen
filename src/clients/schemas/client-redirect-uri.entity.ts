@@ -9,7 +9,7 @@ export class ClientRedirectUri extends BaseEntity {
         example: 1
     })
     @PrimaryGeneratedColumn({})
-    id: number;
+    id?: number;
 
     @ApiProperty({
         example: "http://localhost:4000/callback"
@@ -22,24 +22,24 @@ export class ClientRedirectUri extends BaseEntity {
     redirectUri: string;
 
     @Column({
-        type: Number,
+        type: getColumnType('number'),
         name: 'client_id',
         nullable: true
     })
-    clientId: number;
+    clientId?: number;
     @ManyToOne(type => Client, form => form.redirectUris, { onDelete: 'CASCADE' })
     @JoinColumn({
         name: 'client_id'
     })
-    client: Client;
+    client?: Client;
 
     @CreateDateColumn({
         name: 'created_at'
     })
-    createdAt: Date;
+    createdAt?: Date;
 
     @UpdateDateColumn({
         name: 'updated_at'
     })
-    updatedAt: Date;
+    updatedAt?: Date;
 }

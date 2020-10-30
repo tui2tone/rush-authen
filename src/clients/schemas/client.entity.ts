@@ -77,7 +77,7 @@ export class Client extends BaseEntity {
     redirectUris: ClientRedirectUri[];
 
     @Column({
-        type: Number,
+        type: getColumnType('number'),
         name: 'project_id',
         nullable: true
     })

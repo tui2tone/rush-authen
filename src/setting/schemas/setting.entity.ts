@@ -18,6 +18,13 @@ export class Setting extends BaseEntity {
     })
     siteUrl: string;
 
+    @Column({
+        type: getColumnType('string'),
+        name: 'site_name',
+        nullable: true
+    })
+    siteName: string;
+
     @CreateDateColumn({
         name: 'created_at'
     })

@@ -12,7 +12,7 @@ export class Session extends BaseEntity {
     id: number;
 
     @Column({
-        type: Number,
+        type: getColumnType('number'),
         name: "user_id"
     })
     userId: number;
