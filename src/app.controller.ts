@@ -15,7 +15,7 @@ export class AppController {
     async base(
         @Res() res: Response
     ) {
-        const setuped = await this.setting.isSetuped()
+        const setuped = await this.setting.get()
         if (setuped) {
             return res.redirect(`/admin`)
         } else {

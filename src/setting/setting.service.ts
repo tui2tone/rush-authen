@@ -33,11 +33,7 @@ export class SettingService extends TypeOrmCrudService<Setting> {
 
     async get() {
         return await this.repo.findOne({
-            name: 'setup'
+            name: 'site'
         })
-    }
-
-    async isSetuped() {
-        return await this.repo.findOne()
     }
 }

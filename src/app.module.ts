@@ -14,6 +14,8 @@ import { AdditionalFieldsModule } from './additional-fields/additional-fields.mo
 import { SettingModule } from './setting/setting.module';
 import { SetupModule } from './setup/setup.module';
 import { RolesModule } from './roles/roles.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
     imports: [
@@ -21,6 +23,10 @@ import { RolesModule } from './roles/roles.module';
             type: 'postgres',
             url: Config.DB_URL,
             entities: [__dirname + '/**/*.entity{.ts,.js}']
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '..', 'admin/dist/admin'),
+            serveRoot: '/admin'
         }),
         CoreModule,
         UsersModule,

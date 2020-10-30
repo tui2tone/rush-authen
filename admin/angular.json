@@ -15,13 +15,15 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "ngx-build-plus:browser",
+                    "builder": "@angular-builders/custom-webpack:browser",
                     "options": {
                         "outputPath": "dist/admin",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
-                        "extraWebpackConfig": "webpack.config.js",
+                        "customWebpackConfig": {
+                            "path": "./webpack.config.js"
+                        },
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [
@@ -65,18 +67,51 @@
                                     "maximumError": "10kb"
                                 }
                             ]
+                        },
+                        "fullstack": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.fullstack.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
                         }
                     }
                 },
                 "serve": {
-                    "builder": "ngx-build-plus:dev-server",
+                    "builder": "@angular-builders/custom-webpack:dev-server",
                     "options": {
                         "browserTarget": "admin:build",
-                        "extraWebpackConfig": "webpack.config.js"
+                        "customWebpackConfig": {
+                            "path": "./webpack.config.js"
+                        }
                     },
                     "configurations": {
                         "production": {
                             "browserTarget": "admin:build:production"
+                        },
+                        "fullstack": {
+                            "browserTarget": "admin:build:fullstack"
                         }
                     }
                 },
@@ -87,13 +122,15 @@
                     }
                 },
                 "test": {
-                    "builder": "ngx-build-plus:karma",
+                    "builder": "@angular-builders/custom-webpack:karma",
                     "options": {
                         "main": "src/test.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
-                        "extraWebpackConfig": "webpack.config.js",
+                        "customWebpackConfig": {
+                            "path": "./webpack.config.js"
+                        },
                         "assets": [
                             "src/favicon.ico",
                             "src/assets"
@@ -130,6 +167,9 @@
                     "configurations": {
                         "production": {
                             "devServerTarget": "admin:serve:production"
+                        },
+                        "fullstack": {
+                            "devServerTarget": "admin:serve:fullstack"
                         }
                     }
                 }
