@@ -1,12 +1,12 @@
 <a class="item" [routerLink]="viewLink(item)">
-    <div class="flex w-full items-center px-5 py-5">
-        <div class="text-lg flex-grow text-gray-700">{{item?.name}}</div>
+    <div class="flex flex-grow items-center px-5 py-5">
+        <div class="text-lg mr-2 flex-grow text-gray-700">{{item?.name}}</div>
         <div class="flex text-sm items-center text-green-500">
             <fa-icon class="mr-1" [icon]="['fas', 'circle']"></fa-icon>
             <span>Active</span>
         </div>
     </div>
-    <div class="border-t border-gray-200 px-5 py-3">
+    <div class="px-5 py-3">
         <div class="flex items-center text-gray-600 mb-1">
             <fa-icon class="icon mr-2" [icon]="['fas', 'users']"></fa-icon>
             <span>79 Users</span>
