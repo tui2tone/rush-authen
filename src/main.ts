@@ -13,7 +13,6 @@ import { ValidationPipe } from '@nestjs/common';
 import { OidcSequelizeAdapter } from '@adapters/oidc-postgres';
 import { AuthProvider } from '@utils/auth-provider';
 import { join } from 'path';
-import * as proxy from 'express-http-proxy';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(

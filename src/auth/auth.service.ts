@@ -13,13 +13,19 @@ import { Request, Response } from 'express';
 import { InteractionResults } from 'oidc-provider';
 import axios from 'axios';
 import { Issuer } from 'openid-client';
+import { SettingService } from '@setting/setting.service';
+import { ClientsService } from '@clients/clients.service';
+import { ProjectsService } from '@projects/projects.service';
 
 @Injectable()
 export class AuthService extends TypeOrmCrudService<Session> {
     constructor(
         @InjectRepository(Session)
         public repo: Repository<Session>,
-        private user: UsersService
+        private user: UsersService,
+        private setting: SettingService,
+        private project: ProjectsService,
+        private client: ClientsService
     ) {
         super(repo)
     }
@@ -48,7 +54,7 @@ export class AuthService extends TypeOrmCrudService<Session> {
             if (matched) {
                 const result = {
                     login: {
-                        account: matched.email,
+                        account: matched.email || matched.username,
                     },
                     consent: {
                         rejectedScopes: [],
@@ -73,6 +79,7 @@ export class AuthService extends TypeOrmCrudService<Session> {
     async validateToken(token: string): Promise<any> {
 
         try {
+            console.log(token)
             const issuer = await Issuer.discover('http://localhost:3000/oauth')
             const client = new issuer.Client({
                 client_id: 'foo2',

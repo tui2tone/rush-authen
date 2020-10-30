@@ -33,9 +33,10 @@ export class Project extends BaseEntity {
     })
     @Column({
         type: Boolean,
+        name: "is_primary",
         default: false
     })
-    removeable: boolean;
+    isPrimary: boolean;
 
     @CreateDateColumn({
         name: 'created_at'

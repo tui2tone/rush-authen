@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthActions, AuthState } from 'src/app/store/auth';
-import { OAuthConfig } from 'src/environments/environment';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -19,14 +18,14 @@ export class SigninComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if (OAuthConfig.skip) {
-            this.store.dispatch(new AuthActions.LoadSuccessAction({
-                token: "xxxxx",
-                permissions: []
-            }));
-            this.router.navigate(['/'])
-            return null;
-        }
+        // if (OAuthConfig.skip) {
+        //     this.store.dispatch(new AuthActions.LoadSuccessAction({
+        //         token: "xxxxx",
+        //         permissions: []
+        //     }));
+        //     this.router.navigate(['/'])
+        //     return null;
+        // }
         this.authService.signin()
     }
 

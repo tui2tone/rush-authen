@@ -72,7 +72,7 @@ export class SetupController {
             // Default Project
             const project = Object.assign(new Project(), {
                 name: siteName || defaultName,
-                removeable: false
+                isPrimary: true
             });
             await queryRunner.manager.save(project);
 

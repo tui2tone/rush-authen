@@ -9,6 +9,7 @@ import { GoogleService } from './google/google.service';
 import { Request, Response } from 'express';
 import { AuthProvider } from '@utils/auth-provider';
 import * as queryString from 'query-string'
+import { ClientsService } from '@clients/clients.service';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -16,17 +17,9 @@ export class AuthController {
 
     constructor(
         private service: AuthService,
-        private google: GoogleService
+        private google: GoogleService,
+        private client: ClientsService
     ) { }
-
-    // @Get()
-    // @ApiOperation({ summary: 'Get current session via token or cookie' })
-    // @ApiResponse({ status: 200 })
-    // async getAuth(
-    //     @CurrentSession() session: Session
-    // ): Promise<Session> {
-    //     return await this.service.repo.findOne({})
-    // }
 
     @Public()
     @Post(':uid/login')
@@ -53,12 +46,17 @@ export class AuthController {
         const { prompt, params, session } = details;
 
         const client = await AuthProvider.Client.find(params.client_id);
+        const appClient = await this.client.findOne({
+            clientId: client.clientId
+        }, {
+            relations: ["project"]
+        })
 
         if (prompt.name === 'login') {
             return res.render('login',
                 {
                     uid,
-                    message: 'Hello world!'
+                    project: appClient.project.name
                 },
             );
         }
@@ -66,10 +64,15 @@ export class AuthController {
             return res.render('consent',
                 {
                     uid,
-                    message: 'Hello world!'
+                    project: appClient.project.name
                 },
             );
         }
+
+        if(prompt.name === "invalid_request") {
+
+        }
+        console.log(prompt.name)
 
         return res.redirect(`${params.redirect_uri}?${queryString.stringify({
             ...params

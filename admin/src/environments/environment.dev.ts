@@ -8,19 +8,6 @@ export const environment = {
     
 };
 
-export const OAuthConfig = {
-    skip: true,
-    authority: 'http://localhost:3000/oauth',
-    client_id: 'foo',
-    redirect_uri: 'http://localhost:4200/auth/callback',
-    response_type: 'code',
-    scope: 'openid email',
-    automaticSilentRenew: true,
-    accessTokenExpiringNotificationTime: 4,
-    filterProtocolClaims: true,
-    loadUserInfo: true
-};
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

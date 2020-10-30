@@ -1,21 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from "@angular/core";
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserManager, User } from 'oidc-client';
-import { OAuthConfig } from '../config/oauth';
 import { AuthActions, AuthState } from '../store/auth';
+import { EnvironmentService } from './environment.service';
 
 @Injectable()
 export class AuthService {
 
-    mgr: UserManager = new UserManager(OAuthConfig);
+    mgr: UserManager = null;
     token: string = null;
 
     constructor(
         private store: Store<AuthState.State>,
         private router: Router,
-        private ngZone: NgZone
+        private ngZone: NgZone,
+        private env: EnvironmentService
     ) {
+    }
+
+    init() {
+        this.mgr = new UserManager(this.env.config);
     }
 
     signin() {
@@ -34,6 +40,7 @@ export class AuthService {
                 this.router.navigate(['/'])
             })
         } catch (error) {
+            console.error(error)
             this.store.dispatch(new AuthActions.LoadFailureAction(error));
         }
     }

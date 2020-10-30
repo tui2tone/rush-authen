@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -23,9 +23,14 @@ import { HttpClientInterceptor } from "./utils/http-client-interceptor";
 
 import { AppComponentsModule } from './components/components.module';
 import { SidebarService } from './services/sidebar.service';
+import { EnvironmentService } from './services/environment.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, '/languages/');
+}
+
+export function environmentServiceFactory(envService: EnvironmentService): Function {
+    return () => envService.load();
 }
 
 @NgModule({
@@ -59,6 +64,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         }),
     ],
     providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: environmentServiceFactory,
+            deps: [EnvironmentService],
+            multi: true
+        },
         AuthService,
         AuthGuardService,
         SidebarService,
