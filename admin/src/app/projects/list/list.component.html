@@ -1,4 +1,4 @@
-<app-page-header [title]="'Applications' | translate">
+<app-page-header [title]="'Projects' | translate">
     <ng-container option>
         <a class="ml-2 flex items-center px-8 py-3 rounded-full bg-gray-100 text-gray-600 border-dashed border border-gray-400" [routerLink]="createLink()">
             <fa-icon [icon]="['fas', 'plus']"></fa-icon>
@@ -16,7 +16,7 @@
     </ng-container>
 </app-page-header>
 <div pageBody>
-    <app-infinite-list url="/applications">
+    <app-infinite-list url="/projects">
         <ng-template let-items="items">
             <app-list-item [item]="item" *ngFor="let item of items"></app-list-item>
             <app-list-create-item></app-list-create-item>

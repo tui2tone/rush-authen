@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Config from 'src/app/constants';
-import { ApplicationDto } from '../../interfaces/application.interface';
+import { ProjectDto } from '../../interfaces/project.interface';
 
 @Component({
     selector: 'app-list-item',
@@ -9,14 +9,14 @@ import { ApplicationDto } from '../../interfaces/application.interface';
 })
 export class ListItemComponent implements OnInit {
 
-    @Input() item: ApplicationDto;
+    @Input() item: ProjectDto;
     constructor() { }
 
     ngOnInit(): void {
     }
 
-    viewLink(item: ApplicationDto) {
-        return `${Config.APP_URL.APPLICATION}/${item.id}`;
+    viewLink(item: ProjectDto) {
+        return `${Config.APP_URL.PROJECT}/${item.id}`;
     }
 
 }

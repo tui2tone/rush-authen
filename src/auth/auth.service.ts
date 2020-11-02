@@ -77,19 +77,28 @@ export class AuthService extends TypeOrmCrudService<Session> {
     }
 
     async validateToken(token: string): Promise<any> {
-
         try {
-            console.log(token)
-            const issuer = await Issuer.discover('http://localhost:3000/oauth')
-            const client = new issuer.Client({
-                client_id: 'foo2',
-                client_secret: 'bar2',
-                redirect_uris: [],
-                response_types: [],
-                grant_types: ['client_credentials']
-            });
-            return await client.introspect(token)
+            const tokens = await this.repo.query(`select * from "AccessTokens" where data->>'kind' = 'AccessToken' AND data->>'jwt' = '${token}';`)
+            if (tokens && tokens.length) {
+                const exist = tokens[0]
+                const client = await this.client.repo.findOne({
+                    clientId: exist.data.clientId
+                })
+                const site = await this.setting.get()
+                const issuer = await Issuer.discover(site.siteUrl + '/oauth')
+                const clienIssuer = new issuer.Client({
+                    client_id: client.clientId,
+                    client_secret: client.clientSecret,
+                    redirect_uris: [],
+                    response_types: [],
+                    grant_types: ['client_credentials']
+                });
+                return await clienIssuer.introspect(token)
+            } else {
+                
+            }
         } catch (error) {
+            console.error(error)
             throw new UnauthorizedException();
         }
     }

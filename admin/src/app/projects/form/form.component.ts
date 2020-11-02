@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'underscore';
-import { ApplicationDto } from '../interfaces/application.interface';
+import { ProjectDto } from '../interfaces/project.interface';
 
 @Component({
     selector: 'app-form',
@@ -11,14 +11,14 @@ import { ApplicationDto } from '../interfaces/application.interface';
     styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-    @Output() onSubmit: EventEmitter<ApplicationDto> = new EventEmitter();
+    @Output() onSubmit: EventEmitter<ProjectDto> = new EventEmitter();
     @Input() error: any;
     @Input() mode: string = 'view';
     @Input() disabled: boolean = false;
     @Input() isLoading: boolean = false;
 
     @Input()
-    set data(value: ApplicationDto) {
+    set data(value: ProjectDto) {
         if (this.form) {
             this.form.patchValue(value);
         }
@@ -45,7 +45,7 @@ export class FormComponent implements OnInit {
             return false;
         }
 
-        const data = this.form.value as ApplicationDto
+        const data = this.form.value as ProjectDto
         this.onSubmit.emit(data);
     }
 

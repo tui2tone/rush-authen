@@ -14,7 +14,7 @@ export class ListCreateItemComponent implements OnInit {
     }
 
     createLink() {
-        return `${Config.APP_URL.APPLICATION}/create`;
+        return `${Config.APP_URL.PROJECT}/create`;
     }
 
 }

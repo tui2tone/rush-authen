@@ -1,6 +1,5 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn, AfterLoad } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { ClientRedirectUri } from './client-redirect-uri.entity';
 import { Project } from '@projects/schemas/project.entity';
 import { getColumnType } from '@utils/database/column-type';
 
@@ -71,10 +70,25 @@ export class Client extends BaseEntity {
     })
     tokenEndpointAuthMethod?: string;
 
-    @OneToMany(type => ClientRedirectUri, item => item.client, {
-        cascade: true
+    @ApiProperty({
+        example: "xxxxxxxxxxxxxxxxxxx"
     })
-    redirectUris: ClientRedirectUri[];
+    @Column({
+        type: getColumnType('array'),
+        name: 'redirect_uris',
+        nullable: true
+    })
+    redirectUris?: string[];
+
+    @ApiProperty({
+        example: "xxxxxxxxxxxxxxxxxxx"
+    })
+    @Column({
+        type: getColumnType('array'),
+        name: 'grant_types',
+        nullable: true
+    })
+    grantTypes?: string[];
 
     @Column({
         type: getColumnType('number'),

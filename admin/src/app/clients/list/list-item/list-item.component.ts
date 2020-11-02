@@ -15,7 +15,7 @@ export class ListItemComponent implements OnInit {
     }
 
     viewLink(item) {
-        return `${Config.APP_URL.APPLICATION}/${item.id}`;
+        return `${Config.APP_URL.PROJECT}/${item.id}`;
     }
 
 }

@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
     }
 
     createLink(): string {
-        return Config.APP_URL.APPLICATION + Config.APP_URL.PAGE.CREATE;
+        return Config.APP_URL.PROJECT + Config.APP_URL.PAGE.CREATE;
     }
 
 }

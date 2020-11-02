@@ -16,6 +16,10 @@ export const getColumnType = (type: string) => {
         case 'datetime':
         case 'date':
             return 'date';
+        case 'array':
+            return 'jsonb';
+        case 'json':
+            return 'simple-json';
         default:
             return 'varchar'
     }

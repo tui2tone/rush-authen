@@ -35,12 +35,7 @@ export class InitService implements OnModuleInit {
             INSERT INTO "Clients" (id, data, "createdAt", "updatedAt")
             select id, row_to_json(row), now(), now()
             from (
-                select client_id as id, name, client_id, client_secret, application_type, token_endpoint_auth_method,
-                array(
-                    select redirect_uri 
-                    from app_client_redirect_uris t 
-                    where t.client_id = u.id
-                    ) as redirect_uris
+                select client_id as id, name, client_id, client_secret, application_type, token_endpoint_auth_method, redirect_uris, grant_types
                 FROM app_clients u
             ) row;
         `

@@ -14,11 +14,11 @@ const routes: Routes = [{
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     }, {
-        path: 'applications',
-        loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule)
+        path: 'projects',
+            loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
     }, {
         path: '',
-        redirectTo: '/applications',
+            redirectTo: '/projects',
         pathMatch: 'full'
     }]
 }];

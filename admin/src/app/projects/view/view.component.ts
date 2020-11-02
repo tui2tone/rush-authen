@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ViewEncapsulation } from "@ang
 import { ActivatedRoute, Router } from "@angular/router";
 import Config, { getAppUrl } from 'src/app/constants';
 import { HttpClient } from '@angular/common/http';
-import { ApplicationDto } from '../interfaces/application.interface';
+import { ProjectDto } from '../interfaces/project.interface';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
@@ -16,7 +16,7 @@ export class ViewComponent implements OnInit {
     id: number;
     isLoading: boolean = false;
     disabled: boolean = true;
-    data: ApplicationDto = null;
+    data: ProjectDto = null;
     tabs: Object = {
         stats: 0,
         users: 1,
@@ -44,7 +44,7 @@ export class ViewComponent implements OnInit {
     async getData() {
         try {
             this.isLoading = true;
-            this.data = await this.http.get(`${Config.API_URL.APPLICATION}/${this.id}`).toPromise() as ApplicationDto
+            this.data = await this.http.get(`${Config.API_URL.PROJECT}/${this.id}`).toPromise() as ProjectDto
             this.isLoading = false;
         } catch (error) {
             this.isLoading = false;
@@ -53,16 +53,16 @@ export class ViewComponent implements OnInit {
     }
 
     updateLink() {
-        return getAppUrl(Config.APP_URL.APPLICATION + Config.APP_URL.PAGE.EDIT, this.id);
+        return getAppUrl(Config.APP_URL.PROJECT + Config.APP_URL.PAGE.EDIT, this.id);
     }
 
     async remove() {
         
     }
 
-    async onSubmit(data: ApplicationDto) {
+    async onSubmit(data: ProjectDto) {
         try {
-            const response = await this.http.patch(`${Config.API_URL.APPLICATION}/${this.id}`, data).toPromise();
+            const response = await this.http.patch(`${Config.API_URL.PROJECT}/${this.id}`, data).toPromise();
         } catch (error) {
             console.error(error)
         }
@@ -70,6 +70,6 @@ export class ViewComponent implements OnInit {
 
     selectedTabChange(tab: MatTabChangeEvent) {
         const getTab = tab.tab.textLabel;
-        this.router.navigate([Config.APP_URL.APPLICATION, this.id, getTab])
+        this.router.navigate([Config.APP_URL.PROJECT, this.id, getTab])
     }
 }

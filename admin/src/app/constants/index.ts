@@ -33,10 +33,10 @@ export const Config = {
         },
         MAIN: '/',
         AUTH: '/auth',
-        APPLICATION: '/applications'
+        PROJECT: '/projects'
     },
     API_URL: {
-        APPLICATION: '/applications'
+        PROJECT: '/projects'
     },
     POSTFIX: {
         AUTOCOMPLETE: '/autocomplete'

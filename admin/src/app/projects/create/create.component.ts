@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Config from 'src/app/constants';
-import { ApplicationDto } from '../interfaces/application.interface';
+import { ProjectDto } from '../interfaces/project.interface';
 
 @Component({
     selector: 'app-create',
@@ -21,9 +21,9 @@ export class CreateComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    async onSubmit(data: ApplicationDto) {
+    async onSubmit(data: ProjectDto) {
         try {
-            const response = await this.http.post(Config.API_URL.APPLICATION, data).toPromise();
+            const response = await this.http.post(Config.API_URL.PROJECT, data).toPromise();
             this.location.back();
         } catch (error) {
             console.error(error)

@@ -72,7 +72,6 @@ export class AuthController {
         if(prompt.name === "invalid_request") {
 
         }
-        console.log(prompt.name)
 
         return res.redirect(`${params.redirect_uri}?${queryString.stringify({
             ...params

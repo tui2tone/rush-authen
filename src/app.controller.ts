@@ -37,15 +37,11 @@ export class AppController {
         })
         const client = await this.client.findOne({
             projectId: project.id
-        }, {
-            relations: [
-                'redirectUris'
-            ]
         })
         return {
             authority: setuped.siteUrl + '/oauth',
             client_id: client.clientId,
-            redirect_uri: client.redirectUris[0].redirectUri,
+            redirect_uri: client.redirectUris[0],
             response_type: 'code',
             scope: 'openid email',
             automaticSilentRenew: true,
