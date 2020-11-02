@@ -11,7 +11,6 @@ import { Config } from '@config/index';
 import { AuthProvider } from '@utils/auth-provider';
 import { Request, Response } from 'express';
 import { InteractionResults } from 'oidc-provider';
-import axios from 'axios';
 import { Issuer } from 'openid-client';
 import { SettingService } from '@setting/setting.service';
 import { ClientsService } from '@clients/clients.service';
@@ -78,7 +77,7 @@ export class AuthService extends TypeOrmCrudService<Session> {
 
     async validateToken(token: string): Promise<any> {
         try {
-            const tokens = await this.repo.query(`select * from "AccessTokens" where data->>'kind' = 'AccessToken' AND data->>'jwt' = '${token}';`)
+            const tokens = await this.repo.query(`select * from "AccessTokens" where data->>'kind' = 'AccessToken' AND data->>'jti' = '${token}';`)
             if (tokens && tokens.length) {
                 const exist = tokens[0]
                 const client = await this.client.repo.findOne({
@@ -89,6 +88,7 @@ export class AuthService extends TypeOrmCrudService<Session> {
                 const clienIssuer = new issuer.Client({
                     client_id: client.clientId,
                     client_secret: client.clientSecret,
+                    introspection_endpoint_auth_method: client.tokenEndpointAuthMethod as any,
                     redirect_uris: [],
                     response_types: [],
                     grant_types: ['client_credentials']

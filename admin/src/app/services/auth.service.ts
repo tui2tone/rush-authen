@@ -21,6 +21,7 @@ export class AuthService {
     }
 
     init() {
+        console.log(this.env.config)
         this.mgr = new UserManager(this.env.config);
     }
 
@@ -51,7 +52,7 @@ export class AuthService {
 
     async signoutRedirectCallback() {
         try {
-            // const user = await this.mgr.signoutRedirectCallback()
+            const user = await this.mgr.signoutRedirectCallback()
         } catch (error) {
             this.store.dispatch(new AuthActions.LoadFailureAction(error));
         }

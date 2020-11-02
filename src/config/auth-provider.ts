@@ -23,6 +23,9 @@ export const AuthProviderConfig: Configuration = {
     features: {
         devInteractions: { enabled: false },
         introspection: { enabled: true },
+        jwtIntrospection: {
+            enabled: true
+        },
         revocation: { enabled: true },
         clientCredentials: { enabled: true }
     }
