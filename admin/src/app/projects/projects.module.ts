@@ -15,11 +15,12 @@ import { ListItemComponent } from './list/list-item/list-item.component';
 import { FormComponent } from './form/form.component';
 import { ListCreateItemComponent } from './list/list-create-item/list-create-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { StatsComponent } from './stats/stats.component'
+import { StatsComponent } from './stats/stats.component';
+import { ProjectsComponent } from './projects.component'
 
 
 @NgModule({
-    declarations: [ViewComponent, ListComponent, CreateComponent, ListItemComponent, FormComponent, ListCreateItemComponent, StatsComponent],
+    declarations: [ViewComponent, ListComponent, CreateComponent, ListItemComponent, FormComponent, ListCreateItemComponent, StatsComponent, ProjectsComponent],
     imports: [
         CommonModule,
         ProjectsRoutingModule,
@@ -31,6 +32,9 @@ import { StatsComponent } from './stats/stats.component'
         FormsModule,
         ReactiveFormsModule,
         MatTabsModule
+    ],
+    exports: [
+        ListItemComponent
     ]
 })
 export class ProjectsModule { }

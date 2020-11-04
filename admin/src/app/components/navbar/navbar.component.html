@@ -5,11 +5,11 @@
                 <a class="flex-shrink-0 flex items-center" routerLink="/">
                     <img class="block h-12 w-auto" src="assets/images/logo.png" alt="Workflow logo">
                 </a>
-                <div class="flex items-center" *ngIf="!isShowProject">
+                <div class="flex items-center" *ngIf="menu != 'project'">
                     <div class="h-6 border-l border-opacity-25 border-white mx-6"></div>
-                    <div class="text-2xl text-white">Dashboard</div>
+                    <div class="text-2xl text-white">{{title}}</div>
                 </div>
-                <div class="flex items-center" *ngIf="isShowProject">
+                <div class="flex items-center" *ngIf="menu == 'project'">
                     <div class="h-6 border-l border-opacity-25 border-white mx-6"></div>
                     <app-project-selector [valueLabel]="'name'" class="w-48" [noMargin]="true"
                         [placeholder]="'PROJECT' | translate" url="/projects" [query]="{'page': 1}"
@@ -28,6 +28,9 @@
                 <button class="menu-item" aria-label="Notifications">
                     <fa-icon class="icon" [icon]="['far', 'bell']"></fa-icon>
                 </button>
+                <a routerLink="/setting" class="menu-item" aria-label="Setting">
+                    <fa-icon class="icon" [icon]="['fas', 'sliders-h']"></fa-icon>
+                </a>
                 <button class="menu-item" id="user-menu" aria-label="User menu" aria-haspopup="true">
                     <span class="h-6 w-6 rounded-full overflow-hidden flag-icon flag-icon-gb"></span>
                 </button>
@@ -40,7 +43,7 @@
         </div>
     </div>
 </nav>
-<div class="navigation navbar-tab">
+<div class="navigation navbar-tab" *ngIf="menu == 'project'">
     <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
         <mat-tab-group [selectedIndex]="selectedTab" disableRipple animationDuration="0ms"
             (selectedTabChange)="selectedTabChange($event)">
@@ -67,6 +70,23 @@
             <mat-tab label="setting">
                 <ng-template mat-tab-label>
                     <span>Setting</span>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div class="navigation navbar-tab" *ngIf="menu == 'setting'">
+    <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
+        <mat-tab-group [selectedIndex]="selectedSettingTab" disableRipple animationDuration="0ms"
+            (selectedTabChange)="selectedSettingTabChange($event)">
+            <mat-tab label="site">
+                <ng-template mat-tab-label>
+                    <span>Site Setting</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="providers">
+                <ng-template mat-tab-label>
+                    <span>OAuth Providers</span>
                 </ng-template>
             </mat-tab>
         </mat-tab-group>

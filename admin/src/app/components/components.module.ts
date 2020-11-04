@@ -26,8 +26,6 @@ import { LoaderComponent } from './loader/loader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { NavbarLanguageComponent } from './navbar/navbar-language/navbar-language.component';
-import { NavbarProfileComponent } from './navbar/navbar-profile/navbar-profile.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AppDatatableComponent } from './datatable/datatable.component';
 import { ExpandAnimateComponent } from './expand-animate/expand-animate.component';
@@ -47,8 +45,6 @@ import { SectionHeaderComponent } from './section/section-header/section-header.
 import { CardFormComponent } from './card/card-form/card-form.component';
 import { BtnSuccessComponent } from './button/btn-success/btn-success.component';
 import { AppDirectivesModule } from '../directives/directives.module';
-import { NavbarMenuItemComponent } from './navbar/navbar-menu-item/navbar-menu-item.component';
-import { NavbarMenuComponent } from './navbar/navbar-menu/navbar-menu.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PageHeaderComponent } from './page-header/page-header.component';
@@ -69,7 +65,6 @@ import { MyMatPaginatorIntl } from './datatable/paginator-intl';
 import { MonthYearPickerComponent } from './month-year-picker/month-year-picker.component';
 import { YearPickerComponent } from './year-picker/year-picker.component';
 import { InfiniteListComponent } from './infinite-list/infinite-list.component';
-import { NavbarProjectComponent } from './navbar/navbar-project/navbar-project.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 
@@ -83,8 +78,6 @@ import { ProjectSelectorComponent } from './project-selector/project-selector.co
         LoaderComponent,
         NavbarComponent,
         DropdownComponent,
-        NavbarLanguageComponent,
-        NavbarProfileComponent,
         ConfirmModalComponent,
         AppDatatableComponent,
         ExpandAnimateComponent,
@@ -102,8 +95,6 @@ import { ProjectSelectorComponent } from './project-selector/project-selector.co
         SectionHeaderComponent,
         CardFormComponent,
         BtnSuccessComponent,
-        NavbarMenuItemComponent,
-        NavbarMenuComponent,
         CheckboxComponent,
         DatetimepickerComponent,
         PageHeaderComponent,
@@ -118,7 +109,6 @@ import { ProjectSelectorComponent } from './project-selector/project-selector.co
         MonthYearPickerComponent,
         YearPickerComponent,
         InfiniteListComponent,
-        NavbarProjectComponent,
         ProjectSelectorComponent
     ],
     imports: [

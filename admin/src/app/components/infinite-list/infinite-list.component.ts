@@ -14,6 +14,7 @@ export class InfiniteListComponent implements OnInit, OnDestroy, AfterContentIni
     @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
     @Output() onFetch: EventEmitter<any> = new EventEmitter();
     @Input() url: string = '';
+    @Input() params: any = {};
 
     subscriber: Subscription[] = [];
     items: any[] = [];
@@ -54,7 +55,10 @@ export class InfiniteListComponent implements OnInit, OnDestroy, AfterContentIni
         }
 
         return this.http
-            .get(`${this.url}?${queryString.stringify(params)}`)
+            .get(`${this.url}?${queryString.stringify({
+                ...params,
+                ...this.params
+            })}`)
             .subscribe((data: any) => {
 
                 this.items = data.data || [];

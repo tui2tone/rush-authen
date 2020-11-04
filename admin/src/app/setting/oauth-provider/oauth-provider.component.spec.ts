@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarLanguageComponent } from './navbar-language.component';
+import { OauthProviderComponent } from './oauth-provider.component';
 
-describe('NavbarLanguageComponent', () => {
-  let component: NavbarLanguageComponent;
-  let fixture: ComponentFixture<NavbarLanguageComponent>;
+describe('OauthProviderComponent', () => {
+  let component: OauthProviderComponent;
+  let fixture: ComponentFixture<OauthProviderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarLanguageComponent ]
+      declarations: [ OauthProviderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavbarLanguageComponent);
+    fixture = TestBed.createComponent(OauthProviderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

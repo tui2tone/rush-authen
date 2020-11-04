@@ -25,6 +25,7 @@ import { AppComponentsModule } from './components/components.module';
 import { SidebarService } from './services/sidebar.service';
 import { EnvironmentService } from './services/environment.service';
 import { ParamsService } from './services/params.service';
+import { RouteDataService } from './services/route-data.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, '/languages/');
@@ -75,6 +76,7 @@ export function environmentServiceFactory(envService: EnvironmentService): Funct
         AuthGuardService,
         SidebarService,
         ParamsService,
+        RouteDataService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpClientInterceptor,

@@ -8,8 +8,10 @@ import { Store } from '@ngrx/store';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { FormControl } from '@angular/forms';
 import { ParamsService } from 'src/app/services/params.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Config from 'src/app/constants';
+import { RouteDataService } from 'src/app/services/route-data.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
     selector: 'app-navbar',
@@ -30,14 +32,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
         setting: 4
     }
     selectedTab: number = 0
+
+    settingTabs: Object = {
+        site: 0,
+        providers: 1
+    }
+    selectedSettingTab: number = 0
     subscriber: Subscription[] = [];
-    isShowProject: boolean = false;
+    title: string = null;
+    menu: string = null;
 
     constructor(
         private store: Store<AuthState.State>,
         private sidebarService: SidebarService,
         private paramService: ParamsService,
-        private router: Router
+        private router: Router,
+        private routeDataService: RouteDataService
     ) { }
 
     ngOnInit() {
@@ -45,10 +55,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
         this.subscriber.push(this.paramService.params.subscribe((params) => {
             if (params && params.projectId) {
-                this.isShowProject = true;
+                this.menu = 'project';
                 this.project.patchValue(params.projectId, { emitEvent: false })
             } else {
-                this.isShowProject = false;
+                this.menu = null;
                 this.project.reset(null, { emitEvent: false })
             }
         }))
@@ -58,6 +68,50 @@ export class NavbarComponent implements OnInit, OnDestroy {
                 this.router.navigate([Config.APP_URL.PROJECT, projectId])
             }
         }))
+
+        this.subscriber.push(this.routeDataService.data.subscribe((data) => {
+            if (data && data.title) {
+                this.title = data.title
+            } else {
+                this.title = null;
+            }
+
+            if (data && data.menu) {
+                this.menu = data.menu
+            } else {
+                this.menu = null;
+            }
+        }))
+
+        this.subscriber.push(
+            this.router.events.pipe(distinctUntilChanged()).subscribe((res) => {
+                this.setActiveTab()
+            })
+        )
+        this.setActiveTab()
+    }
+
+    setActiveTab() {
+
+        const keys = Object.keys(this.tabs)
+        keys.map((item) => {
+            const projectUrl = `/projects/${this.project.value}/${item}`
+            if (this.router.url.indexOf(projectUrl) > -1) {
+                if (this.selectedTab != this.tabs[item]) {
+                    this.selectedTab = this.tabs[item]
+                }
+            }
+        })
+
+        const settingKeys = Object.keys(this.settingTabs)
+        settingKeys.map((item) => {
+            const settingUrl = `/setting/${item}`
+            if (this.router.url.indexOf(settingUrl) > -1) {
+                if (this.selectedSettingTab != this.settingTabs[item]) {
+                    this.selectedSettingTab = this.settingTabs[item]
+                }
+            }
+        })
     }
 
     ngOnDestroy() {
@@ -73,6 +127,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     selectedTabChange(tab: MatTabChangeEvent) {
+        const getTab = tab.tab.textLabel;
+        this.router.navigate([Config.APP_URL.PROJECT, this.project.value, getTab])
+    }
+
+
+    selectedSettingTabChange(tab: MatTabChangeEvent) {
+        const getTab = tab.tab.textLabel;
+        this.router.navigate([Config.APP_URL.SETTING, getTab])
     }
 
 }

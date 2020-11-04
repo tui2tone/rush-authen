@@ -1,0 +1,9 @@
+<app-page-header [title]="title">
+    <ng-container action>
+    </ng-container>
+</app-page-header>
+<div pageBody>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <app-project-item [item]="item" *ngFor="let item of items"></app-project-item>
+    </div>
+</div>

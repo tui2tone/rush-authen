@@ -9,7 +9,7 @@
 <div pageBody>
     <app-infinite-list url="/projects">
         <ng-template let-items="items">
-            <app-list-item [item]="item" *ngFor="let item of items"></app-list-item>
+            <app-project-item [item]="item" *ngFor="let item of items"></app-project-item>
             <app-list-create-item></app-list-create-item>
         </ng-template>
     </app-infinite-list>

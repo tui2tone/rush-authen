@@ -3,7 +3,7 @@ import Config from 'src/app/constants';
 import { ProjectDto } from '../../interfaces/project.interface';
 
 @Component({
-    selector: 'app-list-item',
+    selector: 'app-project-item',
     templateUrl: './list-item.component.html',
     styleUrls: ['./list-item.component.scss']
 })
