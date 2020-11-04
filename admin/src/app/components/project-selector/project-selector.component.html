@@ -1,0 +1,20 @@
+<div [class.mb-2]="!noMargin" class="project-selector">
+    <label *ngIf="label" class="block text-gray-700 text-sm font-bold mb-1">
+        {{label}}
+    </label>
+    <div>
+        <ng-select class="rounded" [placeholder]="placeholder" [disabled]="disabled" [items]="items"
+            [bindValue]="valueId" [multiple]="multiple" [bindLabel]="valueLabel" [formControl]="form"
+            [clearable]="false" (focus)="onFocus()" appendTo="body" [ngClass]="{'is-invalid':
+        error || isInvalid}" (change)="onValueChange($event)" (search)="onSearch($event)">
+            <ng-template ng-label-tmp let-item="item" class="item">
+                <div class="text-white text-xl">{{item.name}}</div>
+                <div class="text-gray-500">{{item.description}}</div>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm" class="item">
+                <div class="text-gray-700 text-xl">{{item.name}}</div>
+                <div class="text-gray-500">{{item.description}}</div>
+            </ng-template>
+        </ng-select>
+    </div>
+</div>

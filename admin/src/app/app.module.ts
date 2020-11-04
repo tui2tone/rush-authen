@@ -24,6 +24,7 @@ import { HttpClientInterceptor } from "./utils/http-client-interceptor";
 import { AppComponentsModule } from './components/components.module';
 import { SidebarService } from './services/sidebar.service';
 import { EnvironmentService } from './services/environment.service';
+import { ParamsService } from './services/params.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, '/languages/');
@@ -73,6 +74,7 @@ export function environmentServiceFactory(envService: EnvironmentService): Funct
         AuthService,
         AuthGuardService,
         SidebarService,
+        ParamsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpClientInterceptor,

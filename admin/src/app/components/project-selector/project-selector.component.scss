@@ -1,0 +1,114 @@
+.project-selector {
+    .ng-select {
+        @apply h-16 bg-transparent mb-0 border-0;
+
+        min-width: 300px;
+        max-width: 300px;
+        width: 100%;
+
+        &.ng-select-single {
+            .ng-select-container {
+                @apply h-16 bg-transparent mb-0 border-0;
+
+                min-width: 300px;
+                max-width: 300px;
+                width: 100%;
+            }
+        }
+    }
+
+    // .ng-select.ng-select-single .ng-select-container {
+    //     height: 50px;
+    //     min-width: 250px;
+    // }
+
+    // .ng-dropdown-panel.ng-select-bottom {
+    //     min-width: 250px;
+    // }
+
+    // .ng-select {
+    //     max-width: inherit;
+    //     .ng-dropdown-panel {
+    //         width: auto;
+    //     }
+    // }
+}
+// .ng-select {
+//   height: 40px;
+// }
+
+// .ng-select.ng-select-single .ng-select-container {
+//   height: 40px;
+//   border: 1px solid #E8E8E8;
+//   box-shadow: none;
+// }
+
+// .ng-select.ng-select-multiple .ng-select-container {
+//   height: 40px;
+//   border: 1px solid #E8E8E8;
+//   box-shadow: none;
+// }
+
+// .ng-select.ng-select-disabled>.ng-select-container {
+//   @apply bg-gray-100;
+// }
+
+// .ng-select.is-invalid.ng-select-single .ng-select-container {
+//   border: 1px solid #f56565 !important;
+// }
+
+// .ng-select.is-invalid.ng-select-multiple .ng-select-container {
+//   border: 1px solid #f56565 !important;
+// }
+
+// .ng-select .ng-value-container {
+//   height: 40px;
+// }
+
+// .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+//   top: 0;
+//   height: 40px;
+
+//   input {
+//     height: 40px;
+//     padding: 0;
+//   }
+// }
+
+// .invalid-feedback {
+//   display: block;
+// }
+
+// .ng-select .ng-select-container {
+//   @apply bg-white border shadow;
+// }
+
+// .form-group {
+//   &.no-padding {
+//     margin-bottom: 0;
+//   }
+
+//   &.no-label {
+//     label {
+//       display: none;
+//     }
+//   }
+
+//   &.no-border {
+//     .ng-select .ng-select-container {
+//       border: 0;
+//       box-shadow: none;
+//     }
+
+//     .form-control {
+//       border: 0;
+//       box-shadow: none;
+//     }
+//   }
+// }
+
+// .print-container {
+//   .ng-arrow-wrapper {
+//     display: none;
+//   }
+// }

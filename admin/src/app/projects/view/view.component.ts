@@ -33,7 +33,7 @@ export class ViewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.id = parseInt(this.route.snapshot.paramMap.get("id"));
+        this.id = parseInt(this.route.snapshot.paramMap.get("projectId"));
         const routeConfig = this.route.snapshot.routeConfig
         if (routeConfig.children && routeConfig.children.length > 1) {
             this.selectedTab = this.tabs[routeConfig.children[1].path]

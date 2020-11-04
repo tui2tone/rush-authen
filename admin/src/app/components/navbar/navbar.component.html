@@ -1,15 +1,74 @@
-<nav class="navbar flex items-center justify-between bg-white border-b border-gray-300">
-    <div class="h-full flex sidebar-toggle">
-        <button (click)="toggleSidebar()" id="btn-navbar-toggle"
-            class="h-full flex items-center text-gray-500 p-5 text-md hover:text-gray-700 hover:bg-gray-200">
-            <fa-icon [icon]="['fas', 'bars']"></fa-icon>
-        </button>
-        <app-navbar-menu class="h-full" [mobile]="true" [profile]="profile$ | async"></app-navbar-menu>
-    </div>
-    <div class="h-full w-full flex-grow lg:items-center lg:w-auto hidden sm:flex md:flex lg:flex xl:flex">
-        <div class="text-sm lg:flex-grow"></div>
-        <div class="h-full d-flex">
-            <app-navbar-menu [profile]="profile$ | async"></app-navbar-menu>
+<nav class="navbar">
+    <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
+        <div class="relative flex items-center justify-between h-16">
+            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                <a class="flex-shrink-0 flex items-center" routerLink="/">
+                    <img class="block h-12 w-auto" src="assets/images/logo.png" alt="Workflow logo">
+                </a>
+                <div class="flex items-center" *ngIf="!isShowProject">
+                    <div class="h-6 border-l border-opacity-25 border-white mx-6"></div>
+                    <div class="text-2xl text-white">Dashboard</div>
+                </div>
+                <div class="flex items-center" *ngIf="isShowProject">
+                    <div class="h-6 border-l border-opacity-25 border-white mx-6"></div>
+                    <app-project-selector [valueLabel]="'name'" class="w-48" [noMargin]="true"
+                        [placeholder]="'PROJECT' | translate" url="/projects" [query]="{'page': 1}"
+                        [formControl]="project" [disabled]="false" [valueId]="'id'">
+                    </app-project-selector>
+                </div>
+            </div>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div class="relative">
+                    <input class="ml-2 flex items-center px-8 py-3 rounded-full bg-gray-500 bg-opacity-25 text-gray-600"
+                        placeholder="Search">
+                    <div class="absolute top-0 right-0 h-full flex items-center px-8">
+                        <fa-icon class="text-lg text-gray-500" [icon]="['fas', 'search']"></fa-icon>
+                    </div>
+                </div>
+                <button class="menu-item" aria-label="Notifications">
+                    <fa-icon class="icon" [icon]="['far', 'bell']"></fa-icon>
+                </button>
+                <button class="menu-item" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                    <span class="h-6 w-6 rounded-full overflow-hidden flag-icon flag-icon-gb"></span>
+                </button>
+                <button class="menu-item" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                    <img class="h-8 w-8 rounded-full"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt="">
+                </button>
+            </div>
         </div>
     </div>
 </nav>
+<div class="navigation navbar-tab">
+    <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
+        <mat-tab-group [selectedIndex]="selectedTab" disableRipple animationDuration="0ms"
+            (selectedTabChange)="selectedTabChange($event)">
+            <mat-tab label="stats">
+                <ng-template mat-tab-label>
+                    <span>Stats</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="users">
+                <ng-template mat-tab-label>
+                    <span>Users</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="roles">
+                <ng-template mat-tab-label>
+                    <span>Roles</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="clients">
+                <ng-template mat-tab-label>
+                    <span>Clients</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="setting">
+                <ng-template mat-tab-label>
+                    <span>Setting</span>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-@import '../variable.scss';
+@import "../variable.scss";
 
 .mat-drawer.mat-drawer-side {
     z-index: 4 !important;
@@ -14,13 +14,13 @@
     }
 }
 
-.mat-drawer {
-    background-color: $sidebar-bg;
+// .mat-drawer {
+//     background-color: $sidebar-bg;
 
-.sidebar {
-    background-color: $sidebar-bg;
-}
-}
+//     .sidebar {
+//         background-color: $sidebar-bg;
+//     }
+// }
 
 .sidebar-container {
     .mat-expansion-panel {
@@ -29,13 +29,13 @@
     }
 
     .mat-expansion-panel-header-title {
-        margin-right: 0; 
+        margin-right: 0;
     }
 
     .mat-expansion-indicator {
         position: absolute;
         right: 25px;
-        opacity: .3;
+        opacity: 0.3;
         display: flex;
     }
 
@@ -50,8 +50,8 @@
     }
 
     .mat-expansion-panel-body {
-        background-color: rgba($app-white, .05);
-        
+        background-color: rgba($app-white, 0.05);
+
         border-radius: 4px;
         padding: 5px;
         padding-left: 44px;

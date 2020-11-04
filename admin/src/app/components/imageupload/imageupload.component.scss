@@ -1,4 +1,4 @@
-@import 'assets/styles/variable.scss';
+// @import 'assets/styles/variable.scss';
 
 .img-upload-container {
   padding: 0px;
@@ -32,8 +32,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $app-grey-darker;
-        border: 1px dashed $app-grey-darker;
+        // color: $app-grey-darker;
+        // border: 1px dashed $app-grey-darker;
       }
     }
 
@@ -51,35 +51,35 @@
   .btn-upload-wrapper {
     position: relative;
     overflow: hidden;
-    border: 1px dashed $app-grey-darker;
+    // border: 1px dashed $app-grey-darker;
     border-radius: 3px;
     width: 100px;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $app-grey-darker;
+    // color: $app-grey-darker;
 
     .icon-holder {
       font-size: 2rem;
-      color: $app-grey-darker;
+    //   color: $app-grey-darker;
     }
 
     .text {
       font-size: 0.9rem;
-      color: $app-grey-darker;
+    //   color: $app-grey-darker;
     }
 
     &:hover {
-      background-color: $app-grey;
+    //   background-color: $app-grey;
       cursor: pointer;
 
       .icon-holder {
-        color: $app-black-lightest;
+        // color: $app-black-lightest;
       }
 
       .text {
-        color: $app-black-lightest;
+        // color: $app-black-lightest;
       }
     }
 
@@ -100,7 +100,7 @@
     height: 100px;
     overflow: hidden;
     border-radius: 2px;
-    border: 1px dashed $app-grey-darker;
+    // border: 1px dashed $app-grey-darker;
 
     img {
       width: 100%;

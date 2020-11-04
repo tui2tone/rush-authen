@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from "@angular/core";
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserManager, User } from 'oidc-client';
 import { AuthActions, AuthState } from '../store/auth';
 import { EnvironmentService } from './environment.service';
+import { environment as ENV } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,12 @@ export class AuthService {
     }
 
     init() {
-        console.log(this.env.config)
+        if (ENV.skipAuth) {
+            return this.store.dispatch(new AuthActions.LoadSuccessAction({
+                token: '',
+                permissions: []
+            }));
+        }
         this.mgr = new UserManager(this.env.config);
     }
 

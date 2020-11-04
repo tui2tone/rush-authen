@@ -12,7 +12,7 @@ const routes: Routes = [{
     path: 'create',
     component: CreateComponent
 }, {
-    path: ':id',
+    path: ':projectId',
     component: ViewComponent,
     children: [
         {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment as ENV } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,12 @@ export class EnvironmentService {
 
     load(): Promise<any> {
         return new Promise((resolve, reject) => {
+
+            if (ENV.skipAuth) {
+                return resolve({
+
+                })
+            }
             this.http
                 .get('/oauth-config')
                 .toPromise()

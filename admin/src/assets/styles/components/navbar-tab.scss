@@ -1,0 +1,35 @@
+.navbar-tab {
+    .mat-tab-label {
+        @apply h-auto mr-8 px-0 py-6 min-w-0 opacity-100;
+
+        .mat-tab-label-content {
+            @apply text-gray-100;
+            font-family: 'Roboto Regular';
+            font-weight: 400;
+        }
+
+        &.mat-tab-label-active {
+            .mat-tab-label-content {
+                @apply text-yellow-600 text-opacity-100;
+            }
+        }
+    }
+
+    .mat-tab-nav-bar, .mat-tab-header {
+        border-bottom: 3px solid rgba(0, 0, 0, 0.12);
+        overflow: visible;
+    }
+
+    .mat-tab-label-container {
+        overflow: visible;
+    }
+
+    .mat-tab-group.mat-primary {
+        .mat-ink-bar {
+            @apply bg-yellow-500;
+            border-radius: 3px;
+            margin-bottom: -3px;
+            height: 3px;
+        }
+    }
+}

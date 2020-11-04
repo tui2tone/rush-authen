@@ -77,7 +77,7 @@ export class AuthService extends TypeOrmCrudService<Session> {
 
     async validateToken(token: string): Promise<any> {
         try {
-            const tokens = await this.repo.query(`select * from "AccessTokens" where data->>'kind' = 'AccessToken' AND data->>'jti' = '${token}';`)
+            const tokens = await this.repo.query(`select * from "AccessTokens" where data->>'kind' = 'AccessToken' AND data->>'jwt' = '${token}';`)
             if (tokens && tokens.length) {
                 const exist = tokens[0]
                 const client = await this.client.repo.findOne({

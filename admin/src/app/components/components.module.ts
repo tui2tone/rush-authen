@@ -70,6 +70,8 @@ import { MonthYearPickerComponent } from './month-year-picker/month-year-picker.
 import { YearPickerComponent } from './year-picker/year-picker.component';
 import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 import { NavbarProjectComponent } from './navbar/navbar-project/navbar-project.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 
 @NgModule({
     declarations: [
@@ -116,7 +118,8 @@ import { NavbarProjectComponent } from './navbar/navbar-project/navbar-project.c
         MonthYearPickerComponent,
         YearPickerComponent,
         InfiniteListComponent,
-        NavbarProjectComponent
+        NavbarProjectComponent,
+        ProjectSelectorComponent
     ],
     imports: [
         CommonModule,
@@ -144,7 +147,8 @@ import { NavbarProjectComponent } from './navbar/navbar-project/navbar-project.c
         MatIconModule,
         NgxMaskModule,
         NgbTypeaheadModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        MatTabsModule
     ],
     exports: [
         InputComponent,
@@ -184,7 +188,8 @@ import { NavbarProjectComponent } from './navbar/navbar-project/navbar-project.c
         MultiSelectComponent,
         MonthYearPickerComponent,
         YearPickerComponent,
-        InfiniteListComponent
+        InfiniteListComponent,
+        ProjectSelectorComponent
     ],
     providers: [
         {
