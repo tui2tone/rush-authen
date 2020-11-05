@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div [appLoader]="isLoading">
+        <div appCardForm>
+            <div appRow>
+                <div appColumn>
+                    <app-input [label]="'NAME' | translate" formControlName="name" [disabled]="disabled"
+                        [required]="true" [touched]="form.touched">
+                    </app-input>
+                </div>
+                <div appColumn>
+                    <app-toggle [label]="'IS_ACTIVE' | translate" formControlName="isActive" [error]="error?.isActive"
+                        [disabled]="disabled"></app-toggle>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex" *ngIf="!disabled">
+        <button btnPrimary class="mr-2" *ngIf="mode == 'create'" type="submit">{{ 'CREATE' | translate }}</button>
+        <button btnPrimary class="mr-2" *ngIf="mode == 'update'" type="submit">{{ 'SAVE_CHANGE' | translate }}</button>
+        <button btnSecondary type="button" appBtnBack>{{ 'CANCEL' | translate }}</button>
+    </div>
+</form>

@@ -34,7 +34,8 @@ export const Config = {
         MAIN: '/',
         AUTH: '/auth',
         PROJECT: '/projects',
-        SETTING: '/setting'
+        SETTING: '/setting',
+        CLIENT: '/clients'
     },
     API_URL: {
         PROJECT: '/projects'

@@ -13,10 +13,14 @@ import { AppDirectivesModule } from '../directives/directives.module';
 import { AppComponentsModule } from '../components/components.module';
 import { ListItemComponent } from './list/list-item/list-item.component';
 import { ListCreateItemComponent } from './list/list-create-item/list-create-item.component';
+import { CreateComponent } from './create/create.component';
+import { FormComponent } from './form/form.component';
+import { ClientService } from './client.service';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 @NgModule({
-    declarations: [ListComponent, ViewComponent, ListItemComponent, ListCreateItemComponent],
+    declarations: [ListComponent, ViewComponent, ListItemComponent, ListCreateItemComponent, CreateComponent, FormComponent],
     imports: [
         CommonModule,
         ClientsRoutingModule,
@@ -27,7 +31,11 @@ import { ListCreateItemComponent } from './list/list-create-item/list-create-ite
         FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTabsModule
+        MatTabsModule,
+        TimeagoModule
+    ],
+    providers: [
+        ClientService
     ]
 })
 export class ClientsModule { }

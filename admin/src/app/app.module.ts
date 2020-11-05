@@ -19,6 +19,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { NgxMaskModule } from 'ngx-mask';
+import { TimeagoModule } from 'ngx-timeago';
 import { HttpClientInterceptor } from "./utils/http-client-interceptor";
 
 import { AppComponentsModule } from './components/components.module';
@@ -52,6 +53,7 @@ export function environmentServiceFactory(envService: EnvironmentService): Funct
         LoadingBarHttpClientModule,
         NgxSmartModalModule.forRoot(),
         NgxMaskModule.forRoot({}),
+        TimeagoModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

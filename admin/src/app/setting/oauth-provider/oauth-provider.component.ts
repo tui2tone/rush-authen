@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-oauth-provider',
-  templateUrl: './oauth-provider.component.html',
-  styleUrls: ['./oauth-provider.component.scss']
+    selector: 'app-oauth-provider',
+    templateUrl: './oauth-provider.component.html',
+    styleUrls: ['./oauth-provider.component.scss']
 })
 export class OauthProviderComponent implements OnInit {
 
-  constructor() { }
+    title: string = 'OAuth Providers';
 
-  ngOnInit(): void {
-  }
+    constructor() { }
+
+    ngOnInit(): void {
+    }
 
 }

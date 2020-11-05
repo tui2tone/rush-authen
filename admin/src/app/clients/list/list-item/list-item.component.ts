@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Config from 'src/app/constants';
+import { ClientDto } from '../../interfaces/client.interface';
 
 @Component({
     selector: 'app-list-item',
@@ -14,8 +15,8 @@ export class ListItemComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    viewLink(item) {
-        return `${Config.APP_URL.PROJECT}/${item.id}`;
+    viewLink(item: ClientDto) {
+        return `${Config.APP_URL.PROJECT}/${item.projectId}/${Config.APP_URL.CLIENT}/${item.id}`;
     }
 
 }

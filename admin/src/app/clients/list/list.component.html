@@ -1,12 +1,15 @@
 <app-page-header [title]="title" [breadcrumb]="breadcrumb">
     <ng-container action>
+        <a btnPrimary class="ml-2" [routerLink]="createLink()">
+            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+            <span class="ml-2 hidden md:flex">Create</span>
+        </a>
     </ng-container>
 </app-page-header>
 <div pageBody>
     <app-infinite-list url="/clients" [params]="fixedParams">
         <ng-template let-items="items">
             <app-list-item [item]="item" *ngFor="let item of items"></app-list-item>
-            <app-list-create-item></app-list-create-item>
         </ng-template>
     </app-infinite-list>
 </div>

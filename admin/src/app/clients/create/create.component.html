@@ -1,0 +1,7 @@
+<app-page-header [title]="'Clients'">
+    <ng-container action></ng-container>
+</app-page-header>
+<div pageBody>
+    <app-evaluation-final-grade-form mode="create" [error]="error " [isLoading]="isLoading"
+        (onSubmit)="onSubmit($event)"></app-evaluation-final-grade-form>
+</div>

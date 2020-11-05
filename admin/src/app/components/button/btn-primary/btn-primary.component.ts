@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './btn-primary.component.html',
     styleUrls: ['./btn-primary.component.scss'],
     host: {
-        class: 'flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded shadow focus:outline-none focus:shadow-outline'
+        class: 'inline-flex items-center px-4 py-2 border border-transparent font-medium rounded shadow text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out'
     }
 })
 export class BtnPrimaryComponent implements OnInit {

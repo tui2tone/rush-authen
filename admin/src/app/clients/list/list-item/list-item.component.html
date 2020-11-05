@@ -1,23 +1,32 @@
-<a class="flex flex-col rounded bg-white shadow-lg w-full flex-grow overflow-hidden border-white border-2 hover:border-blue-500 transform transition-all duration-500 ease-in-out" [routerLink]="viewLink(item)">
-    <div class="flex w-full items-center px-5 py-5">
-        <div class="text-lg flex-grow text-gray-700">{{item?.name}}</div>
-        <div class="flex text-sm items-center text-green-500">
-            <fa-icon class="mr-1" [icon]="['fas', 'circle']"></fa-icon>
-            <span>Active</span>
+<a class="flex flex-col rounded bg-white shadow-lg w-full flex-grow overflow-hidden border-white border-2 hover:border-blue-500 transform transition-all duration-500 ease-in-out"
+    [routerLink]="viewLink(item)">
+    <div class="flex w-full items-center px-5 py-4">
+        <div class="w-3/12">
+            <div class="text-sm text-gray-500">Name</div>
+            <div class="text-lg text-gray-700">{{item.name}}</div>
         </div>
-    </div>
-    <div class="border-t border-gray-200 px-5 py-3">
-        <div class="flex items-center text-gray-600 mb-1">
-            <fa-icon class="icon mr-2" [icon]="['fas', 'users']"></fa-icon>
-            <span>79 Users</span>
+        <div class="w-3/12">
+            <div class="text-sm text-gray-500">Client ID</div>
+            <div class="text-lg text-gray-700">{{item.clientId}}</div>
         </div>
-        <div class="flex items-center text-gray-600 mb-1">
-            <fa-icon class="icon mr-2" [icon]="['fas', 'chart-line']"></fa-icon>
-            <span>3 Daily Active Users</span>
+        <div class="w-3/12">
+            <div class="text-sm text-gray-500">Client Secret</div>
+            <div class="text-lg text-gray-700">
+                {{item.clientSecret}}
+            </div>
         </div>
-        <div class="flex items-center text-gray-600 mb-1">
-            <fa-icon class="icon mr-2" [icon]="['fas', 'plus']"></fa-icon>
-            <span>5 Registered a week</span>
+        <div class="w-2/12">
+            <div class="text-sm text-gray-500">Last Active</div>
+            <div class="text-lg text-gray-700">
+                {{item.lastActiveTimestamp | timeago:live}}
+            </div>
+        </div>
+
+        <div class="flex w-1/12 text-sm justify-end items-center text-green-500">
+            <ng-container *ngIf="item.isActive">
+                <fa-icon class="mr-1" [icon]="['fas', 'circle']"></fa-icon>
+                <span>Active</span>
+            </ng-container>
         </div>
     </div>
 </a>

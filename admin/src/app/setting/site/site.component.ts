@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiteComponent implements OnInit {
 
-
     title: string = 'Site Setting';
     constructor() { }
 
