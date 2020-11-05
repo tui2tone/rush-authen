@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ClientDto } from '../interfaces/client.interface';
 
 @Component({
-    selector: 'app-evaluation-final-grade-form',
+    selector: 'app-client-form',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss']
 })
@@ -33,10 +33,11 @@ export class FormComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.fb.group({
-            id: '',
             name: '',
+            description: '',
             clientId: '',
-            clientSecret: ''
+            clientSecret: '',
+            isActive: false
         });
     }
 

@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from '../client.service';
@@ -14,21 +15,25 @@ export class CreateComponent implements OnInit {
     id: string;
     isLoading: boolean = false;
     data: ClientDto = null;
+    projectId: number;
     error: any;
 
     constructor(
         private location: Location,
         private service: ClientService,
         private toastr: ToastrService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
-
+        this.projectId = parseInt(this.route.snapshot.paramMap.get("projectId"));
     }
 
     async onSubmit(data: ClientDto) {
         try {
+            data.projectId = this.projectId;
+            
             this.isLoading = true;
             this.data = await this.service.create(data)
             this.location.back()

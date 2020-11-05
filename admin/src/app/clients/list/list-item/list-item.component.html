@@ -18,7 +18,8 @@
         <div class="w-2/12">
             <div class="text-sm text-gray-500">Last Active</div>
             <div class="text-lg text-gray-700">
-                {{item.lastActiveTimestamp | timeago:live}}
+                <span *ngIf="!item.lastActiveTimestamp">-</span>
+                <span *ngIf="item.lastActiveTimestamp">{{item.lastActiveTimestamp | timeago}}</span>
             </div>
         </div>
 

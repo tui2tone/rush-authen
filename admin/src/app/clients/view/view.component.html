@@ -1,1 +1,11 @@
-<p>view works!</p>
+<app-page-header [title]="'Clients'"  [breadcrumb]="breadcrumb">
+    <ng-container action>
+        <a btnPrimary class="ml-2" [routerLink]="'/'">
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+        </a>
+    </ng-container>
+</app-page-header>
+<div pageBody>
+    <app-client-form [mode]="mode" [value]="data" [error]="error" [isLoading]="isLoading"
+        (onSubmit)="onSubmit($event)"></app-client-form>
+</div>

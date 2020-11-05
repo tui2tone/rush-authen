@@ -33,6 +33,9 @@ const routes: Routes = [{
                 path: 'clients',
                 loadChildren: () => import('../clients/clients.module').then(m => m.ClientsModule)
             }, {
+                path: 'setting',
+                loadChildren: () => import('./project-setting/project-setting.module').then(m => m.ProjectSettingModule)
+            }, {
                 path: '',
                 redirectTo: 'stats'
             }

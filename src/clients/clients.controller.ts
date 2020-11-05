@@ -11,7 +11,7 @@ import { Public } from '@decorators/public.decorator';
     }
 })
 @ApiTags('clients')
-@Controller('clients')
+@Controller('api/clients')
 export class ClientsController implements CrudController<Client> {
     get base(): CrudController<Client> {
         return this;
@@ -21,11 +21,5 @@ export class ClientsController implements CrudController<Client> {
         public service: ClientsService
     ) {
 
-    }
-
-    @Public()
-    @Get()
-    async getClient() {
-        return this.service.repo.find()
     }
 }

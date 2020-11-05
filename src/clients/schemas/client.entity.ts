@@ -6,6 +6,7 @@ import { getColumnType } from '@utils/database/column-type';
 export interface ClientDto {
     id?: number,
     name: string,
+    description: string,
     clientId: string,
     clientSecret: string,
     projectId: number,
@@ -28,6 +29,15 @@ export class Client extends BaseEntity {
         unique: true
     })
     name: string;
+
+    @ApiProperty({
+        example: "web client"
+    })
+    @Column({
+        type: getColumnType('string'),
+        nullable: true
+    })
+    description: string;
 
     @ApiProperty({
         example: "xxxxxxxxxxxxxxxxxxx"
