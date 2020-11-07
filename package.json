@@ -116,6 +116,7 @@
 		"@healthcheck": "dist/healthcheck",
 		"@interaction": "dist/interaction",
 		"@interceptors": "dist/interceptors",
+		"@oauth-providers": "dist/oauth-providers",
 		"@projects": "dist/projects",
 		"@register": "dist/register",
 		"@roles": "dist/roles",

@@ -35,7 +35,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     settingTabs: Object = {
         site: 0,
-        providers: 1
+        providers: 1,
+        templates: 2
     }
     selectedSettingTab: number = 0
 

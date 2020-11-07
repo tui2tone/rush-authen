@@ -16,6 +16,7 @@ import { SetupModule } from './setup/setup.module';
 import { RolesModule } from './roles/roles.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { OAuthProvidersModule } from './oauth-providers/oauth-providers.module';
 
 @Module({
     imports: [
@@ -38,7 +39,8 @@ import { join } from 'path';
         AdditionalFieldsModule,
         SettingModule,
         SetupModule,
-        RolesModule
+        RolesModule,
+        OAuthProvidersModule
     ],
     controllers: [AppController],
     providers: [TokenStrategy],

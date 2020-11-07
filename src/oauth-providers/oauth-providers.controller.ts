@@ -1,0 +1,51 @@
+import { Controller, Get } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { OAuthProviderMethods } from './oauth-provider.constants';
+import { OAuthProvidersService } from './oauth-providers.service';
+import { OAuthProvider } from './schemas/oauth-provider.entity';
+
+@Crud({
+    model: {
+        type: OAuthProvider,
+    }
+})
+@Controller('api/oauth-providers')
+export class OAuthProvidersController {
+    get base(): CrudController<OAuthProvider> {
+        return this;
+    }
+
+    constructor(
+        public service: OAuthProvidersService
+    ) {
+        
+    }
+
+    @Get('methods')
+    async allMethods() {
+        // Setup Method Records
+        const allMethods = await this.service.repo.find({})
+        for (let i = 0; i < OAuthProviderMethods.length; i++) {
+            const item = OAuthProviderMethods[i]
+            const matched = allMethods.find(m => m.method === item.method)
+            console.log(matched)
+            if (!matched) {
+                await this.service.repo.save({
+                    name: item.name,
+                    method: item.method,
+                    orderNo: item.orderNo,
+                    isActive: false
+                })
+            } else {
+                matched.name = item.name;
+                matched.orderNo = item.orderNo;
+                await matched.save();
+            }
+        }
+        const data = await this.service.repo.find({})
+        return {
+            data,
+            total: data.length
+        }
+    }
+}

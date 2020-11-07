@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OauthProviderComponent } from './oauth-provider/oauth-provider.component';
 import { SettingComponent } from './setting.component';
-import { SiteComponent } from './site/site.component';
 
 const routes: Routes = [{
     path: '',
@@ -13,10 +11,13 @@ const routes: Routes = [{
     },
     children: [{
         path: 'providers',
-        component: OauthProviderComponent
+        loadChildren: () => import('./oauth-provider/oauth-provider.module').then(m => m.OauthProviderModule)
     }, {
         path: 'site',
-        component: SiteComponent
+        loadChildren: () => import('./site-setting/site-setting.module').then(m => m.SiteSettingModule)
+    }, {
+        path: 'templates',
+        loadChildren: () => import('./template-setting/template-setting.module').then(m => m.TemplateSettingModule)
     }, {
         path: '',
         redirectTo: '/setting/site',

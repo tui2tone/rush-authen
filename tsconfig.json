@@ -44,6 +44,9 @@
 			"@interceptors/*": [
 				"src/interceptors/*"
 			],
+			"@oauth-providers/*": [
+				"src/oauth-providers/*"
+			],
 			"@projects/*": [
 				"src/projects/*"
 			],

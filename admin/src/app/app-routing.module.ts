@@ -15,10 +15,10 @@ const routes: Routes = [{
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     }, {
         path: 'projects',
-            loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
+        loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
     }, {
         path: 'setting',
-            loadChildren: () => import('./setting/setting.module').then(m => m.SettingModule)
+        loadChildren: () => import('./setting/setting.module').then(m => m.SettingModule)
     }, {
         path: '',
         redirectTo: '/dashboard',

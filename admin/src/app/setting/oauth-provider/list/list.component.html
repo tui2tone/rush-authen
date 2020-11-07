@@ -1,0 +1,18 @@
+<app-page-header [title]="'OAuth Providers' | translate">
+    <ng-container option>
+    </ng-container>
+</app-page-header>
+<div pageBody>
+    <mat-accordion>
+        <ng-container *ngFor="let item of items">
+            <ng-container *ngIf="item.method == 'password'">
+                <app-item-password [providerId]="item.id"></app-item-password>
+            </ng-container>
+
+            <ng-container
+                *ngIf="item.method == 'google' || item.method == 'facebook' || item.method == 'line' || item.method == 'apple'">
+                <app-item-oauth [providerId]="item.id"></app-item-oauth>
+            </ng-container>
+        </ng-container>
+    </mat-accordion>
+</div>
