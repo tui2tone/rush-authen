@@ -1,6 +1,6 @@
 <div class="menu-container" [class.is-level2]="level == 2" [appPermission]="item.permission" permissionType="view">
   <div class="menu-header" *ngIf="item.isHeader">
-    <span class="text text-white opacity-50">{{ item.name | translate}}</span>
+    <span class="text">{{ item.name | translate}}</span>
   </div>
   <ng-container *ngIf="!item.isHeader && !hasSubMenu()">
     <a class="menu" [class.is-level2]="level == 2" [routerLinkActive]="['is-active']" [routerLink]="item.link"

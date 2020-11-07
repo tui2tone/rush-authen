@@ -38,6 +38,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
         providers: 1
     }
     selectedSettingTab: number = 0
+
+    mainTabs: Object = {
+        dashboard: 0,
+        projects: 1,
+        setting: 2
+    }
+    selectedMainTab: number = 0
     subscriber: Subscription[] = [];
     title: string = null;
     menu: string = null;
@@ -79,7 +86,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
             if (data && data.menu) {
                 this.menu = data.menu
             } else {
-                this.menu = null;
+                this.menu = 'main';
             }
         }))
 
@@ -112,6 +119,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
                 }
             }
         })
+
+        const mainKeys = Object.keys(this.mainTabs)
+        mainKeys.map((item) => {
+            const mainUrl = `/${item}`
+            if (this.router.url.indexOf(mainUrl) > -1) {
+                if (this.selectedMainTab != this.mainTabs[item]) {
+                    this.selectedMainTab = this.mainTabs[item]
+                }
+            }
+        })
     }
 
     ngOnDestroy() {
@@ -131,10 +148,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.router.navigate([Config.APP_URL.PROJECT, this.project.value, getTab])
     }
 
-
     selectedSettingTabChange(tab: MatTabChangeEvent) {
         const getTab = tab.tab.textLabel;
         this.router.navigate([Config.APP_URL.SETTING, getTab])
+    }
+
+    selectedMainTabChange(tab: MatTabChangeEvent) {
+        const getTab = tab.tab.textLabel;
+        this.router.navigate([getTab])
     }
 
 }

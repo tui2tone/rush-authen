@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import * as _ from 'underscore';
 import { ToastrService } from 'ngx-toastr';
-import { TranslateService } from '@ngx-translate/core';
 import { ClientDto } from '../interfaces/client.interface';
+import { FormMode } from 'src/app/enum/form.enum';
 
 @Component({
     selector: 'app-client-form',
@@ -13,7 +13,7 @@ import { ClientDto } from '../interfaces/client.interface';
 export class FormComponent implements OnInit {
     @Output() onSubmit: EventEmitter<any> = new EventEmitter();
     @Input() error: ClientDto;
-    @Input() mode: string = 'view';
+    @Input() mode: number = FormMode.View;
     @Input() disabled: boolean = false;
     @Input() isLoading: boolean = false;
 
@@ -27,8 +27,7 @@ export class FormComponent implements OnInit {
     form: FormGroup;
     constructor(
         private fb: FormBuilder,
-        private toastr: ToastrService,
-        private translate: TranslateService
+        private toastr: ToastrService
     ) { }
 
     ngOnInit() {
@@ -43,7 +42,7 @@ export class FormComponent implements OnInit {
 
     onFormSubmit() {
         if (!this.form.valid) {
-            this.toastr.error(this.translate.instant("FORM_INVALID"));
+            this.toastr.error("Form Invalid");
             this.form.markAsTouched()
             return false;
         }
@@ -52,5 +51,8 @@ export class FormComponent implements OnInit {
         this.onSubmit.emit(data);
     }
 
+    get isCreateMode() {
+        return this.mode == FormMode.Create
+    }
 
 }

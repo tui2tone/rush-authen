@@ -1,31 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
     <div [appLoader]="isLoading">
         <div appCardForm>
-            <div class="flex">
-                <div class="w-0 md:w-1/6">
-                    <!-- <div class="text-gray-700 font-medium">Info</div>
-                    <div class="text-gray-500">Client Info</div> -->
-                </div>
-                <div class="w-full md:w-5/6">
+            <app-form-container [border]="false">
+                <ng-container item>
                     <app-input [label]="'Name'" formControlName="name" [disabled]="disabled" [required]="true"
                         [touched]="form.touched">
                     </app-input>
-                    <app-input [label]="'Description'" formControlName="description" [disabled]="disabled" [required]="true"
-                        [touched]="form.touched">
+                    <app-input [label]="'Description'" formControlName="description" [disabled]="disabled"
+                        [required]="true" [touched]="form.touched">
                     </app-input>
-                    <!-- 
-                    <app-toggle [label]="'Active'" formControlName="isActive" [error]="error?.isActive"
-                        [disabled]="disabled"></app-toggle> -->
-                </div>
-            </div>
-            <div class="border-b my-4 w-full block" *ngIf="mode != 'create'"></div>
-            <div class="flex" *ngIf="mode != 'create'">
-                <div class="w-0 md:w-1/6 pr-4">
+                </ng-container>
+            </app-form-container>
+
+            <app-form-container *ngIf="!isCreateMode">
+                <ng-container detail>
                     <div class="block text-gray-600 text-sm font-bold mb-1">Credentials</div>
                     <div class="text-sm text-gray-500">Client ID & Client Secret for your app used, <a href="#">How to
                             use?</a></div>
-                </div>
-                <div class="w-full md:w-5/6">
+                </ng-container>
+                <ng-container item>
                     <app-input [label]="'Client ID'" formControlName="clientId" [disabled]="disabled" [required]="true"
                         [touched]="form.touched">
                     </app-input>
@@ -33,20 +26,16 @@
                     <app-input [label]="'Client Secret'" formControlName="clientSecret" [disabled]="disabled"
                         [required]="true" [touched]="form.touched">
                     </app-input>
-                </div>
-            </div>
-            <div class="border-b my-4 w-full block"></div>
-            <div class="flex">
-                <div class="w-0 md:w-1/6"></div>
-                <div class="w-full md:w-5/6">
-                    <div class="flex" *ngIf="!disabled">
-                        <button btnPrimary class="mr-2" *ngIf="mode == 'create'" type="submit">{{ 'Create' }}</button>
-                        <button btnPrimary class="mr-2" *ngIf="mode == 'update'"
-                            type="submit">{{ 'Save Changes' }}</button>
-                        <button btnSecondary type="button" appBtnBack>{{ 'Cancel' }}</button>
+                </ng-container>
+            </app-form-container>
+            <app-form-container *ngIf="!disabled">
+                <ng-container item>
+                    <div class="flex">
+                        <button btnPrimary class="mr-2" type="submit">Save Changes</button>
+                        <button btnSecondary type="button">Cancel</button>
                     </div>
-                </div>
-            </div>
+                </ng-container>
+            </app-form-container>
         </div>
     </div>
 </form>

@@ -35,9 +35,6 @@ export class SidebarContainerComponent implements OnInit, AfterViewInit, OnDestr
     ngAfterViewInit() {
         setTimeout(() => {
             this.sidebarService.setDrawer(this.drawer);
-            if(!this.mobileQuery.matches) {
-                this.sidebarService.open()
-            }
         })
     }
 

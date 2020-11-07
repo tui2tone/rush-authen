@@ -1,6 +1,8 @@
 <div class="w-full h-screen flex flex-col">
-    <app-navbar></app-navbar>
-    <div class="container mx-auto p-2">
-        <router-outlet></router-outlet>
-    </div>
+    <app-sidebar-container class="flex-1" [menu]="menu">
+        <app-navbar></app-navbar>
+        <div class="container mx-auto p-2">
+            <router-outlet></router-outlet>
+        </div>
+    </app-sidebar-container>
 </div>

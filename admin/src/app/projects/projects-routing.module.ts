@@ -17,11 +17,16 @@ const routes: Routes = [{
         path: '',
         component: ListComponent,
         data: {
-            title: 'Project'
+            title: 'Project',
+            menu: 'main'
         }
     }, {
         path: 'create',
-        component: CreateComponent
+        component: CreateComponent,
+        data: {
+            title: 'Project',
+            menu: 'main'
+        }
     }, {
         path: ':projectId',
         component: ViewComponent,

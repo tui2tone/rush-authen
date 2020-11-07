@@ -1,0 +1,9 @@
+<div class="border-b my-4 w-full block" *ngIf="border"></div>
+<div class="flex">
+    <div class="w-0 md:w-1/6 pr-4">
+        <ng-content select="[detail]"></ng-content>
+    </div>
+    <div class="w-full md:w-5/6">
+        <ng-content select="[item]"></ng-content>
+    </div>
+</div>

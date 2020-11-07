@@ -1,20 +1,12 @@
-
-@import 'assets/styles/variable.scss';
-
-.navbar-logo {
-    // height: $navbar-height;
-    // background: $sidebar-bg-header;
-    // color: $app-white;
-}
-
-.logo-img {
-    width: auto;
-    height: 40px;
-    overflow: hidden;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    img {
-        width: auto;
-        height: 100%;
+.sidebar-nav {
+    @apply flex items-center justify-between flex-wrap;
+    height: var(--navbar-height);
+    .logo {
+        @apply px-12 h-full border-b flex items-center;
+        height: var(--navbar-height);
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { FormMode } from 'src/app/enum/form.enum';
 import { BreadcrumbItemDto } from 'src/app/interfaces/breadcrumb-item.interface';
 import { ClientService } from '../client.service';
 import { ClientDto } from '../interfaces/client.interface';
@@ -17,8 +18,8 @@ export class ViewComponent implements OnInit {
     data: ClientDto = null;
     isFetchLoading: boolean = false;
     isLoading: boolean = false;
-    error: any = {}
-    mode: string = 'update';
+    mode: number = FormMode.View;
+    error: ClientDto = null;
 
     breadcrumb: BreadcrumbItemDto[] = [{
         name: "Project",
@@ -63,5 +64,13 @@ export class ViewComponent implements OnInit {
             this.isLoading = false;
             this.toastr.error(this.translate.instant("SAVED_FAILED"));
         }
+    }
+
+    onToggleMode() {
+        this.mode
+    }
+
+    get disabled() {
+        return this.mode == FormMode.View
     }
 }

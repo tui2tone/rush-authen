@@ -66,7 +66,7 @@ export class AuthService extends TypeOrmCrudService<Session> {
                 return res.render('login',
                     {
                         uid,
-                        message: 'Hello world!'
+                        error: 'Invalid username / password'
                     },
                 );
             }

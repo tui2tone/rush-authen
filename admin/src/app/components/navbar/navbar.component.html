@@ -2,15 +2,17 @@
     <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
         <div class="relative flex items-center justify-between h-16">
             <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <a class="flex-shrink-0 flex items-center" routerLink="/">
-                    <img class="block h-12 w-auto" src="assets/images/logo.png" alt="Workflow logo">
-                </a>
+                <button
+                    class="h-full flex items-center text-gray-500 py-5 text-2xl hover:text-white mr-5"
+                    (click)="toggleSidebar()" id="btn-navbar-toggle">
+                    <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+                </button>
                 <div class="flex items-center" *ngIf="menu != 'project'">
-                    <div class="h-6 border-l border-opacity-25 border-white mx-6"></div>
+                    <!-- <div class="h-6 border-l border-opacity-25 border-white mx-6"></div> -->
                     <div class="text-2xl text-white">{{title}}</div>
                 </div>
                 <div class="flex items-center" *ngIf="menu == 'project'">
-                    <div class="h-6 border-l border-opacity-25 border-white mx-6"></div>
+                    <!-- <div class="h-6 border-l border-opacity-25 border-white mx-6"></div> -->
                     <app-project-selector [valueLabel]="'name'" class="w-48" [noMargin]="true"
                         [placeholder]="'PROJECT' | translate" url="/projects" [query]="{'page': 1}"
                         [formControl]="project" [disabled]="false" [valueId]="'id'">
@@ -87,6 +89,28 @@
             <mat-tab label="providers">
                 <ng-template mat-tab-label>
                     <span>OAuth Providers</span>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div class="navigation navbar-tab" *ngIf="menu == 'main'">
+    <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
+        <mat-tab-group [selectedIndex]="selectedMainTab" disableRipple animationDuration="0ms"
+            (selectedTabChange)="selectedMainTabChange($event)">
+            <mat-tab label="dashboard">
+                <ng-template mat-tab-label>
+                    <span>Dashboard</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="projects">
+                <ng-template mat-tab-label>
+                    <span>Projects</span>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="setting">
+                <ng-template mat-tab-label>
+                    <span>Setting</span>
                 </ng-template>
             </mat-tab>
         </mat-tab-group>

@@ -1,59 +1,59 @@
-@import "../variable.scss";
+// @import "../variable.scss";
 
-.mat-drawer.mat-drawer-side {
-    z-index: 4 !important;
-    border-right: none;
-}
+// .mat-drawer.mat-drawer-side {
+//     z-index: 4 !important;
+//     border-right: none;
+// }
 
-.mat-drawer-container {
-    background: transparent;
-    overflow: visible;
+// .mat-drawer-container {
+//     background: transparent;
+//     overflow: visible;
 
-    .mat-drawer-inner-container {
-        overflow: auto;
-    }
-}
-
-// .mat-drawer {
-//     background-color: $sidebar-bg;
-
-//     .sidebar {
-//         background-color: $sidebar-bg;
+//     .mat-drawer-inner-container {
+//         overflow: auto;
 //     }
 // }
 
-.sidebar-container {
-    .mat-expansion-panel {
-        box-shadow: none;
-        background-color: transparent;
-    }
+// // .mat-drawer {
+// //     background-color: $sidebar-bg;
 
-    .mat-expansion-panel-header-title {
-        margin-right: 0;
-    }
+// //     .sidebar {
+// //         background-color: $sidebar-bg;
+// //     }
+// // }
 
-    .mat-expansion-indicator {
-        position: absolute;
-        right: 25px;
-        opacity: 0.3;
-        display: flex;
-    }
+// .sidebar-container {
+//     .mat-expansion-panel {
+//         box-shadow: none;
+//         background-color: transparent;
+//     }
 
-    .mat-expansion-panel-spacing {
-        margin: 0;
-    }
+//     .mat-expansion-panel-header-title {
+//         margin-right: 0;
+//     }
 
-    .mat-expansion-panel-header {
-        padding: 0;
-        min-height: 36px;
-        max-height: 36px;
-    }
+//     .mat-expansion-indicator {
+//         position: absolute;
+//         right: 25px;
+//         opacity: 0.3;
+//         display: flex;
+//     }
 
-    .mat-expansion-panel-body {
-        background-color: rgba($app-white, 0.05);
+//     .mat-expansion-panel-spacing {
+//         margin: 0;
+//     }
 
-        border-radius: 4px;
-        padding: 5px;
-        padding-left: 44px;
-    }
-}
+//     .mat-expansion-panel-header {
+//         padding: 0;
+//         min-height: 36px;
+//         max-height: 36px;
+//     }
+
+//     .mat-expansion-panel-body {
+//         background-color: rgba($app-white, 0.05);
+
+//         border-radius: 4px;
+//         padding: 5px;
+//         padding-left: 44px;
+//     }
+// }

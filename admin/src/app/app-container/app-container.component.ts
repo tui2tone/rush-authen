@@ -15,22 +15,9 @@ export class AppContainerComponent implements OnInit {
             link: '/dashboard'
         }),
         new Menu({
-            name: 'Application',
-            isHeader: true
-        }),
-        new Menu({
-            name: 'Applications',
+            name: 'Projects',
             icon: 'archive',
-            link: '/applications'
-        }),
-        new Menu({
-            name: 'User Management',
-            isHeader: true
-        }),
-        new Menu({
-            name: 'Users',
-            icon: 'users',
-            link: '/users'
+            link: '/projects'
         })
     ]
     constructor(
