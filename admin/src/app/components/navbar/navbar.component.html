@@ -33,10 +33,10 @@
                 <a routerLink="/setting" class="menu-item" aria-label="Setting">
                     <fa-icon class="icon" [icon]="['fas', 'sliders-h']"></fa-icon>
                 </a>
-                <button class="menu-item" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                <button class="menu-item" [matMenuTriggerFor]="languageMenu">
                     <span class="h-6 w-6 rounded-full overflow-hidden flag-icon flag-icon-gb"></span>
                 </button>
-                <button class="menu-item" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                <button class="menu-item"  [matMenuTriggerFor]="profileMenu">
                     <img class="h-8 w-8 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt="">
@@ -45,6 +45,37 @@
         </div>
     </div>
 </nav>
+<mat-menu #profileMenu="matMenu" xPosition="before">
+    <div class="py-1">
+        <a href="#"
+            class="dropdown-item"
+            role="menuitem">Edit</a>
+        <a href="#"
+            class="dropdown-item"
+            role="menuitem">Duplicate</a>
+    </div>
+    <div class="border-t border-gray-100"></div>
+    <div class="py-1">
+        <a href="#"
+            class="dropdown-item"
+            role="menuitem">Archive</a>
+        <a href="#"
+            class="dropdown-item"
+            role="menuitem">Move</a>
+    </div>
+</mat-menu>
+<mat-menu #languageMenu="matMenu" xPosition="before">
+    <div class="py-1">
+        <a href="#"
+            class="dropdown-item"
+            role="menuitem"><span class="mr-2 flag-icon flag-icon-gb"></span>
+            English</a>
+        <a href="#"
+            class="dropdown-item"
+            role="menuitem"><span class="mr-2 flag-icon flag-icon-th"></span>
+            ไทย</a>
+    </div>
+</mat-menu>
 <div class="navigation navbar-tab" *ngIf="menu == 'project'">
     <div class="max-w-7xl w-full container mx-auto px-2 sm:px-4 lg:px-4">
         <mat-tab-group [selectedIndex]="selectedTab" disableRipple animationDuration="0ms"

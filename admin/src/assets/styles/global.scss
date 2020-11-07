@@ -28,11 +28,6 @@ body {
     @apply bg-gray-200;
 }
 
-.mat-drawer-container {
-    @apply bg-gray-200;
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-}
 
 a {
     @apply text-indigo-600;
@@ -53,9 +48,6 @@ button {
     }
 }
 
-.mat-menu-item {
-    font-family: "Roboto", "Prompt Regular" !important;
-}
 
 // .mat-expansion-panel-header-description,
 // .mat-expansion-indicator::after {

@@ -68,6 +68,7 @@ import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 import { FormContainerComponent } from './form/form-container/form-container.component';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 @NgModule({
     declarations: [
@@ -111,7 +112,8 @@ import { FormContainerComponent } from './form/form-container/form-container.com
         YearPickerComponent,
         InfiniteListComponent,
         ProjectSelectorComponent,
-        FormContainerComponent
+        FormContainerComponent,
+        MenuItemComponent
     ],
     imports: [
         CommonModule,

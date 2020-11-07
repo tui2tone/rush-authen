@@ -28,7 +28,6 @@ export class OAuthProvidersController {
         for (let i = 0; i < OAuthProviderMethods.length; i++) {
             const item = OAuthProviderMethods[i]
             const matched = allMethods.find(m => m.method === item.method)
-            console.log(matched)
             if (!matched) {
                 await this.service.repo.save({
                     name: item.name,
