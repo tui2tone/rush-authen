@@ -13,11 +13,17 @@ export class InfiniteListComponent implements OnInit, OnDestroy, AfterContentIni
 
     @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
     @Output() onFetch: EventEmitter<any> = new EventEmitter();
+    @Input() onSearch: any;
     @Input() url: string = '';
     @Input() params: any = {};
+    @Input() limit: number = 10;
 
     subscriber: Subscription[] = [];
     items: any[] = [];
+    total: number = 0;
+    page: number = 1;
+
+    isLatest: boolean = false;
 
     constructor(
         private http: HttpClient,
@@ -30,7 +36,7 @@ export class InfiniteListComponent implements OnInit, OnDestroy, AfterContentIni
 
         this.subscriber.push(obsComb.subscribe(ap => {
             this.fetch()
-        }))
+        }));
     }
 
     ngOnDestroy() {
@@ -41,17 +47,19 @@ export class InfiniteListComponent implements OnInit, OnDestroy, AfterContentIni
     }
 
     onScrollUp() {
-
     }
 
     onScrollDown() {
-
+        this.fetch()
     }
 
     fetch() {
+        if (this.isLatest) {
+            return false;
+        }
         const params = {
-            page: 1,
-            limit: 10
+            page: this.page,
+            limit: this.limit || 10
         }
 
         return this.http
@@ -61,7 +69,15 @@ export class InfiniteListComponent implements OnInit, OnDestroy, AfterContentIni
             })}`)
             .subscribe((data: any) => {
 
-                this.items = data.data || [];
+                this.items = [
+                    ...this.items,
+                    ...(data.data || [])
+                ]
+                if (this.items.length) {
+                    this.page += 1;
+                } else {
+                    this.isLatest = true;
+                }
                 if (this.onFetch) {
                     this.onFetch.emit(data)
                 }

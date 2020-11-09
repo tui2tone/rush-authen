@@ -2,9 +2,8 @@
     font-family: "Roboto", "Prompt Regular" !important;
 }
 .mat-drawer-container {
-    @apply bg-gray-200;
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
+    @apply bg-gray-200 overflow-auto;
+    height: 100vh !important;
 }
 
 @keyframes slideDown {

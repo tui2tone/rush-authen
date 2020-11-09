@@ -57,14 +57,6 @@ export class AuthService {
         })
     }
 
-    async signoutRedirectCallback() {
-        try {
-            const user = await this.mgr.signoutRedirectCallback()
-        } catch (error) {
-            this.store.dispatch(new AuthActions.LoadFailureAction(error));
-        }
-    }
-
     setToken(token: string) {
         this.token = token;
     }

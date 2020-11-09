@@ -17,6 +17,7 @@ import { ListCreateItemComponent } from './list/list-create-item/list-create-ite
 import { MatTabsModule } from '@angular/material/tabs';
 import { StatsComponent } from './stats/stats.component';
 import { ProjectsComponent } from './projects.component'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ProjectsComponent } from './projects.component'
         FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTabsModule
+        MatTabsModule,
+        InfiniteScrollModule
     ],
     exports: [
         ListItemComponent

@@ -2,7 +2,7 @@
   <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidebar-container" [class.is-mobile]="mobileQuery.matches">
       <app-sidebar class="sidebar" [menu]="menu"></app-sidebar>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="app-drawer-content overflow-scroll">
       <ng-content>
 
       </ng-content>
