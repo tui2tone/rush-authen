@@ -49,19 +49,9 @@
     <div class="py-1">
         <a href="#"
             class="dropdown-item"
-            role="menuitem">Edit</a>
-        <a href="#"
-            class="dropdown-item"
-            role="menuitem">Duplicate</a>
-    </div>
-    <div class="border-t border-gray-100"></div>
-    <div class="py-1">
-        <a href="#"
-            class="dropdown-item"
-            role="menuitem">Archive</a>
-        <a href="#"
-            class="dropdown-item"
-            role="menuitem">Move</a>
+            role="menuitem">Profile</a>
+        <button (click)="onSignout()"
+            class="dropdown-item">Signout</button>
     </div>
 </mat-menu>
 <mat-menu #languageMenu="matMenu" xPosition="before">

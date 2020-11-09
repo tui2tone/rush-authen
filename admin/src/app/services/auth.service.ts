@@ -52,7 +52,9 @@ export class AuthService {
     }
 
     async signout() {
-        this.mgr.signoutRedirect()
+        this.mgr.signoutRedirect({
+            post_logout_redirect_uri: window.location.origin
+        })
     }
 
     async signoutRedirectCallback() {

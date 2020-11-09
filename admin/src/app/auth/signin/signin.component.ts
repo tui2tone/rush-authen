@@ -12,20 +12,10 @@ import { AuthService } from '../../services/auth.service';
 export class SigninComponent implements OnInit {
 
     constructor(
-        private store: Store<AuthState.State>,
-        private router: Router,
         private authService: AuthService
     ) { }
 
     ngOnInit(): void {
-        // if (OAuthConfig.skip) {
-        //     this.store.dispatch(new AuthActions.LoadSuccessAction({
-        //         token: "xxxxx",
-        //         permissions: []
-        //     }));
-        //     this.router.navigate(['/'])
-        //     return null;
-        // }
         this.authService.signin()
     }
 

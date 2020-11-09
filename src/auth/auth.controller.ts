@@ -52,6 +52,8 @@ export class AuthController {
             relations: ["project"]
         })
 
+        console.log(prompt.name)
+
         if (prompt.name === 'login') {
             return res.render('login',
                 {

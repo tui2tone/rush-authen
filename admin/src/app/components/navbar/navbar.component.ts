@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Config from 'src/app/constants';
 import { RouteDataService } from 'src/app/services/route-data.service';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -55,7 +56,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private paramService: ParamsService,
         private router: Router,
-        private routeDataService: RouteDataService
+        private routeDataService: RouteDataService,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
@@ -157,6 +159,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     selectedMainTabChange(tab: MatTabChangeEvent) {
         const getTab = tab.tab.textLabel;
         this.router.navigate([getTab])
+    }
+
+    onSignout() {
+        this.authService.signout()
     }
 
 }

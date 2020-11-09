@@ -95,6 +95,16 @@ export class Client extends BaseEntity {
     })
     @Column({
         type: getColumnType('array'),
+        name: 'post_logout_redirect_uris',
+        nullable: true
+    })
+    postLogoutRedirectUris?: string[];
+
+    @ApiProperty({
+        example: "xxxxxxxxxxxxxxxxxxx"
+    })
+    @Column({
+        type: getColumnType('array'),
         name: 'grant_types',
         nullable: true
     })
