@@ -31,8 +31,7 @@ export class AuthController {
         @Req() req: Request,
         @Res() res: Response
     ) {
-        const session = await this.service.signinPassword(req, res, payload)
-        res.send(session);
+        return await this.service.signinPassword(req, res, payload)
     }
 
     @Public()

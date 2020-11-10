@@ -8,15 +8,16 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
-<body>
+<body data-barba="wrapper">
     <div class="w-full py-8 h-auto md:h-screen bg-gray-200 flex justify-center items-center overflow-auto"
-        data-barba="wrapper">
+        x-data="data()">
         <div class="flex justify-center items-center mx-auto h-full">
             <div class="flex flex-col justify-center items-center h-full app-login ">
                 <div class="w-full text-center mb-8">
                     <img src="/assets/images/rushlap-logo-horizontal.png" class="logo" />
                 </div>
-                <div class="flex justify-center items-center w-full" data-barba="container" data-barba-namespace="home">
+                <div class="flex justify-center items-center w-full" data-barba="container"
+                    data-barba-namespace="content">
                     <div class="max-w-sm w-full rounded-lg overflow-hidden p-10 mb-10 bg-white shadow">
                         <div class="mb-8 text-center">
                             <div class="text-gray-600 text-sm mb-1">
@@ -26,6 +27,8 @@
                         </div>
 
                         <form action="/auth/{{uid}}/login" method="POST">
+                            <div x-show="error" class="text-white bg-red-500 py-2 px-2 text-center rounded w-full mb-4"
+                                x-text="error"></div>
                             <div class="mb-4">
                                 <input
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
@@ -71,6 +74,26 @@
     <script>
         barba.init({
         })
+
+
+        // Error Handler
+        function getError() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('error');
+        }
+
+        function data() {
+            const error = getError()
+            if(error == 'invalid') {
+                return {
+                    error: 'Username/Password is incorrect'
+                }
+            }
+            return {
+                error: null
+            }
+        }
+
     </script>
 </body>
 

@@ -36,9 +36,8 @@ export class AuthService extends TypeOrmCrudService<Session> {
     }
 
     async signinPassword(req: Request, res: Response, dto: UserPasswordSigninDto) {
-
+        const { uid, prompt, params } = await AuthProvider.interactionDetails(req, res);
         try {
-            const { uid, prompt, params } = await AuthProvider.interactionDetails(req, res);
             dto.cryptedPassword = Hash.sha256(dto.password, Config.PASSWORD_SECRET)
             const matched = await this.user.repo.findOne({
                 where: [{
@@ -61,17 +60,13 @@ export class AuthService extends TypeOrmCrudService<Session> {
                     },
                 }
 
-                return await AuthProvider.interactionFinished(req, res, result);
+                const session = await AuthProvider.interactionFinished(req, res, result);
+                return res.send(session);
             } else {
-                return res.render('login',
-                    {
-                        uid,
-                        error: 'Invalid username / password'
-                    },
-                );
+                return res.redirect(`/auth/${uid}?error=invalid`);
             }
         } catch (error) {
-            console.error(error)
+            return res.redirect(`/auth/${uid}?error=invalid`);
         }
     }
 
