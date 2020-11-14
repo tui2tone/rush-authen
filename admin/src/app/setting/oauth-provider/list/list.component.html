@@ -4,14 +4,36 @@
 </app-page-header>
 <div pageBody>
     <mat-accordion>
-        <ng-container *ngFor="let item of items">
-            <ng-container *ngIf="item.method == 'password'">
-                <app-item-password [providerId]="item.id"></app-item-password>
-            </ng-container>
+        <ng-container *ngFor="let item of items; let i = index">
+            <!-- <ng-container *ngIf="item.method == 'password'">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <div class="w-full flex mr-4">
+                            <div class="flex-grow text-gray-700">{{item.name}}</div>
+                            <div class="text-gray-600 text-sm w-20 text-center">
+                                <span class="text-green-600" *ngIf="item.isEnabled">Enabled</span>
+                                <span class="text-gray-600" *ngIf="!item.isEnabled">Disabled</span>
+                            </div>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <app-item-password [providerId]="item.id"></app-item-password>
+                </mat-expansion-panel>
+            </ng-container> -->
 
             <ng-container
                 *ngIf="item.method == 'google' || item.method == 'facebook' || item.method == 'line' || item.method == 'apple'">
-                <app-item-oauth [providerId]="item.id"></app-item-oauth>
+                <mat-expansion-panel [expanded]="item.expanded">
+                    <mat-expansion-panel-header>
+                        <div class="w-full flex mr-4">
+                            <div class="flex-grow text-gray-700">{{item.name}}</div>
+                            <div class="text-gray-600 text-sm w-20 text-center">
+                                <span class="text-green-600" *ngIf="item.isEnabled">Enabled</span>
+                                <span class="text-gray-600" *ngIf="!item.isEnabled">Disabled</span>
+                            </div>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <app-item-oauth [providerId]="item.id" (onUpdated)="onUpdated($event, i)"></app-item-oauth>
+                </mat-expansion-panel>
             </ng-container>
         </ng-container>
     </mat-accordion>

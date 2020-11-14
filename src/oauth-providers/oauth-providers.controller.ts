@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { OAuthProviderMethods } from './oauth-provider.constants';
 import { OAuthProvidersService } from './oauth-providers.service';
@@ -7,10 +7,10 @@ import { OAuthProvider } from './schemas/oauth-provider.entity';
 @Crud({
     model: {
         type: OAuthProvider,
-    }
+    } 
 })
 @Controller('api/oauth-providers')
-export class OAuthProvidersController {
+export class OAuthProvidersController implements CrudController<OAuthProvider> {
     get base(): CrudController<OAuthProvider> {
         return this;
     }
@@ -33,7 +33,7 @@ export class OAuthProvidersController {
                     name: item.name,
                     method: item.method,
                     orderNo: item.orderNo,
-                    isActive: false
+                    isEnabled: false
                 })
             } else {
                 matched.name = item.name;
@@ -41,7 +41,11 @@ export class OAuthProvidersController {
                 await matched.save();
             }
         }
-        const data = await this.service.repo.find({})
+        const data = await this.service.repo.find({
+            order: {
+                orderNo: 'ASC'
+            }
+        })
         return {
             data,
             total: data.length

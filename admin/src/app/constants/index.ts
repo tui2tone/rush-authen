@@ -38,7 +38,8 @@ export const Config = {
         CLIENT: '/clients'
     },
     API_URL: {
-        PROJECT: '/projects'
+        PROJECT: '/projects',
+        OAUTH_PROVIDER: '/oauth-providers'
     },
     POSTFIX: {
         AUTOCOMPLETE: '/autocomplete'

@@ -26,9 +26,10 @@ export class OAuthProvider extends BaseEntity {
 
     @Column({
         type: getColumnType('boolean'),
+        name: 'is_enabled',
         default: false
     })
-    isActive: boolean;
+    isEnabled: boolean;
 
     @ApiProperty({
         example: "xxxxxxxxxxxxxxxxxxx"
@@ -62,7 +63,8 @@ export class OAuthProvider extends BaseEntity {
 
     @Column({
         type: getColumnType('boolean'),
-        default: false
+        default: false,
+        name: 'is_password_less'
     })
     isPasswordLess: boolean;
 

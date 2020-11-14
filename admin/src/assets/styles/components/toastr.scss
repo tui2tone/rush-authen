@@ -1,7 +1,14 @@
 .toast-container {
-  padding-top: 1rem;
+    padding-top: 1rem;
+    .ngx-toastr {
+        @apply shadow-xl;
+    }
 
-  .toast-message {
-    color: #FFF !important;
-  }
+    .toast-success {
+        @apply bg-green-600 text-white;
+
+        .toast-message {
+            @apply text-white;
+        }
+    }
 }

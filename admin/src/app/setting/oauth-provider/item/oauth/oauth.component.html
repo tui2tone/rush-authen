@@ -1,7 +1,34 @@
-<mat-expansion-panel>
-    <mat-expansion-panel-header>
-        {{data.name}}
-    </mat-expansion-panel-header>
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div [appLoader]="isLoading">
+        <app-form-container [border]="false">
+            <ng-container detail>
+                <div class="block text-gray-600 text-sm font-bold mb-1">Credentials</div>
+                <div class="text-sm text-gray-500">Client ID & Client Secret for your app used, <a href="#">How to
+                        use?</a></div>
+            </ng-container>
+            <ng-container item>
+                <app-input [label]="'Client ID'" formControlName="clientId" [disabled]="disabled" [required]="true"
+                    [touched]="form.touched">
+                </app-input>
+                <app-input [label]="'Client Secret'" formControlName="clientSecret" [disabled]="disabled"
+                    [required]="true" [touched]="form.touched">
+                </app-input>
 
-    OAuth
-</mat-expansion-panel>
+                <div class="py-4">
+
+                    <app-toggle formControlName="isEnabled" [disabled]="disabled" [label]="'Enable'">
+                    </app-toggle>
+                </div>
+            </ng-container>
+        </app-form-container>
+
+        <app-form-container *ngIf="!disabled && form.dirty">
+            <ng-container item>
+                <div class="flex">
+                    <button btnPrimary class="mr-2" type="submit">Save Changes</button>
+                    <button btnSecondary type="button" (click)="onReset()">Cancel</button>
+                </div>
+            </ng-container>
+        </app-form-container>
+    </div>
+</form>
