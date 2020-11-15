@@ -9,6 +9,7 @@ import { GoogleService } from './google/google.service';
 import { ClientsModule } from '@clients/clients.module';
 import { ProjectsModule } from '@projects/projects.module';
 import { SettingModule } from '@setting/setting.module';
+import { OAuthProvidersModule } from '@oauth-providers/oauth-providers.module';
 
 @Module({
     imports: [
@@ -17,7 +18,8 @@ import { SettingModule } from '@setting/setting.module';
         UsersModule,
         ProjectsModule,
         SettingModule,
-        ClientsModule
+        ClientsModule,
+        OAuthProvidersModule
     ],
     controllers: [AuthController],
     providers: [AuthService, GoogleService],

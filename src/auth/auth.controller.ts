@@ -10,6 +10,7 @@ import { Request, Response } from 'express';
 import { AuthProvider } from '@utils/auth-provider';
 import * as queryString from 'query-string'
 import { ClientsService } from '@clients/clients.service';
+import { OAuthProvidersService } from '@oauth-providers/oauth-providers.service';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -18,7 +19,8 @@ export class AuthController {
     constructor(
         private service: AuthService,
         private google: GoogleService,
-        private client: ClientsService
+        private client: ClientsService,
+        private provider: OAuthProvidersService
     ) { }
 
     @Public()
@@ -51,13 +53,16 @@ export class AuthController {
             relations: ["project"]
         })
 
-        console.log(prompt.name)
+        const providers = await this.provider.repo.find({
+            isEnabled: true
+        })
 
         if (prompt.name === 'login') {
             return res.render('login',
                 {
                     uid,
-                    project: appClient.project.name
+                    project: appClient.project.name,
+                    providers: JSON.stringify(providers)
                 },
             );
         }

@@ -23,5 +23,10 @@ export const OAuthProviderMethods = [
         name: 'Apple',
         method: 'apple',
         orderNo: 4
+    },
+    {
+        name: 'Microsoft',
+        method: 'microsoft',
+        orderNo: 5
     }
 ]

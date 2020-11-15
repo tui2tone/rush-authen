@@ -14,7 +14,7 @@
         <div class="flex justify-center items-center mx-auto h-full">
             <div class="flex flex-col justify-center items-center h-full app-login ">
                 <div class="w-full text-center mb-8">
-                    <img src="/assets/images/rushlap-logo-horizontal.png" class="logo" />
+                    <img src="/assets/images/rush-authen-full-logo.png" class="logo" />
                 </div>
                 <div class="flex justify-center items-center w-full" data-barba="container"
                     data-barba-namespace="content">
@@ -29,15 +29,11 @@
                         <form action="/auth/{{uid}}/login" method="POST">
                             <div x-show="error" class="text-white bg-red-500 py-2 px-2 text-center rounded w-full mb-4"
                                 x-text="error"></div>
-                            <div class="mb-4">
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                                    name="username" type="text" placeholder="Username">
+                            <div class="mb-3">
+                                <input class="input" name="username" type="text" placeholder="Username">
                             </div>
-                            <div class="mb-6">
-                                <input
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                                    name="password" type="password" placeholder="Password">
+                            <div class="mb-4">
+                                <input class="input" name="password" type="password" placeholder="Password">
                             </div>
                             <div class="flex items-center justify-between w-full">
                                 <button
@@ -49,14 +45,25 @@
                         </form>
 
                         <div class="my-6 text-xs font-bold text-center text-gray-500">OR</div>
-
                         <div class="mb-6 pb-6 border-b border-gray-200">
-                            <button class="w-full mb-3 shadow p-3 rounded appearance-none" type="button" color="white">
-                                <div class="flex items-center">
-                                    <img src="/assets/images/logos/google.svg" class="btn-logo mr-3" />
-                                    <div class="flex-grow text-gray-600">Signin with Google</div>
-                                </div>
-                            </button>
+                            <template x-for="(provider, index) in providers" :key="index">
+                                <button class="btn-login" :class="{
+                                        'btn-login is-google': provider.method === 'google', 
+                                        'btn-login is-line': provider.method === 'line', 
+                                        'btn-login is-apple': provider.method === 'apple', 
+                                        'btn-login is-microsoft': provider.method === 'microsoft', 
+                                        'btn-login is-facebook': provider.method === 'facebook'
+                                    }" type="button">
+                                    <div class="flex items-center">
+                                        <img src="/assets/images/logos/google.svg" class="btn-logo logo-google" />
+                                        <img src="/assets/images/logos/line.png" class="btn-logo logo-line" />
+                                        <img src="/assets/images/logos/microsoft.svg" class="btn-logo logo-microsoft" />
+                                        <div class="flex-grow text-sm text-gray-600">Signin with <span
+                                                x-text="provider.name"></span></div>
+                                    </div>
+                                </button>
+                            </template>
+
                         </div>
                         <div class="text-center flex items-center justify-center">
                             <a class="text-blue-700 text-sm" href="">Can't log in?</a>
@@ -82,15 +89,20 @@
             return urlParams.get('error');
         }
 
+        function getErrorMessage(error) {
+            switch (error) {
+                case 'invalid':
+                    return 'Username/Password is incorrect';
+                default:
+                    return 'Username/Password is incorrect';
+            }
+        }
+
         function data() {
             const error = getError()
-            if(error == 'invalid') {
-                return {
-                    error: 'Username/Password is incorrect'
-                }
-            }
             return {
-                error: null
+                error: error ? getErrorMessage(error) : null,
+                providers: JSON.parse(`{{{providers}}}`)
             }
         }
 

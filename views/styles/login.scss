@@ -5,7 +5,44 @@
         margin: 0 auto;
     }
 
-    .btn-logo {
-        max-width: 30px;
+    .btn-login {
+        @apply w-full mb-2 shadow p-2 rounded appearance-none;
+
+        .btn-logo {
+            @apply mr-2;
+            height: 30px;
+            width: auto;
+            display: none;
+        }
+
+        &.is-google {
+            .logo-google {
+                display: block;
+            }
+        }
+
+        &.is-line {
+            .logo-line {
+                display: block;
+            }
+        }
+
+        &.is-microsoft {
+            .logo-microsoft {
+                display: block;
+            }
+        }
+
+        &.is-apple {
+            .logo-apple {
+                display: block;
+            }
+        }
+
+        &.is-facebook {
+            .logo-facebook {
+                display: block;
+            }
+        }
     }
 }
