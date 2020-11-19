@@ -9,7 +9,6 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaskModule } from 'ngx-mask'
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { InputComponent } from './input/input.component';
@@ -140,7 +139,6 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
         MatDatepickerModule,
         MatIconModule,
         NgxMaskModule,
-        NgbTypeaheadModule,
         InfiniteScrollModule,
         MatTabsModule
     ],

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SidebarContainerComponent } from './sidebar-container.component';
 
@@ -6,7 +6,7 @@ describe('SidebarContainerComponent', () => {
   let component: SidebarContainerComponent;
   let fixture: ComponentFixture<SidebarContainerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SidebarContainerComponent ]
     })

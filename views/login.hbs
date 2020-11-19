@@ -82,14 +82,13 @@
         barba.init({
         })
 
-
         // Error Handler
         function getError() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('error');
         }
 
-        function getErrorMessage(error) {
+        function getErrorMessage(error: string) {
             switch (error) {
                 case 'invalid':
                     return 'Username/Password is incorrect';
@@ -105,8 +104,9 @@
                 providers: JSON.parse(`{{{providers}}}`)
             }
         }
-
     </script>
+
+    <script src="js/login.js"></script>
 </body>
 
 </html>
