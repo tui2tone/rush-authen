@@ -58,21 +58,10 @@ export class AuthController {
         })
 
         if (prompt.name === 'login') {
-            return res.render('login',
-                {
-                    uid,
-                    project: appClient.project.name,
-                    providers: JSON.stringify(providers)
-                },
-            );
+            return res.render('index');
         }
         if (prompt.name === "consent") {
-            return res.render('consent',
-                {
-                    uid,
-                    project: appClient.project.name
-                },
-            );
+            return res.render('index');
         }
 
         if(prompt.name === "invalid_request") {

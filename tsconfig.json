@@ -73,6 +73,8 @@
 	"exclude": [
 		"node_modules",
 		"dist",
-		"admin"
+		"admin",
+		"app",
+		"views"
 	]
 }
