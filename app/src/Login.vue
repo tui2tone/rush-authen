@@ -13,9 +13,7 @@
                 {{ project }}
               </div>
             </div>
-            <div class="my-6 text-xs font-bold text-center text-gray-500">OR</div>
-
-            <form action="/auth/{{uid}}/login" method="POST">
+            <form :action="formAction" method="POST">
               <div class="mb-3">
                 <input class="input" name="username" type="text" placeholder="Username" />
               </div>
@@ -23,7 +21,7 @@
                 <input class="input" name="password" type="password" placeholder="Password" />
               </div>
               <div class="flex items-center justify-between w-full">
-                <div class="btn-submit" type="submit">Sign In</div>
+                <button class="btn-submit" type="submit">Sign In</button>
               </div>
             </form>
             <div class="my-6 text-xs font-bold text-center text-gray-500">OR</div>
@@ -44,7 +42,19 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-export default defineComponent({});
+export default defineComponent({
+  data() {
+    return {
+      project: window.project,
+      uid: window.uid,
+    };
+  },
+  computed: {
+    formAction() {
+      return `/auth/${this.uid}/login`;
+    },
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -56,7 +66,11 @@ export default defineComponent({});
   }
 
   .btn-submit {
-    @apply bg-green-500 appearance-none shadow w-full text-center cursor-pointer hover:bg-green-700 text-white font-bold py-3 px-4 rounded focus:outline-none;
+    @apply bg-green-500 appearance-none shadow w-full text-center cursor-pointer text-white font-bold py-3 px-4 rounded;
+
+    &:hover {
+      @apply bg-green-700;
+    }
   }
 
   .btn-login {

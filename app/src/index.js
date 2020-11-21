@@ -3,7 +3,7 @@ import * as VueRouter from 'vue-router';
 import App from "./App.vue";
 import Login from "./Login.vue";
 
-import "tailwindcss/tailwind.css"
+// import "tailwindcss/tailwind.css"
 import "./styles/index.scss";
 
 const routes = [
@@ -11,7 +11,7 @@ const routes = [
 ]
 
 const router = VueRouter.createRouter({
-    history: VueRouter.createWebHashHistory(),
+    history: VueRouter.createWebHistory(),
     routes,
 })
 

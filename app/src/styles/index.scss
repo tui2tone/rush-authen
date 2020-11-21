@@ -1,4 +1,8 @@
 
-@import './fonts.scss';
-@import './global.scss';
-@import './form.scss';
+@import 'tailwindcss/dist/base.css';
+@import 'tailwindcss/dist/components.css';
+@import 'tailwindcss/dist/utilities.css';
+
+@import "./fonts.scss";
+@import "./global.scss";
+@import "./form.scss";
