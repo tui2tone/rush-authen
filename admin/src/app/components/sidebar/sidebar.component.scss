@@ -3,7 +3,7 @@
     height: var(--navbar-height);
     .logo {
         @apply px-12 h-full border-b flex items-center;
-        height: var(--navbar-height);
+        height: calc(var(--navbar-height) - 20px);
         img {
             width: 100%;
             height: auto;

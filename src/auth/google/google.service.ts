@@ -1,31 +1,62 @@
 import { Injectable } from '@nestjs/common';
 import { GoogleAuthPayload } from '@auth/interfaces/auth-payload.interface';
-import { GoogleOAuthConfig } from '@config/google.oauth';
-import { google } from 'googleapis';
 import axios from 'axios';
-
-const oauth2Client = new google.auth.OAuth2(
-    GoogleOAuthConfig.CLIENT_ID,
-    GoogleOAuthConfig.CLIENT_SECRET,
-    GoogleOAuthConfig.REDIRECT_URL
-);
+import { OAuthProvidersService } from '@oauth-providers/oauth-providers.service';
+import { Request, Response } from 'express';
+import { AuthProvider } from '@utils/auth-provider';
+const { Issuer } = require('openid-client');
 
 @Injectable()
 export class GoogleService {
 
-    async authen(payload: GoogleAuthPayload) {
-        // console.log(payload)
-        // const { tokens } = await oauth2Client.
-        // console.log(tokens)
-        // oauth2Client.setCredentials(tokens);
-        const result = await axios.post('https://oauth2.googleapis.com/token', {
-            code: payload.code,
-            client_id: GoogleOAuthConfig.CLIENT_ID,
-            client_secret: GoogleOAuthConfig.CLIENT_SECRET,
-            redirect_uri: GoogleOAuthConfig.REDIRECT_URL,
-            grant_type: 'authorization_code'
-        })
-        console.log(result.data)
-        return Promise.resolve()
+    constructor(
+        private provider: OAuthProvidersService
+    ) {
+
+    }
+
+    async authen(req: Request, res: Response, payload: GoogleAuthPayload) {
+        try {
+            const provider = await this.provider.findOne({
+                method: 'google'
+            })
+
+            const issuer = await Issuer.discover(provider.issuer)
+            const client = new issuer.Client({
+                authority: provider.authority,
+                client_id: provider.clientId,
+                client_secret: provider.clientSecret,
+                redirect_uris: [provider.redirectUri],
+                response_types: [provider.responseType],
+                scope: provider.scope
+            });
+            const params = client.callbackParams(req);
+            console.log(payload)
+            // const profile = await client.userinfo(payload.id_token)
+            const response = await client.callback(provider.redirectUri, params, {
+                state: params.state
+                // nonce: params.nonce
+            })
+            console.log(response)
+
+            // Create Profile & Redirect Back
+
+            // const result = {
+            //     login: {
+            //         account: profile.email || profile.username,
+            //     },
+            //     consent: {
+            //         rejectedScopes: [],
+            //         rejectedClaims: [],
+            //     },
+            // }
+
+            // const session = await AuthProvider.interactionFinished(req, res, result);
+            // return res.send(session);
+            return res.send(null);
+        } catch (error) {
+            console.error(error)
+            return Promise.reject(error)
+        }
     }
 }

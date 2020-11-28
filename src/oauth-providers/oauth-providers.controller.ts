@@ -1,3 +1,4 @@
+import { Public } from '@decorators/public.decorator';
 import { Controller, Get, Param, Post } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { OAuthProviderMethods } from './oauth-provider.constants';
@@ -7,7 +8,7 @@ import { OAuthProvider } from './schemas/oauth-provider.entity';
 @Crud({
     model: {
         type: OAuthProvider,
-    } 
+    }
 })
 @Controller('api/oauth-providers')
 export class OAuthProvidersController implements CrudController<OAuthProvider> {
@@ -18,7 +19,15 @@ export class OAuthProvidersController implements CrudController<OAuthProvider> {
     constructor(
         public service: OAuthProvidersService
     ) {
-        
+
+    }
+
+    @Public()
+    @Get('available')
+    async getAvailableProviders() {
+        return await this.service.repo.find({
+            isEnabled: true
+        })
     }
 
     @Get('methods')

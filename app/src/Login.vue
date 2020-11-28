@@ -25,6 +25,30 @@
               </div>
             </form>
             <div class="my-6 text-xs font-bold text-center text-gray-500">OR</div>
+            <div class="mb-6 pb-6 border-b border-gray-200">
+              <a
+                v-for="(provider, index) in providers"
+                :key="index"
+                class="btn-login"
+                :href="signinLink(provider)"
+                :class="{
+                  'btn-login is-google': provider.method === 'google',
+                  'btn-login is-line': provider.method === 'line',
+                  'btn-login is-apple': provider.method === 'apple',
+                  'btn-login is-microsoft': provider.method === 'microsoft',
+                  'btn-login is-facebook': provider.method === 'facebook',
+                }"
+              >
+                <div class="flex items-center">
+                  <img src="/assets/images/logos/google.svg" class="btn-logo logo-google" />
+                  <img src="/assets/images/logos/line.png" class="btn-logo logo-line" />
+                  <img src="/assets/images/logos/microsoft.svg" class="btn-logo logo-microsoft" />
+                  <div class="flex-grow text-sm text-gray-600">
+                    Signin with <span>{{ provider.name }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
             <div class="text-center flex items-center justify-center">
               <a class="text-blue-700 text-sm" href="">Can't log in?</a>
               <div class="text-gray-300 mx-4">|</div>
@@ -42,18 +66,43 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import OdicClient from "oidc-client";
+import axios from "axios";
+
 export default defineComponent({
   data() {
     return {
       project: window.project,
       uid: window.uid,
+      providers: [],
     };
   },
   computed: {
     formAction() {
       return `/auth/${this.uid}/login`;
+    }
+  },
+  methods: {
+    async getProviders() {
+      return (await axios.get("/api/oauth-providers/available")).data;
     },
-  }
+    signinLink(provider) {
+      return `/auth/${this.uid}/${provider.method}`;
+    },
+    signin(provider) {
+      // const mgr = new OdicClient.UserManager({
+        // authority: provider.authority,
+        // client_id: provider.clientId,
+        // redirect_uri: provider.redirectUri,
+        // response_type: provider.responseType,
+        // scope: provider.scope
+      // });
+      // mgr.signinRedirect({});
+    },
+  },
+  async mounted() {
+    this.providers = await this.getProviders();
+  },
 });
 </script>
 
@@ -74,7 +123,7 @@ export default defineComponent({
   }
 
   .btn-login {
-    @apply w-full mb-2 shadow p-2 rounded appearance-none;
+    @apply w-full mb-2 shadow p-2 rounded appearance-none block;
 
     .btn-logo {
       @apply mr-2;

@@ -14,6 +14,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { OidcSequelizeAdapter } from '@adapters/oidc-postgres';
 import { AuthProvider } from '@utils/auth-provider';
 import { join } from 'path';
+import * as session from 'express-session';
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(
@@ -35,6 +38,15 @@ async function bootstrap() {
     app.setBaseViewsDir(join(__dirname, '..', 'app/build'));
     app.engine('html', es6Renderer);
     app.set('view engine', 'html');
+
+    app.use(session({
+        secret: 'happy dog',
+        saveUninitialized: true,
+        resave: true
+    }));
+
+    app.use(cookieParser());
+    app.use(flash());
 
     const options = new DocumentBuilder()
         .setTitle('Rush Plan API')

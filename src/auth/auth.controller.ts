@@ -1,4 +1,4 @@
-import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get, Req, Res, Param } from '@nestjs/common';
+import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get, Req, Res, Param, Query } from '@nestjs/common';
 import { UserPasswordSigninDto, GoogleAuthPayload } from './interfaces/auth-payload.interface';
 import { AuthService } from './auth.service';
 import { Public } from '@decorators/public.decorator';
@@ -11,6 +11,7 @@ import { AuthProvider } from '@utils/auth-provider';
 import * as queryString from 'query-string'
 import { ClientsService } from '@clients/clients.service';
 import { OAuthProvidersService } from '@oauth-providers/oauth-providers.service';
+const { Issuer, generators } = require('openid-client');
 
 @ApiTags('auth')
 @Controller('auth')
@@ -24,11 +25,70 @@ export class AuthController {
     ) { }
 
     @Public()
+    @Post('handler')
+    async callbackHandler(
+        @Req() req: Request,
+        @Res() res: Response
+    ) {
+        try {
+            const uid = req.cookies.uid
+            // const details = await AuthProvider.interactionDetails(req, res);
+            const method = req.cookies.method
+            const nonce = req.cookies.nonce
+            console.log({
+                cookies: req.cookies
+            })
+            // const cookies = JSON.parse(req.flash('cookies')[0])
+            // const cookieKeys = Object.keys(cookies)
+
+            // cookieKeys.map((key) => {
+            //     req.cookies[key] = cookies[key]
+            // })
+
+            const provider = await this.provider.findOne({
+                method
+            })
+
+            const issuer = await Issuer.discover(provider.issuer)
+            const client = new issuer.Client({
+                authority: provider.authority,
+                client_id: provider.clientId,
+                client_secret: provider.clientSecret,
+                redirect_uris: [provider.redirectUri],
+                response_types: [provider.responseType],
+                scope: provider.scope
+            });
+            const params = client.callbackParams(req);
+            const tokenSet = await client.callback(provider.redirectUri, params, {
+                nonce
+            })
+            const profile = tokenSet.claims()
+            // await AuthProvider.setProviderSession(req, res, { account: profile.email });
+            const result = {
+                login: {
+                    account: profile.email,
+                },
+                consent: {
+                    rejectedScopes: [],
+                    rejectedClaims: [],
+                },
+            }
+
+            const session = await AuthProvider.interactionFinished(req, res, result);
+            return res.send(session);
+            // return res.send(null)
+        } catch (error) {
+            console.error(error)
+            return res.send(error)
+        }
+    }
+
+    @Public()
     @Post(':uid/login')
     @ApiOperation({ summary: 'Signin via username/password' })
     @ApiResponse({ status: 200, description: 'Signin Successfully' })
     @ApiResponse({ status: 400, description: 'Something error' })
-    async signinPassword (
+    async signinPassword(
         @Body() payload: UserPasswordSigninDto,
         @Req() req: Request,
         @Res() res: Response
@@ -53,10 +113,6 @@ export class AuthController {
             relations: ["project"]
         })
 
-        const providers = await this.provider.repo.find({
-            isEnabled: true
-        })
-
         if (prompt.name === 'login') {
             return res.render('index', {
                 locals: {
@@ -74,7 +130,7 @@ export class AuthController {
             });
         }
 
-        if(prompt.name === "invalid_request") {
+        if (prompt.name === "invalid_request") {
 
         }
 
@@ -83,11 +139,38 @@ export class AuthController {
         })}`)
     }
 
+
     @Public()
-    @Post('google')
-    async googleAuthen(
-        @Body() body: GoogleAuthPayload
+    @Get(':uid/:method')
+    async googleSignin(
+        @Req() req: Request,
+        @Res() res: Response,
+        @Param('method') method: string,
+        @Param('uid') uid: string
     ) {
-        return await this.google.authen(body)
+        const provider = await this.provider.findOne({
+            method
+        })
+
+        const issuer = await Issuer.discover(provider.issuer)
+        const client = new issuer.Client({
+            client_id: provider.clientId,
+            redirect_uris: [provider.redirectUri],
+            response_types: [provider.responseType]
+        });
+        const cookieKeys = Object.keys(req.cookies)
+        cookieKeys.map((key) => {
+            res.cookie(key, req.cookies[key])
+        })
+        const nonce = generators.nonce();
+        res.cookie('method', method);
+        res.cookie('uid', uid);
+        res.cookie('nonce', nonce);
+        const url = client.authorizationUrl({
+            scope: provider.scope,
+            response_mode: 'form_post',
+            nonce
+        });
+        return res.redirect(url)
     }
 }

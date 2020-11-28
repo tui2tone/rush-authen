@@ -23,7 +23,6 @@ export class AuthService extends TypeOrmCrudService<Session> {
         public repo: Repository<Session>,
         private user: UsersService,
         private setting: SettingService,
-        private project: ProjectsService,
         private client: ClientsService
     ) {
         super(repo)

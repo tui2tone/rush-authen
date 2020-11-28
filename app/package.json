@@ -5,6 +5,8 @@
     "build:watch": "snowpack build --watch"
   },
   "dependencies": {
+    "axios": "^0.21.0",
+    "oidc-client": "^1.10.1",
     "vue": "3.0.0",
     "vue-router": "^4.0.0-rc.3"
   },
