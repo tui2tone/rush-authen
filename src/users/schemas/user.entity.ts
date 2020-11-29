@@ -16,7 +16,7 @@ export class User extends BaseEntity {
     })
     @Column({
         type: getColumnType('string'),
-        unique: true
+        nullable: true
     })
     email: string;
 
@@ -54,7 +54,7 @@ export class User extends BaseEntity {
     })
     @Column({
         type: getColumnType('string'),
-        unique: true
+        nullable: true,
     })
     username: string;
 
@@ -90,6 +90,26 @@ export class User extends BaseEntity {
         nullable: true
     })
     googleUserId: string;
+
+    @ApiProperty({
+        example: "xxxxxxx"
+    })
+    @Column({
+        type: getColumnType('string'),
+        name: 'line_user_id',
+        nullable: true
+    })
+    lineUserId: string;
+
+    @ApiProperty({
+        example: "xxxxxxx"
+    })
+    @Column({
+        type: getColumnType('string'),
+        name: 'facebook_user_id',
+        nullable: true
+    })
+    facebookUserId: string;
 
     password?: string;
     confirmPassword?: string;

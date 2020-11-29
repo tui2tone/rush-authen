@@ -10,8 +10,9 @@ import { OAuthProvidersService } from '@oauth-providers/oauth-providers.service'
 import { Hash } from '@utils/hash';
 import { UsersService } from '@users/users.service';
 import { Config } from '@config/index';
-import { GoogleProfilePayload } from './interfaces/google-payload.interface';
+import { GoogleProfilePayload, LineProfilePayload } from './interfaces/provider-payload.interface';
 import { nanoid } from 'nanoid';
+import { User } from '@users/schemas/user.entity';
 const { Issuer, generators } = require('openid-client');
 
 @ApiTags('auth')
@@ -33,47 +34,76 @@ export class AuthController {
         try {
             const [uid, method] = (req.cookies.uid || "|||").split("|||")
             const nonce = req.cookies.nonce
+            const state = req.cookies.state
 
             const provider = await this.provider.findOne({
                 method
             })
 
+            if (!provider) {
+                return {
+                    code: 'no provider from cookie'
+                }
+            }
+
             const issuer = await Issuer.discover(provider.authority)
+            const idTokenSignedResponseAlg = getIdTokenSignedResponseAlg(issuer, method)
             const client = new issuer.Client({
                 authority: provider.authority,
                 client_id: provider.clientId,
                 client_secret: provider.clientSecret,
                 redirect_uris: [provider.redirectUri],
                 response_types: [provider.responseType],
-                scope: provider.scope
+                scope: provider.scope,
+                id_token_signed_response_alg: idTokenSignedResponseAlg
             });
             const callbackParams = client.callbackParams(req);
             const tokenSet = await client.callback(provider.redirectUri, callbackParams, {
-                nonce
+                nonce,
+                state
             })
-            const profile = tokenSet.claims() as GoogleProfilePayload
-            console.log(profile)
+            let profile: User;
 
-            // Create Profile If Not Exist
-            let existProfile = await this.user.repo.findOne({
-                googleUserId: profile.sub
-            })
+            if (provider.method === "google") {
+                const googleProfile = tokenSet.claims() as GoogleProfilePayload
 
-            if (!existProfile) {
-                existProfile = await this.user.repo.save({
-                    uuid: nanoid(),
-                    googleUserId: profile.sub,
-                    email: profile.email,
-                    username: profile.email,
-                    firstName: profile.given_name,
-                    lastName: profile.family_name,
-                    profileImgUrl: profile.picture
+                // Create Profile If Not Exist
+                profile = await this.user.repo.findOne({
+                    googleUserId: googleProfile.sub
                 })
+
+                if (!profile) {
+                    profile = await this.user.repo.save({
+                        uuid: nanoid(),
+                        googleUserId: googleProfile.sub,
+                        email: googleProfile.email,
+                        username: googleProfile.email,
+                        firstName: googleProfile.given_name,
+                        lastName: googleProfile.family_name,
+                        profileImgUrl: googleProfile.picture
+                    })
+                }
+            } else if (provider.method === "line") {
+                const lineProfile = tokenSet.claims() as LineProfilePayload
+                // Create Profile If Not Exist
+                profile = await this.user.repo.findOne({
+                    lineUserId: lineProfile.sub
+                })
+
+                if (!profile) {
+                    profile = await this.user.repo.save({
+                        uuid: nanoid(),
+                        googleUserId: lineProfile.sub,
+                        username: lineProfile.sub,
+                        firstName: lineProfile.name,
+                        profileImgUrl: lineProfile.picture
+                    })
+                }
             }
 
             const result = {
                 login: {
-                    account: profile.email,
+                    account: profile.uuid,
                 },
                 consent: {
                     rejectedScopes: [],
@@ -192,6 +222,7 @@ export class AuthController {
         const issuer = await Issuer.discover(provider.authority)
         const client = new issuer.Client({
             client_id: provider.clientId,
+            client_secret: provider.clientSecret,
             redirect_uris: [provider.redirectUri],
             response_types: [provider.responseType]
         });
@@ -200,13 +231,23 @@ export class AuthController {
             res.cookie(key, req.cookies[key])
         })
         const nonce = generators.nonce();
+        const state = generators.state()
         res.cookie('uid', uid + "|||" + provider.method);
+        res.cookie('state', state);
         res.cookie('nonce', nonce);
         const url = client.authorizationUrl({
             scope: provider.scope,
+            state,
             response_mode: 'form_post',
             nonce
         });
         return res.redirect(url)
     }
+}
+
+const getIdTokenSignedResponseAlg = (issuer, method: string) => {
+    if (method === "line") {
+        return 'HS256'
+    }
+    return issuer.id_token_signing_alg_values_supported[0]
 }

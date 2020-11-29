@@ -5,3 +5,9 @@ export interface GoogleProfilePayload {
     family_name: string,
     picture: string
 }
+
+export interface LineProfilePayload {
+    sub: string,
+    name: string,
+    picture: string,
+}

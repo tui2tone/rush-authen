@@ -46,7 +46,7 @@ export class AppController {
             client_id: client.clientId,
             redirect_uri: client.redirectUris[0],
             response_type: 'code',
-            scope: 'openid email',
+            scope: 'openid email profile',
             automaticSilentRenew: true,
             accessTokenExpiringNotificationTime: 4,
             filterProtocolClaims: true,
