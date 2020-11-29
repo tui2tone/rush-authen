@@ -32,20 +32,6 @@ export class OAuthProvider extends BaseEntity {
 
     @Column({
         type: getColumnType('string'),
-        nullable: true,
-        name: 'token_endpoint'
-    })
-    tokenEndpoint: string;
-
-    @Column({
-        type: getColumnType('string'),
-        nullable: true,
-        name: 'issuer'
-    })
-    issuer: string;
-
-    @Column({
-        type: getColumnType('string'),
         name: 'redirect_uri',
         nullable: true
     })

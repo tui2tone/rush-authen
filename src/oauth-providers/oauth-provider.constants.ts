@@ -1,4 +1,13 @@
-export const OAuthProviderMethods = [
+export interface OAuthProviderMethod {
+    name: string,
+    method: string,
+    orderNo: number,
+    authority?: string,
+    responseType?: string,
+    scope?: string
+}
+
+export const OAuthProviderMethods: OAuthProviderMethod[] = [
     {
         name: 'Email/Password',
         method: 'password',
@@ -7,7 +16,11 @@ export const OAuthProviderMethods = [
     {
         name: 'Google',
         method: 'google',
-        orderNo: 1
+        orderNo: 1,
+        authority: 'https://accounts.google.com',
+        responseType: 'id_token',
+        scope: 'openid email profile'
+
     },
     {
         name: 'Facebook',

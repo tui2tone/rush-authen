@@ -9,7 +9,6 @@ export const AuthProvider = new Provider(Config.OAUTH_ISSUER, {
     adapter: oidcAdapter,
     ...AuthProviderConfig,
     async findAccount(ctx, id) {
-        console.log(id)
         return {
             accountId: id,
             async claims(use, scope) { return { sub: id }; },

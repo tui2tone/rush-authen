@@ -34,6 +34,9 @@ export class AuthGuardService implements CanActivate {
 
                                 this.ngZone.run(() => {
                                     if (user) {
+                                        console.log({
+                                            user
+                                        })
                                         const accessToken = user.access_token
                                         this.auth.setToken(accessToken)
                                         this.store.dispatch(new AuthActions.LoadSuccessAction({

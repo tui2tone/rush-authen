@@ -1,6 +1,6 @@
 import { ClientsService } from '@clients/clients.service';
 import { Public } from '@decorators/public.decorator';
-import { Controller, Get, Res } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Res } from '@nestjs/common';
 import { ProjectsService } from '@projects/projects.service';
 import { SettingService } from '@setting/setting.service';
 import { Response } from 'express';
@@ -32,6 +32,9 @@ export class AppController {
     async configAdmin(
     ) {
         const setuped = await this.setting.get()
+        if (!setuped) {
+            throw new BadRequestException('Setup Required');
+        }
         const project = await this.project.findOne({
             isPrimary: true
         })

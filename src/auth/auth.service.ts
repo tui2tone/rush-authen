@@ -1,72 +1,23 @@
 import { Injectable, CACHE_MANAGER, Inject, UnauthorizedException } from '@nestjs/common';
 import { Hash } from '@utils/hash';
 import { User } from '@users/schemas/user.entity';
-import { UsersService } from '@users/users.service';
 import { TypeOrmCrudService } from '@utils/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Session } from './schemas/session.entity';
-import { UserPasswordSigninDto } from './interfaces/auth-payload.interface';
-import { Config } from '@config/index';
-import { AuthProvider } from '@utils/auth-provider';
-import { Request, Response } from 'express';
-import { InteractionResults } from 'oidc-provider';
 import { Issuer } from 'openid-client';
 import { SettingService } from '@setting/setting.service';
 import { ClientsService } from '@clients/clients.service';
-import { ProjectsService } from '@projects/projects.service';
 
 @Injectable()
 export class AuthService extends TypeOrmCrudService<Session> {
     constructor(
         @InjectRepository(Session)
         public repo: Repository<Session>,
-        private user: UsersService,
         private setting: SettingService,
         private client: ClientsService
     ) {
         super(repo)
-    }
-
-
-    async getSigninSession(req: Request, res: Response): Promise<InteractionResults> {
-        const response = await AuthProvider.interactionDetails(req, res);
-        return Promise.resolve(null)
-    }
-
-    async signinPassword(req: Request, res: Response, dto: UserPasswordSigninDto) {
-        const { uid, prompt, params } = await AuthProvider.interactionDetails(req, res);
-        try {
-            dto.cryptedPassword = Hash.sha256(dto.password, Config.PASSWORD_SECRET)
-            const matched = await this.user.repo.findOne({
-                where: [{
-                    username: dto.username,
-                    cryptedPassword: dto.cryptedPassword,
-                }, {
-                    email: dto.username,
-                    cryptedPassword: dto.cryptedPassword,
-                }]
-            })
-
-            if (matched) {
-                const result = {
-                    login: {
-                        account: matched.email || matched.username,
-                    },
-                    consent: {
-                        rejectedScopes: [],
-                        rejectedClaims: [],
-                    },
-                }
-
-                const session = await AuthProvider.interactionFinished(req, res, result);
-                return res.send(session);
-            } else {
-                return res.redirect(`/auth/${uid}?error=invalid`);
-            }
-        } catch (error) {
-            return res.redirect(`/auth/${uid}?error=invalid`);
-        }
     }
 
     async validateToken(token: string): Promise<any> {

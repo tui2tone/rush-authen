@@ -53,6 +53,7 @@
 		"googleapis": "^59.0.0",
 		"hbs": "^4.1.1",
 		"module-alias": "^2.2.2",
+		"nanoid": "^3.1.18",
 		"nodemailer": "^6.4.11",
 		"oidc-provider": "^6.29.5",
 		"openid-client": "^3.15.10",

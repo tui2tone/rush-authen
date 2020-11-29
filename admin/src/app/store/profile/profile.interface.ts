@@ -1,11 +1,10 @@
 export class Profile {
     id: number;
     username: string;
+    email: string;
     firstName: string;
     lastName: string;
-    role: any;
-    roles: any[];
-    company: any;
+    profileImgUrl?: string;
 
     constructor(data: Object) {
         for (let key in data) {

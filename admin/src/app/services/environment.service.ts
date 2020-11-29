@@ -8,7 +8,9 @@ import { environment as ENV } from 'src/environments/environment';
 export class EnvironmentService {
     config: any;
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient
+    ) { }
 
     load(): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -31,7 +33,16 @@ export class EnvironmentService {
                     }
                 })
                 .catch(error => {
-                    reject(error);
+                    if (error && error.error) {
+                        const message = error.error.message
+                        if (message == "Setup Required") {
+                            resolve()
+                            const setupUrl = (ENV.apiUrl + '/setup').replace("/api", "")
+                            window.location.replace(setupUrl)
+                        } 
+                    } else {
+                        reject(error);
+                    }
                 });
         });
     }

@@ -1,4 +1,4 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, AfterLoad } from 'typeorm';
 import { getColumnType } from '@utils/database/column-type';
 @Entity("settings")
 export class Setting extends BaseEntity {
@@ -34,4 +34,11 @@ export class Setting extends BaseEntity {
         name: 'updated_at'
     })
     updatedAt: Date;
+
+    redirectUri?: string;
+
+    @AfterLoad()
+    setRedirectUri() {
+        this.redirectUri = `${this.siteUrl}/auth/handler`
+    }
 }

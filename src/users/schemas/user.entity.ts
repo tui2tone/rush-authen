@@ -21,12 +21,33 @@ export class User extends BaseEntity {
     email: string;
 
     @ApiProperty({
-        example: "Charuwit Nod."
+        example: "abc@gmail.com"
     })
     @Column({
-        type: getColumnType('string')
+        type: getColumnType('string'),
+        unique: true
     })
-    name: string;
+    uuid: string;
+
+    @ApiProperty({
+        example: "Charuwit"
+    })
+    @Column({
+        type: getColumnType('string'),
+        name: 'first_name',
+        nullable: true
+    })
+    firstName: string;
+
+    @ApiProperty({
+        example: "Nodthaisong"
+    })
+    @Column({
+        type: getColumnType('string'),
+        name: 'last_name',
+        nullable: true
+    })
+    lastName: string;
 
     @ApiProperty({
         example: "tui2tone"
@@ -39,7 +60,8 @@ export class User extends BaseEntity {
 
     @Column({
         type: getColumnType('string'),
-        name: "crypted_password"
+        name: "crypted_password",
+        nullable: true
     })
     cryptedPassword: string;
 
@@ -49,6 +71,15 @@ export class User extends BaseEntity {
         default: false
     })
     isOwner: boolean;
+
+    @ApiProperty({
+        example: "tui2tone"
+    })
+    @Column({
+        type: getColumnType('string'),
+        nullable: true
+    })
+    profileImgUrl: string;
 
     @ApiProperty({
         example: "xxxxxxx"
@@ -77,4 +108,11 @@ export class User extends BaseEntity {
         name: 'updated_at'
     })
     updatedAt: Date;
+
+    fullName?: string;
+
+    @AfterLoad()
+    setMetaData() {
+         this.fullName = `${this.firstName || ''} ${this.lastName || ''}`.trim()
+    }
 }

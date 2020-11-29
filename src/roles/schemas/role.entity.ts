@@ -2,14 +2,14 @@ import { Entity, Column, Unique, BaseEntity, PrimaryColumn, ManyToOne, JoinColum
 import { getColumnType } from '@utils/database/column-type';
 import { Project } from '@projects/schemas/project.entity';
 
+@Unique(["name", "projectId"])
 @Entity("roles")
 export class Role extends BaseEntity {
     @PrimaryGeneratedColumn({})
     id: number;
 
     @Column({
-        type: getColumnType('string'),
-        unique: true
+        type: getColumnType('string')
     })
     name: string;
 

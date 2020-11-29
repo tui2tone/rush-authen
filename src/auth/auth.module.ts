@@ -5,7 +5,6 @@ import { CoreModule } from '@core/core.module';
 import { UsersModule } from '@users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Session } from './schemas/session.entity';
-import { GoogleService } from './google/google.service';
 import { ClientsModule } from '@clients/clients.module';
 import { ProjectsModule } from '@projects/projects.module';
 import { SettingModule } from '@setting/setting.module';
@@ -22,7 +21,7 @@ import { OAuthProvidersModule } from '@oauth-providers/oauth-providers.module';
         OAuthProvidersModule
     ],
     controllers: [AuthController],
-    providers: [AuthService, GoogleService],
+    providers: [AuthService],
     exports: [
         AuthService
     ]

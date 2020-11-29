@@ -88,17 +88,7 @@ export default defineComponent({
     },
     signinLink(provider) {
       return `/auth/${this.uid}/${provider.method}`;
-    },
-    signin(provider) {
-      // const mgr = new OdicClient.UserManager({
-        // authority: provider.authority,
-        // client_id: provider.clientId,
-        // redirect_uri: provider.redirectUri,
-        // response_type: provider.responseType,
-        // scope: provider.scope
-      // });
-      // mgr.signinRedirect({});
-    },
+    }
   },
   async mounted() {
     this.providers = await this.getProviders();

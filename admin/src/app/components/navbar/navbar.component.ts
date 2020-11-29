@@ -20,7 +20,8 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-    profile: Observable<Profile>;
+    profile$: Observable<Profile>;
+    profile: Profile = null;
     project: FormControl = new FormControl(null);
 
     isSidebarOpen: boolean = true;
@@ -61,7 +62,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.profile = this.store.select(ProfileSelectors.selectFindProfiles)
+        this.profile$ = this.store.select(ProfileSelectors.selectFindProfiles)
+        this.subscriber.push(this.profile$.subscribe(profile => {
+            this.profile = profile;
+            console.log(profile)
+        }))
 
         this.subscriber.push(this.paramService.params.subscribe((params) => {
             if (params && params.projectId) {

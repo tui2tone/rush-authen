@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Menu } from '../components/sidebar/menu';
+import { AuthState } from '../store/auth';
+import { ProfileActions } from '../store/profile';
 
 @Component({
     selector: 'app-app-container',
@@ -21,9 +24,11 @@ export class AppContainerComponent implements OnInit {
         })
     ]
     constructor(
+        private store$: Store<AuthState.State>
     ) { }
 
     ngOnInit() {
+        this.store$.dispatch(new ProfileActions.LoadRequestAction());
     }
 
 }

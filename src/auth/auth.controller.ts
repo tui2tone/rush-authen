@@ -1,16 +1,17 @@
 import { Controller, Body, Post, HttpStatus, HttpException, Delete, Get, Req, Res, Param, Query } from '@nestjs/common';
 import { UserPasswordSigninDto, GoogleAuthPayload } from './interfaces/auth-payload.interface';
-import { AuthService } from './auth.service';
 import { Public } from '@decorators/public.decorator';
-import { CurrentSession } from '@decorators/current-session.decorator';
-import { Session } from './schemas/session.entity';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { GoogleService } from './google/google.service';
 import { Request, Response } from 'express';
 import { AuthProvider } from '@utils/auth-provider';
 import * as queryString from 'query-string'
 import { ClientsService } from '@clients/clients.service';
 import { OAuthProvidersService } from '@oauth-providers/oauth-providers.service';
+import { Hash } from '@utils/hash';
+import { UsersService } from '@users/users.service';
+import { Config } from '@config/index';
+import { GoogleProfilePayload } from './interfaces/google-payload.interface';
+import { nanoid } from 'nanoid';
 const { Issuer, generators } = require('openid-client');
 
 @ApiTags('auth')
@@ -18,8 +19,7 @@ const { Issuer, generators } = require('openid-client');
 export class AuthController {
 
     constructor(
-        private service: AuthService,
-        private google: GoogleService,
+        private user: UsersService,
         private client: ClientsService,
         private provider: OAuthProvidersService
     ) { }
@@ -31,25 +31,14 @@ export class AuthController {
         @Res() res: Response
     ) {
         try {
-            const uid = req.cookies.uid
-            // const details = await AuthProvider.interactionDetails(req, res);
-            const method = req.cookies.method
+            const [uid, method] = (req.cookies.uid || "|||").split("|||")
             const nonce = req.cookies.nonce
-            console.log({
-                cookies: req.cookies
-            })
-            // const cookies = JSON.parse(req.flash('cookies')[0])
-            // const cookieKeys = Object.keys(cookies)
-
-            // cookieKeys.map((key) => {
-            //     req.cookies[key] = cookies[key]
-            // })
 
             const provider = await this.provider.findOne({
                 method
             })
 
-            const issuer = await Issuer.discover(provider.issuer)
+            const issuer = await Issuer.discover(provider.authority)
             const client = new issuer.Client({
                 authority: provider.authority,
                 client_id: provider.clientId,
@@ -58,12 +47,30 @@ export class AuthController {
                 response_types: [provider.responseType],
                 scope: provider.scope
             });
-            const params = client.callbackParams(req);
-            const tokenSet = await client.callback(provider.redirectUri, params, {
+            const callbackParams = client.callbackParams(req);
+            const tokenSet = await client.callback(provider.redirectUri, callbackParams, {
                 nonce
             })
-            const profile = tokenSet.claims()
-            // await AuthProvider.setProviderSession(req, res, { account: profile.email });
+            const profile = tokenSet.claims() as GoogleProfilePayload
+            console.log(profile)
+
+            // Create Profile If Not Exist
+            let existProfile = await this.user.repo.findOne({
+                googleUserId: profile.sub
+            })
+
+            if (!existProfile) {
+                existProfile = await this.user.repo.save({
+                    uuid: nanoid(),
+                    googleUserId: profile.sub,
+                    email: profile.email,
+                    username: profile.email,
+                    firstName: profile.given_name,
+                    lastName: profile.family_name,
+                    profileImgUrl: profile.picture
+                })
+            }
+
             const result = {
                 login: {
                     account: profile.email,
@@ -76,7 +83,6 @@ export class AuthController {
 
             const session = await AuthProvider.interactionFinished(req, res, result);
             return res.send(session);
-            // return res.send(null)
         } catch (error) {
             console.error(error)
             return res.send(error)
@@ -89,11 +95,42 @@ export class AuthController {
     @ApiResponse({ status: 200, description: 'Signin Successfully' })
     @ApiResponse({ status: 400, description: 'Something error' })
     async signinPassword(
-        @Body() payload: UserPasswordSigninDto,
+        @Body() dto: UserPasswordSigninDto,
         @Req() req: Request,
         @Res() res: Response
     ) {
-        return await this.service.signinPassword(req, res, payload)
+        const { uid } = await AuthProvider.interactionDetails(req, res);
+        try {
+            dto.cryptedPassword = Hash.sha256(dto.password, Config.PASSWORD_SECRET)
+            const matched = await this.user.repo.findOne({
+                where: [{
+                    username: dto.username,
+                    cryptedPassword: dto.cryptedPassword,
+                }, {
+                    email: dto.username,
+                    cryptedPassword: dto.cryptedPassword,
+                }]
+            })
+
+            if (matched) {
+                const result = {
+                    login: {
+                        account: matched.email || matched.username,
+                    },
+                    consent: {
+                        rejectedScopes: [],
+                        rejectedClaims: [],
+                    },
+                }
+
+                const session = await AuthProvider.interactionFinished(req, res, result);
+                return res.send(session);
+            } else {
+                return res.redirect(`/auth/${uid}?error=invalid`);
+            }
+        } catch (error) {
+            return res.redirect(`/auth/${uid}?error=invalid`);
+        }
     }
 
     @Public()
@@ -152,7 +189,7 @@ export class AuthController {
             method
         })
 
-        const issuer = await Issuer.discover(provider.issuer)
+        const issuer = await Issuer.discover(provider.authority)
         const client = new issuer.Client({
             client_id: provider.clientId,
             redirect_uris: [provider.redirectUri],
@@ -163,8 +200,7 @@ export class AuthController {
             res.cookie(key, req.cookies[key])
         })
         const nonce = generators.nonce();
-        res.cookie('method', method);
-        res.cookie('uid', uid);
+        res.cookie('uid', uid + "|||" + provider.method);
         res.cookie('nonce', nonce);
         const url = client.authorizationUrl({
             scope: provider.scope,
