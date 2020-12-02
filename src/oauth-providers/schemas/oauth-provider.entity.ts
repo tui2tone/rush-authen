@@ -57,6 +57,13 @@ export class OAuthProvider extends BaseEntity {
     })
     isEnabled: boolean;
 
+    @Column({
+        type: getColumnType('boolean'),
+        name: 'is_supported',
+        default: false
+    })
+    isSupported: boolean;
+
     @ApiProperty({
         example: "xxxxxxxxxxxxxxxxxxx"
     })

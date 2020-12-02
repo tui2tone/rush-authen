@@ -15,13 +15,21 @@
             </div>
             <form :action="formAction" method="POST">
               <div class="mb-3">
-                <input class="input" name="username" type="text" placeholder="Username" />
+                <input class="input" name="username" type="text" placeholder="Email/Username" />
               </div>
               <div class="mb-4">
                 <input class="input" name="password" type="password" placeholder="Password" />
               </div>
               <div class="flex items-center justify-between w-full">
                 <button class="btn-submit" type="submit">Sign In</button>
+              </div>
+            </form>
+            <form :action="formAction" method="POST">
+              <div class="mb-3">
+                <input class="input" name="email" type="text" placeholder="Email" />
+              </div>
+              <div class="flex items-center justify-between w-full">
+                <button class="btn-submit" type="submit">Send me Magic Link via E-mail</button>
               </div>
             </form>
             <div class="my-6 text-xs font-bold text-center text-gray-500">OR</div>

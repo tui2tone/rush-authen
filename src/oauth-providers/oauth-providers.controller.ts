@@ -58,6 +58,9 @@ export class OAuthProvidersController implements CrudController<OAuthProvider> {
             }
         }
         const data = await this.service.repo.find({
+            where: {
+                isSupported: true
+            },
             order: {
                 orderNo: 'ASC'
             }

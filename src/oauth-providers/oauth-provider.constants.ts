@@ -4,42 +4,57 @@ export interface OAuthProviderMethod {
     orderNo: number,
     authority?: string,
     responseType?: string,
-    scope?: string
+    scope?: string,
+    isSupported?: boolean
 }
 
 export const OAuthProviderMethods: OAuthProviderMethod[] = [
     {
-        name: 'Email/Password',
+        name: 'Password with Username/Email',
         method: 'password',
-        orderNo: 0
+        orderNo: 0,
+        isSupported: true
+    },
+    {
+        name: 'Passwordless',
+        method: 'passwordless',
+        orderNo: 1,
+        isSupported: true
     },
     {
         name: 'Google',
         method: 'google',
-        orderNo: 1,
+        orderNo: 2,
         authority: 'https://accounts.google.com',
         responseType: 'id_token',
-        scope: 'openid email profile'
-
+        scope: 'openid email profile',
+        isSupported: true
     },
     {
         name: 'Facebook',
         method: 'facebook',
-        orderNo: 2
+        orderNo: 3,
+        isSupported: false
     },
     {
         name: 'Line',
         method: 'line',
-        orderNo: 3
+        orderNo: 4,
+        authority: 'https://access.line.me',
+        responseType: 'code',
+        scope: 'openid email profile',
+        isSupported: true
     },
     {
         name: 'Apple',
         method: 'apple',
-        orderNo: 4
+        orderNo: 5,
+        isSupported: false
     },
     {
         name: 'Microsoft',
         method: 'microsoft',
-        orderNo: 5
+        orderNo: 6,
+        isSupported: false
     }
 ]

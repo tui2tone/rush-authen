@@ -25,6 +25,14 @@ export class Setting extends BaseEntity {
     })
     siteName: string;
 
+    @Column({
+        type: getColumnType('string'),
+        name: 'mandatory_field',
+        enum: ['username', 'email', 'both'],
+        default: 'email'
+    })
+    mandatoryField: string;
+
     @CreateDateColumn({
         name: 'created_at'
     })
