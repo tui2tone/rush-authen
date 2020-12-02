@@ -10,15 +10,9 @@ export interface OAuthProviderMethod {
 
 export const OAuthProviderMethods: OAuthProviderMethod[] = [
     {
-        name: 'Password with Username/Email',
+        name: 'Password',
         method: 'password',
         orderNo: 0,
-        isSupported: true
-    },
-    {
-        name: 'Passwordless',
-        method: 'passwordless',
-        orderNo: 1,
         isSupported: true
     },
     {

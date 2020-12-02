@@ -46,6 +46,7 @@ export class OAuthProvidersController implements CrudController<OAuthProvider> {
                     method: item.method,
                     orderNo: item.orderNo,
                     isEnabled: false,
+                    isSupported: item.isSupported,
                     authority: item.authority,
                     scope: item.scope,
                     responseType: item.responseType,
@@ -54,6 +55,10 @@ export class OAuthProvidersController implements CrudController<OAuthProvider> {
             } else {
                 matched.name = item.name;
                 matched.orderNo = item.orderNo;
+                matched.isSupported = item.isSupported;
+                matched.authority = item.authority;
+                matched.scope = item.scope;
+                matched.responseType = item.responseType;
                 await matched.save();
             }
         }

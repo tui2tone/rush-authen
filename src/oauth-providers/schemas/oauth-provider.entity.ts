@@ -64,6 +64,13 @@ export class OAuthProvider extends BaseEntity {
     })
     isSupported: boolean;
 
+    @Column({
+        type: getColumnType('boolean'),
+        name: 'is_passwordless_enabled',
+        default: false
+    })
+    isPasswordlessEnabled: boolean;
+
     @ApiProperty({
         example: "xxxxxxxxxxxxxxxxxxx"
     })
