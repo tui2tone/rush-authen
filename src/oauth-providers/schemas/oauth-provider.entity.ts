@@ -25,11 +25,44 @@ export class OAuthProvider extends BaseEntity {
     name: string;
 
     @Column({
+        type: getColumnType('string'),
+        nullable: true
+    })
+    authority: string;
+
+    @Column({
+        type: getColumnType('string'),
+        name: 'redirect_uri',
+        nullable: true
+    })
+    redirectUri: string;
+
+    @Column({
+        type: getColumnType('string'),
+        name: 'response_type',
+        nullable: true
+    })
+    responseType: string;
+
+    @Column({
+        type: getColumnType('string'),
+        nullable: true
+    })
+    scope: string;
+
+    @Column({
         type: getColumnType('boolean'),
         name: 'is_enabled',
         default: false
     })
     isEnabled: boolean;
+
+    @Column({
+        type: getColumnType('boolean'),
+        name: 'is_supported',
+        default: false
+    })
+    isSupported: boolean;
 
     @ApiProperty({
         example: "xxxxxxxxxxxxxxxxxxx"

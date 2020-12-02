@@ -6,6 +6,8 @@
     "ignore": [
         "admin/**/*.ts",
         "admin/**/*.js",
+        "app/**/*.ts",
+        "app/**/*.js",
         "README"
     ],
     "exec": "node dist/main.js"

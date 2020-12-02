@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as es6Renderer from 'express-es6-template-engine';
 import { AppModule } from './app.module';
 import { Config } from './config/index';
 import { TokenAuthGuard } from './guard/auth.guard';
@@ -13,6 +14,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { OidcSequelizeAdapter } from '@adapters/oidc-postgres';
 import { AuthProvider } from '@utils/auth-provider';
 import { join } from 'path';
+import * as session from 'express-session';
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(
@@ -27,14 +31,22 @@ async function bootstrap() {
     app.useGlobalInterceptors(new RequestInterceptor());
     app.useGlobalInterceptors(new ResponseInterceptor());
 
-    app.useStaticAssets(join(__dirname, '..', 'views/_site/assets'), {
-        prefix: '/assets'
-    });
-    app.useStaticAssets(join(__dirname, '..', 'views/_site/style.css'), {
-        prefix: '/style.css'
-    });
-    app.setBaseViewsDir(join(__dirname, '..', 'views'));
-    app.setViewEngine('hbs');
+    app.useStaticAssets(join(__dirname, '..', 'app/build/_dist_'), { prefix: '/_dist_' });
+    app.useStaticAssets(join(__dirname, '..', 'app/build/__snowpack__'), { prefix: '/__snowpack__' });
+    app.useStaticAssets(join(__dirname, '..', 'app/build/web_modules'), { prefix: '/web_modules' });
+    app.useStaticAssets(join(__dirname, '..', 'app/build/assets'), { prefix: '/assets' });
+    app.setBaseViewsDir(join(__dirname, '..', 'app/build'));
+    app.engine('html', es6Renderer);
+    app.set('view engine', 'html');
+
+    app.use(session({
+        secret: 'happy dog',
+        saveUninitialized: true,
+        resave: true
+    }));
+
+    app.use(cookieParser());
+    app.use(flash());
 
     const options = new DocumentBuilder()
         .setTitle('Rush Plan API')

@@ -43,6 +43,21 @@ export const AuthProviderConfig: Configuration = {
             return `/auth/${ctx.oidc.uid}`;
         },
     },
+    claims: {
+        acr: null,
+        auth_time: null,
+        iss: null,
+        openid: [
+            'sub'
+        ],
+        sid: null,
+        profile: [
+            'firstName',
+            'fullName',
+            'lastName',
+            'profileImgUrl'
+        ]
+    },
     features: {
         devInteractions: { enabled: false },
         introspection: { enabled: true },

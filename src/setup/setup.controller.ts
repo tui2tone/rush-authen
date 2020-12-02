@@ -1,48 +1,52 @@
-import { ClientsService } from '@clients/clients.service';
 import { Client } from '@clients/schemas/client.entity';
 import { Config } from '@config/index';
 import { Public } from '@decorators/public.decorator';
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
-import { ProjectsService } from '@projects/projects.service';
 import { Project } from '@projects/schemas/project.entity';
-import { RolesService } from '@roles/roles.service';
 import { Role } from '@roles/schemas/role.entity';
 import { SettingDto } from '@setting/interfaces/setting.interface';
 import { Setting } from '@setting/schemas/setting.entity';
-import { SettingService } from '@setting/setting.service';
 import { User } from '@users/schemas/user.entity';
-import { UsersService } from '@users/users.service';
 import { Request, Response } from 'express';
 import { nanoid } from 'nanoid'
 import { getConnection, getManager } from "typeorm";
 import { Hash } from '@utils/hash';
-const defaultName = "Authenticator"
+import { SettingService } from '@setting/setting.service';
+const defaultName = "Administrator"
 
 @Controller('setup')
 export class SetupController {
 
     constructor(
-        private setting: SettingService,
-        private project: ProjectsService,
-        private client: ClientsService,
-        private role: RolesService,
-        private user: UsersService
+        private setting: SettingService
     ) {
 
     }
 
     @Public()
-    @Get()
-    getSetupPage(
-        @Req() req: Request,
-        @Res() res: Response,
+    @Get('initialize')
+    setupData(
+        @Req() req: Request
     ) {
         const defaultSiteUrl = req.protocol + '://' + req.headers.host;
-        return res.render('setup',
+        return {
+            siteUrl: defaultSiteUrl,
+            siteName: defaultName,
+            username: "admin"
+        }
+    }
+
+    @Public()
+    @Get()
+    getSetupPage(
+        @Res() res: Response,
+    ) {
+        return res.render('index',
             {
-                siteUrl: defaultSiteUrl,
-                siteName: defaultName,
-                username: "admin"
+                locals: {
+                    uid: '',
+                    project: '',
+                }
             },
         );
     }
@@ -50,8 +54,6 @@ export class SetupController {
     @Public()
     @Post()
     async setup(
-        @Req() req: Request,
-        @Res() res: Response,
         @Body() payload: SettingDto
     ) {
         const { siteUrl, siteName, username, password } = payload
@@ -61,6 +63,11 @@ export class SetupController {
         await queryRunner.startTransaction();
 
         try {
+            // Check Exist
+            const exist = await this.setting.repo.findOne()
+            if (exist) {
+                return exist
+            }
             // Setting
             const setting = Object.assign(new Setting(), {
                 name: 'site',
@@ -97,6 +104,7 @@ export class SetupController {
 
             // Default User
             const user = Object.assign(new User(), {
+                uuid: nanoid(),
                 name: username,
                 username,
                 email: '',
@@ -108,26 +116,13 @@ export class SetupController {
                 ]
             });
             await queryRunner.manager.save(user);
-            
             await queryRunner.commitTransaction();
 
-            return res.render('setup-finish',
-                {
-                    siteUrl,
-                    username: "admin"
-                },
-            );
+            return setting
         } catch (error) {
-            console.error(error)
             await queryRunner.rollbackTransaction();
-            return res.render('setup',
-                {
-                    siteUrl,
-                    siteName: siteName || defaultName,
-                    username: username || "admin",
-                    error: error.message
-                },
-            );
+            console.error(error)
+            return {}
         } finally {
             await queryRunner.release();
         }

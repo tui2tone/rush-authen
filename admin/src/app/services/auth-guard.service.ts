@@ -31,7 +31,6 @@ export class AuthGuardService implements CanActivate {
                     } else if (isAuthorized === AuthStateId.Empty) {
                         this.auth.mgr.getUser()
                             .then((user) => {
-
                                 this.ngZone.run(() => {
                                     if (user) {
                                         const accessToken = user.access_token

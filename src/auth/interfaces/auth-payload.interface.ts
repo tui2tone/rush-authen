@@ -16,4 +16,7 @@ export class UserPasswordSigninDto {
 
 export interface GoogleAuthPayload {
     code: string;
+    state: string;
+    access_token: string;
+    id_token: string;
 }
