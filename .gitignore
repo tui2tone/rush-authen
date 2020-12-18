@@ -1,7 +1,7 @@
 # compiled output
 /dist
 /node_modules
-.env*
+.env
 views/node_modules
 admin/node_modules
 views/_site

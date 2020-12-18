@@ -3,16 +3,16 @@ require('module-alias/register');
 
 module.exports = {
     type: 'postgres',
-    url: process.env.DB_URL,
-    synchronize: true,
+    url: process.env.DB_URL || "postgres://admin:password@localhost:2345/authen-dev",
+    synchronize: false,
     logging: false,
     entities: ['dist/**/*.entity.js'],
-    migrations: ['dist/migration/**/*.js'],
-    subscribers: ['dist/subscriber/**/*.js'],
+    migrations: ['dist/migrations/**/*.js'],
+    subscribers: ['dist/subscribers/**/*.js'],
     cli: {
         entitiesDir: 'dist',
-        migrationsDir: 'dist/migration',
-        subscribersDir: 'dist/subscriber',
+        migrationsDir: 'src/migrations',
+        subscribersDir: 'src/subscribers',
     },
     seeds: ['dist/seeds/**/*.seed.js'],
 };

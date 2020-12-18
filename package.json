@@ -123,6 +123,7 @@
 		"@healthcheck": "dist/healthcheck",
 		"@interaction": "dist/interaction",
 		"@interceptors": "dist/interceptors",
+		"@migrations": "dist/migrations",
 		"@oauth-providers": "dist/oauth-providers",
 		"@projects": "dist/projects",
 		"@register": "dist/register",
